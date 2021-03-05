@@ -16,9 +16,10 @@
 <meta property="og:description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-05T01:30:08.000Z">
-<meta property="article:modified_time" content="2021-03-05T13:47:31.782Z">
+<meta property="article:modified_time" content="2021-03-05T13:49:34.007Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="学习,小技巧">
+<meta property="article:tag" content="小技巧">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -177,6 +178,7 @@
       
         <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用</p>
 <span id="more"></span>
+
 <h3 id="概念厘清"><a href="#概念厘清" class="headerlink" title="概念厘清"></a>概念厘清</h3><h4 id="进程，I-O多路复用，线程"><a href="#进程，I-O多路复用，线程" class="headerlink" title="进程，I/O多路复用，线程"></a>进程，I/O多路复用，线程</h4><p>其中基本的逻辑是，I/O多路复用（后简称多路复用）和线程都运行在一个进程之上，不严谨的来说，即进程&gt;多路复用、线程，进程包括线程和多路复用。<br>通俗的讲解好的网址：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程和线程</a>，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32163005/answer/55772739">多路复用</a>，详细的讲解：CSAPP书上</p>
 <h5 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h5><p>每个进程是有其独立的虚拟地址空间，共享文件表，进程间通信比较困难。</p>
 <h5 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a>I/O多路复用</h5><p>略</p>
@@ -204,7 +206,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">学习,小技巧</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		
 		</ul>
@@ -402,7 +408,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">学习,小技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
             
             <div class="clearfix"></div>

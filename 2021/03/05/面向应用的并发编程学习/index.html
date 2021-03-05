@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>Archives: 2021/3 | wweewrwer的博客</title>
+  <title>面向应用的并发编程学习 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="aaaa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="wweewrwer的博客">
-<meta property="og:url" content="https://wweewrwer.github.io/archives/2021/03/index.html">
+  <meta name="description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向应用的并发编程学习">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="aaaa">
+<meta property="og:description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-05T01:30:08.000Z">
+<meta property="article:modified_time" content="2021-03-05T13:42:17.738Z">
 <meta property="article:author" content="wweewrwer">
+<meta property="article:tag" content="学习 小技巧">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -152,36 +155,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-面向应用的并发编程学习" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-03-05T01:30:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">面向应用的并发编程学习</a>
+    <h1 class="article-title" itemprop="name">
+      面向应用的并发编程学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2021-03-05T01:30:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用</p>
+<span id="more"></span>
+<h3 id="概念厘清"><a href="#概念厘清" class="headerlink" title="概念厘清"></a>概念厘清</h3><h4 id="进程，I-O多路复用，线程"><a href="#进程，I-O多路复用，线程" class="headerlink" title="进程，I/O多路复用，线程"></a>进程，I/O多路复用，线程</h4><p>其中基本的逻辑是，I/O多路复用（后简称多路复用）和线程都运行在一个进程之上，不严谨的来说，即进程&gt;多路复用、线程，进程包括线程和多路复用。<br>通俗的讲解好的网址：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程和线程</a>，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32163005/answer/55772739">多路复用</a>，详细的讲解：CSAPP书上</p>
+<h5 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h5><p>每个进程是有其独立的虚拟地址空间，共享文件表，进程间通信比较困难。</p>
+<h5 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a>I/O多路复用</h5><p>略</p>
+<h5 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h5><p>所有线程共享整个地址空间，主线程和其它线程之间没有严格的父子关系，都是平等的，一个线程可以杀死其它任何的线程。同时他们都读取相同的共享数据。</p>
+<h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><p>通俗的讲解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143797513">锁的思想</a>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fenghualong/p/11568398.html">互斥锁和共享锁</a><br>锁的目的便是为了处理多个线程同时读写同一共享变量存在并发问题。</p>
+<h3 id="c-锁的使用"><a href="#c-锁的使用" class="headerlink" title="c++锁的使用"></a>c++锁的使用</h3><p>这里主要讲解互斥锁和共享锁两种。<br>共享：多个线程可以共享这个锁的拥有权。一般用于数据的读操作，防止数据被写修改。<br>互斥：仅仅一个线程可以拥有这个锁。一般用于写操作。<br>如果一个线程已经获取了互斥锁，则其他线程都无法获取该锁。<br>如果一个线程已经获取了共享锁，则其他任何线程都无法获取互斥锁，但是可以获取共享锁。<br>下面实际结合代码讲解：<br>头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;mutex&gt;//用于创建互斥锁，其它的都在这个库</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;shared_mutex&gt;//用于创建共享锁，带shared的都在这个库</span></span></span><br></pre></td></tr></table></figure>
+<p>锁的声明</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::mutex mutex;</span><br><span class="line"><span class="built_in">std</span>::shared_mutex shared_mutex;</span><br></pre></td></tr></table></figure>
+<p>普通的锁的使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mutex.lock();</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">    mutex.unlock();<span class="comment">//shared_mutex没看到可不可以，我猜可以</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这个还要unlock，于是产生了一种直接构造函数加锁，析构函数解锁的操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::unique_lock lock&#123;mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::shared_lock lock&#123;shared_mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里互斥锁和共享锁的差别就体现出来了，一旦有一个线讲解程unique_lock过后，其它再到那个句子，就会停下等解锁，而shared_lock过后，其它线程依然可以通过那个句子，但到unique_lock那里就会卡住等解锁。所以shared_lock可以用于读，毕竟可以多个线程同时读，而unique_lock用于写，因为同时只能一个写。<br>最后，c++里的大多都不是线程安全的，而c里面的大多是，具体的使用的时候一定要具体判断呀！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,95 +210,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-03-04T08:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Windows下Makefile疯狂踩坑记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">Windows下Makefile疯狂踩坑记</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/03/Hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-03T14:14:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/03/Hello-world/">Hello world</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -304,8 +332,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -16,7 +16,7 @@
 <meta property="og:description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-05T01:30:08.000Z">
-<meta property="article:modified_time" content="2021-03-05T13:51:36.394Z">
+<meta property="article:modified_time" content="2021-03-25T13:45:08.811Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="小技巧">
 <meta property="article:tag" content="学习">
@@ -176,7 +176,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用</p>
+        <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用<br>2021.3.25补：这里将补充写并发的时候遇到的注意事项</p>
 <span id="more"></span>
 
 <h3 id="概念厘清"><a href="#概念厘清" class="headerlink" title="概念厘清"></a>概念厘清</h3><h4 id="进程，I-O多路复用，线程"><a href="#进程，I-O多路复用，线程" class="headerlink" title="进程，I/O多路复用，线程"></a>进程，I/O多路复用，线程</h4><p>其中基本的逻辑是，I/O多路复用（后简称多路复用）和线程都运行在一个进程之上，不严谨的来说，即进程&gt;多路复用、线程，进程包括线程和多路复用。<br>通俗的讲解好的网址：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程和线程</a>，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32163005/answer/55772739">多路复用</a>，详细的讲解：CSAPP书上</p>
@@ -193,6 +193,9 @@
 <p>但是这个还要unlock，于是产生了一种直接构造函数加锁，析构函数解锁的操作</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::unique_lock lock&#123;mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::shared_lock lock&#123;shared_mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里互斥锁和共享锁的差别就体现出来了，一旦有一个线讲解程unique_lock过后，其它再到那个句子，就会停下等解锁，而shared_lock过后，其它线程依然可以通过那个句子，但到unique_lock那里就会卡住等解锁。所以shared_lock可以用于读，毕竟可以多个线程同时读，而unique_lock用于写，因为同时只能一个写。<br>最后，c++里的大多都不是线程安全的，而c里面的大多是，具体的使用的时候一定要具体判断呀！</p>
+<h3 id="补：实战踩的坑"><a href="#补：实战踩的坑" class="headerlink" title="补：实战踩的坑"></a>补：实战踩的坑</h3><p>如果出现死锁，可以在每个加锁的地方都输出查看给什么加锁了，方便调试<br>很多地方不要觉得一个函数里加锁就好了，要觉得一个原子操作的地方都加锁，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!haveKey(key))&#123;</span><br><span class="line">    insertKey(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里如果只在insertKey中加锁，就可能出现两个进程都过了haveKey,因而添加重复的情况，故要找这个if的前面就加锁</p>
 
       
 

@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>wweewrwer的博客</title>
+  <title>c++知识点 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="aaaa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="wweewrwer的博客">
-<meta property="og:url" content="https://wweewrwer.github.io/page/2/index.html">
+  <meta name="description" content="这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++知识点">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="aaaa">
+<meta property="og:description" content="这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-26T02:02:18.000Z">
+<meta property="article:modified_time" content="2021-03-26T02:33:44.179Z">
 <meta property="article:author" content="wweewrwer">
+<meta property="article:tag" content="知识">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -152,32 +155,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Windows下Makefile疯狂踩坑记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-c-知识点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">Windows下Makefile疯狂踩坑记</a>
+    <h1 class="article-title" itemprop="name">
+      c++知识点
     </h1>
   
 
         
-        <a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-03-04T08:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-04</time>
+        <a href="/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2021-03-26T02:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为上课要用c++多文件编程的原因，又不想要为了一个c++就去下一个VS（它实在是太大了），加上以前也经常看到makefile，就打算正好借这个机会初步学习一下makefile。但是谁能想到，小小的makefile居然如此麻烦，而且windows下还有些许不同（坑死我了TAT）。因此写一篇文章做为纪念，同时也方便以后自己查阅。<br>注：此文并不提供makefile的教学，仅是给出一个简单的模板，用于解决少量c++多文件编程的问题，方便临时需要用到又没有太多时间学习的同学。<br>
-        
-          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/#more">more >></a>
-        
+        <p>这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。<br> <span id="more"></span></p>
+<h4 id="拷贝构造函数，赋值构造函数与析构函数"><a href="#拷贝构造函数，赋值构造函数与析构函数" class="headerlink" title="拷贝构造函数，赋值构造函数与析构函数"></a>拷贝构造函数，赋值构造函数与析构函数</h4><p>这三个，如果有一个需要自定义，那么另外两个均需自定义。<br>析构构造函数是否要自定义可以通过是否申请了内存进行判断，不然默认的话它不会释放内存。<br>拷贝构造函数则是在函数调用之间那个地方会被用到<code>void f(MyClass a);</code>像这样一个函数，调用的时候就会调用拷贝构造函数。<br>这里注意一下，拷贝构造函数与赋值构造函数的区别：即调用构造函数的时候原对象存在不存在，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30726582/answer/49210382">知乎蓝色的回答</a>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bulk_item a = bulk_item(<span class="number">10</span>);  <span class="comment">//这是拷贝</span></span><br><span class="line"><span class="function">bulk_item <span class="title">a</span><span class="params">(<span class="number">1</span>)</span></span>; a =  bulk_item(<span class="number">10</span>); <span class="comment">//这是赋值</span></span><br></pre></td></tr></table></figure>
+<p>即调用的时候，原不存在即是拷贝构造，并且，如果调了赋值构造函数，你原来存的东西不会被析构的，比如里面申请了内存，如果赋值构造是申请新的话，一定要释放前面的，或者不要申请新的内存。<br>所以为了避免无意的拷贝构造同时避免开销，在函数中能用<code>const MyClass &amp;a</code>做参数的就尽量用这样的参数</p>
+
       
 
       
@@ -190,7 +192,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">知识</a>
         		</li>
       		
 		</ul>
@@ -199,16 +201,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/25/cmu15445Lab2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cmu15445Lab2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -228,87 +289,14 @@
 
 
 
-
-  
-    <article id="post-Hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/03/Hello-world/">Hello world</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/03/Hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-03T14:14:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天，wweewrwer也有一个新家了呀！<br>以后这里就是记录平日里感悟，踩坑和学习的仓库啦！（但愿别咕(っ °Д °;)っ)<br>欢迎大家的到来~  </p>
-<p>感谢提供模板的Litten大大和网络上提供教程的人们。Thank you!</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/03/Hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -331,8 +319,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

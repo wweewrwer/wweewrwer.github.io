@@ -16,7 +16,7 @@
 <meta property="og:description" content="这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-26T02:02:18.000Z">
-<meta property="article:modified_time" content="2021-03-26T02:33:44.179Z">
+<meta property="article:modified_time" content="2021-03-26T05:43:02.589Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="知识">
 <meta name="twitter:card" content="summary">
@@ -178,8 +178,8 @@
         <p>这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。<br> <span id="more"></span></p>
 <h4 id="拷贝构造函数，赋值构造函数与析构函数"><a href="#拷贝构造函数，赋值构造函数与析构函数" class="headerlink" title="拷贝构造函数，赋值构造函数与析构函数"></a>拷贝构造函数，赋值构造函数与析构函数</h4><p>这三个，如果有一个需要自定义，那么另外两个均需自定义。<br>析构构造函数是否要自定义可以通过是否申请了内存进行判断，不然默认的话它不会释放内存。<br>拷贝构造函数则是在函数调用之间那个地方会被用到<code>void f(MyClass a);</code>像这样一个函数，调用的时候就会调用拷贝构造函数。<br>这里注意一下，拷贝构造函数与赋值构造函数的区别：即调用构造函数的时候原对象存在不存在，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30726582/answer/49210382">知乎蓝色的回答</a>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bulk_item a = bulk_item(<span class="number">10</span>);  <span class="comment">//这是拷贝</span></span><br><span class="line"><span class="function">bulk_item <span class="title">a</span><span class="params">(<span class="number">1</span>)</span></span>; a =  bulk_item(<span class="number">10</span>); <span class="comment">//这是赋值</span></span><br></pre></td></tr></table></figure>
-<p>即调用的时候，原不存在即是拷贝构造，并且，如果调了赋值构造函数，你原来存的东西不会被析构的，比如里面申请了内存，如果赋值构造是申请新的话，一定要释放前面的，或者不要申请新的内存。<br>所以为了避免无意的拷贝构造同时避免开销，在函数中能用<code>const MyClass &amp;a</code>做参数的就尽量用这样的参数</p>
-
+<p>即调用的时候，原不存在即是拷贝构造，并且，如果调了赋值构造函数，你原来存的东西不会被析构的，比如里面申请了内存，如果赋值构造是申请新的话，一定要释放前面的，或者不要申请新的内存。<br>所以为了避免无意的拷贝构造同时避免开销，在函数中能用<code>const MyClass &amp;a</code>做参数的就尽量用这样的参数<br>附：几种构造函数的定义方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Empty(<span class="keyword">const</span> Empty&amp;rhs)&#123;&#125;;<span class="comment">//拷贝</span></span><br><span class="line">Empty&amp; <span class="keyword">operator</span> =(<span class="keyword">const</span> Empty &amp; rhs)&#123;&#125;;<span class="comment">//赋值</span></span><br></pre></td></tr></table></figure>
       
 
       

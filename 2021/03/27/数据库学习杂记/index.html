@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>c++知识点 | wweewrwer的博客</title>
+  <title>数据库学习杂记 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
+  <meta name="description" content="最近在学习数据库，本着所有的东西都记笔记太耽搁时间，但是一点也不记也不好，于是在此随意记录些，自己觉得重要的或者以后估计还会看到的就进行记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++知识点">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:title" content="数据库学习杂记">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
+<meta property="og:description" content="最近在学习数据库，本着所有的东西都记笔记太耽搁时间，但是一点也不记也不好，于是在此随意记录些，自己觉得重要的或者以后估计还会看到的就进行记录。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-26T02:02:18.000Z">
-<meta property="article:modified_time" content="2021-03-26T06:26:47.249Z">
+<meta property="article:published_time" content="2021-03-27T01:53:08.000Z">
+<meta property="article:modified_time" content="2021-03-27T08:08:19.621Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="知识">
 <meta name="twitter:card" content="summary">
@@ -155,32 +155,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-c-知识点" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据库学习杂记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      c++知识点
+      数据库学习杂记
     </h1>
   
 
         
-        <a href="/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-03-26T02:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
+        <a href="/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-03-27T01:53:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。<br> <span id="more"></span></p>
-<h4 id="拷贝构造函数，赋值构造函数与析构函数"><a href="#拷贝构造函数，赋值构造函数与析构函数" class="headerlink" title="拷贝构造函数，赋值构造函数与析构函数"></a>拷贝构造函数，赋值构造函数与析构函数</h4><p>这三个，如果有一个需要自定义，那么另外两个均需自定义。<br>析构构造函数是否要自定义可以通过是否申请了内存进行判断，不然默认的话它不会释放内存。<br>拷贝构造函数则是在函数调用之间那个地方会被用到<code>void f(MyClass a);</code>像这样一个函数，调用的时候就会调用拷贝构造函数。<br>这里注意一下，拷贝构造函数与赋值构造函数的区别：即调用构造函数的时候原对象存在不存在，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30726582/answer/49210382">知乎蓝色的回答</a>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bulk_item a = bulk_item(<span class="number">10</span>);  <span class="comment">//这是拷贝</span></span><br><span class="line"><span class="function">bulk_item <span class="title">a</span><span class="params">(<span class="number">1</span>)</span></span>; a =  bulk_item(<span class="number">10</span>); <span class="comment">//这是赋值</span></span><br></pre></td></tr></table></figure>
-<p>即调用的时候，原不存在即是拷贝构造，并且，如果调了赋值构造函数，你原来存的东西不会被析构的，比如里面申请了内存，如果赋值构造是申请新的话，一定要释放前面的，或者不要申请新的内存。<br>所以为了避免无意的拷贝构造同时避免开销，在函数中能用<code>const MyClass &amp;a</code>做参数的就尽量用这样的参数<br>附：几种构造函数的定义方法</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Empty(<span class="keyword">const</span> Empty&amp;rhs)&#123;&#125;;<span class="comment">//拷贝</span></span><br><span class="line">Empty&amp; <span class="keyword">operator</span> =(<span class="keyword">const</span> Empty &amp; rhs)&#123;&#125;;<span class="comment">//赋值</span></span><br></pre></td></tr></table></figure>
-<h4 id="继承和派生"><a href="#继承和派生" class="headerlink" title="继承和派生"></a>继承和派生</h4><p>貌似就是一个意思（笑哭），只是角度不同，不管了。<br>三种继承方式：忘记后两种，只记住public就好，private继承用直接把那个类放到新的类里面的方式，protected继承意义不明</p>
+        <p>最近在学习数据库，本着所有的东西都记笔记太耽搁时间，但是一点也不记也不好，于是在此随意记录些，自己觉得重要的或者以后估计还会看到的就进行记录。<br> <span id="more"></span></p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>一种数据数据，允许数据库高效地找到关系中那些在索引属性上取给定值的元组，而不用扫描关系中的所有元组，B+树就是一种索引。例如，我们在student关系的属性ID上创建了索引，数据库系统就不用读取student关系中的所有元组，就可以找到有着例如1121这样ID的记录。注意：索引不是建一个指针指向数据！！（我怎么以前会有这么蠢的想法）</p>
+<h3 id="储存结构"><a href="#储存结构" class="headerlink" title="储存结构"></a>储存结构</h3><p>因为要算时间复杂度之类的，没有足够的基础很多东西就很不清晰</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>注意，前两者是硬盘的概念，后两者是内存的概念。<br>无论是哪一个，对于数据库而言，都包含了不止一个元组！！！</p>
+<h5 id="扇区"><a href="#扇区" class="headerlink" title="扇区"></a>扇区</h5><p>硬盘的读写以扇区为基本单位。通常情况下每个扇区的大小是 512 字节</p>
+<h5 id="磁盘块"><a href="#磁盘块" class="headerlink" title="磁盘块"></a>磁盘块</h5><p>文件系统读写数据的最小单位，也叫磁盘簇。扇区是磁盘最小的物理存储单元，操作系统将相邻的扇区组合在一起，形成一个块，对块进行管理。每个磁盘块可以包括 2、4、8、16、32 或 64 个扇区。磁盘块是操作系统所使用的逻辑概念，而非磁盘的物理概念。</p>
+<h5 id="页"><a href="#页" class="headerlink" title="页"></a>页</h5><p>内存的最小存储单位。页的大小通常为磁盘块大小的 2^n倍</p>
+<h4 id="数据库概念"><a href="#数据库概念" class="headerlink" title="数据库概念"></a>数据库概念</h4><p>文件 包括 块 包括 记录</p>
+<h5 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h5><p>文件在逻辑上组织为记录的一个序列，这些记录映射到磁盘块上。</p>
+<h5 id="块"><a href="#块" class="headerlink" title="块"></a>块</h5><p>每个文件被分成了定长的存储单元，称为块，块是储存分配和数据传输的基本单元，数据库允许指定块的大小。注意，一个块可以包括很多条记录。</p>
+<h4 id="缓存区管理器"><a href="#缓存区管理器" class="headerlink" title="缓存区管理器"></a>缓存区管理器</h4><p>内存上的一块，用于临时存放磁盘上的文件，方便下次访问时就不用从磁盘读取。cmulab1就是实现这个，一般替换方法为最近最少使用</p>
+<h4 id="时间分析"><a href="#时间分析" class="headerlink" title="时间分析"></a>时间分析</h4><p>就硬盘而言，时间有搜索时间和传输时间。<br>搜索时间分析：每次不是顺序读取的时候都又要搜索一次。例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> r1:</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> r2:</span><br></pre></td></tr></table></figure>
+<p>这样对于r2,仅需寻址一次，因为是顺序访问，而r1则是要寻址<code>size(r1)</code>次</p>
 
       
 
@@ -250,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +272,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据库学习杂记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/25/cmu15445Lab2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cmu15445Lab2</div>
+    <a href="/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++知识点</div>
       <i class="icon-circle-right"></i>
     </a>
   

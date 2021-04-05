@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>c++实用小知识点 | wweewrwer的博客</title>
+  <title>详解socket编程 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
+  <meta name="description" content="之前一直觉得socket编程呀，网络编程呀这些很玄乎，实际上，掌握了一定技巧之后，这些并不麻烦，也就是查查资料，按照规范做就行注：此文大概讲讲我觉得重要的地方。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++实用小知识点">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/03/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:title" content="详解socket编程">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
+<meta property="og:description" content="之前一直觉得socket编程呀，网络编程呀这些很玄乎，实际上，掌握了一定技巧之后，这些并不麻烦，也就是查查资料，按照规范做就行注：此文大概讲讲我觉得重要的地方。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-13T09:39:37.000Z">
-<meta property="article:modified_time" content="2021-03-28T06:40:54.700Z">
+<meta property="article:published_time" content="2021-04-05T03:56:56.000Z">
+<meta property="article:modified_time" content="2021-04-05T10:02:23.086Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="小技巧">
+<meta property="article:tag" content="知识">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -155,37 +155,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-c-实用小知识点" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解socket编程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      c++实用小知识点
+      详解socket编程
     </h1>
   
 
         
-        <a href="/2021/03/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-03-13T09:39:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
+        <a href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-04-05T03:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧<br> <span id="more"></span></p>
-<h5 id="using-模板别名"><a href="#using-模板别名" class="headerlink" title="using 模板别名"></a>using 模板别名</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> Vec = MyVector&lt;T, MyAlloc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">Vec&lt;<span class="keyword">int</span>&gt; vec;</span><br></pre></td></tr></table></figure>
-
-<p>注意，typedef不行</p>
-<h5 id="for-auto-amp-x-y"><a href="#for-auto-amp-x-y" class="headerlink" title="for( auto &amp; x : y)"></a>for( auto &amp; x : y)</h5><p>这个真的好坑呀，如果不加取地址符号，就会是深拷贝，这里必须加取地址符表示引用</p>
-<h5 id="调试时printf输出"><a href="#调试时printf输出" class="headerlink" title="调试时printf输出"></a>调试时printf输出</h5><p>现在经常用printf输出调试，但是每当调试完每句话都要一句一句的删去，十分麻烦，如果用<code>ifdef DEBUG</code>每个地方都要多写整整两句话，而且很不美观，于是我决定把它封装为宏，具体代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MYDEBUG</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> LOG_DEBUG(format, ...) printf (format, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> LOG_DEBUG(format, ...)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用时可以放到一个头文件里，没有define MYDEBUG时这个就会被删去,这样就可以用LOG_DEBUG来进行调试啦</p>
+        <p>之前一直觉得socket编程呀，网络编程呀这些很玄乎，实际上，掌握了一定技巧之后，这些并不麻烦，也就是查查资料，按照规范做就行<br>注：此文大概讲讲我觉得重要的地方。<br> <span id="more"></span></p>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><h4 id="关于linux和windows"><a href="#关于linux和windows" class="headerlink" title="关于linux和windows"></a>关于linux和windows</h4><p>事实上，linux和windows的网络代码都基本差不多，以下就以windows为例，毕竟网上linux的很多。</p>
+<h4 id="WSAStartup"><a href="#WSAStartup" class="headerlink" title="WSAStartup()"></a>WSAStartup()</h4><p>本函数必须是应用程序或DLL调用的第一个Windows Sockets函数.它允许应用程序或DLL指明Windows Sockets API的版本号及获得特定Windows Sockets实现的细节.应用程序或DLL只能在一次成功的WSAStartup()调用之后才能调用进一步的Windows Sockets API函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化</span></span><br><span class="line">WSADATA wsaData;</span><br><span class="line">WSAStartup(MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line"><span class="comment">//终止dll</span></span><br><span class="line">WSACleanup();</span><br></pre></td></tr></table></figure>
+<p>其中<code>MAKEWORD(2,2)</code>的含义是使用调用2.2版，无脑用这个就行</p>
+<h4 id="socket函数"><a href="#socket函数" class="headerlink" title="socket函数"></a>socket函数</h4><p>socket函数可以用来创建套接字描述符</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain,<span class="keyword">int</span> type,<span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line">SOCKET sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);</span><br><span class="line"></span><br><span class="line">closesocket(sock);<span class="comment">//使用完毕后关闭</span></span><br></pre></td></tr></table></figure>
+<p>AF_INET表示32位IP地址;SOCK_STREAM是基于TCP的，SOCK_DGRAM是基于UDP的;最后一个是指明协议</p>
+<h4 id="htons"><a href="#htons" class="headerlink" title="htons"></a>htons</h4><p>将u16整型变量从主机字节顺序转变成网络字节顺序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="function">u_short <span class="title">htons</span><span class="params">(u_short hostshort)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h4><p>套接字就是一个端点，一个“插头”，其中有一些参数可以设置，C里面它有两种结构，见深入了解计算机系统P653。具体来说，这几个需要我们设置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">sockAddr</span>;</span></span><br><span class="line"><span class="built_in">memset</span>(&amp;sockAddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(sockAddr));			<span class="comment">//每个字节都用0填充</span></span><br><span class="line">sockAddr.sin_family = AF_INET; <span class="comment">//同前</span></span><br><span class="line">sockAddr.sin_addr.S_un.S_addr = inet_addr(<span class="string">&quot;127.0.0.1&quot;</span>); <span class="comment">//使用的IP</span></span><br><span class="line">sockAddr.sin_port = htons(<span class="number">1217</span>); <span class="comment">//端口</span></span><br></pre></td></tr></table></figure>
+<p>然后很多时候，<code>sockaddr_in</code>的结构都要转成<code>sockaddr</code>进行传递，这两种结构大小是一样的</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><h4 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">bind(servSock, (SOCKADDR*)&amp; sockAddr, <span class="keyword">sizeof</span>(SOCKADDR));</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">const</span> struct sockaddr *addr,<span class="keyword">socklen_t</span> addrlen)</span></span>;<span class="comment">//将addr中的服务器套接字地址与套接字描述符联系起来</span></span><br><span class="line">listen(servSock, <span class="number">20</span>)；</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> backlog)</span></span>;<span class="comment">//将主动套接字转化为监听套接字，backlog参数见深入理解计算机系统P655，可以直接设置为一个较大的数</span></span><br><span class="line"><span class="comment">//前两个的返回值均是成功为0，出错为1</span></span><br><span class="line">SOCKET clntSock = accept(servSock, (SOCKADDR*)&amp; clntAddr, &amp;nSize);</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br><span class="line"><span class="comment">//具体解释见CSAPP P655, 返回值是连接描述符，-1失败。唯一要注意的是第三个参数：The addrlen argument is a value-result argument: the caller must initialize it to contain the size (in bytes) of the structure pointed to by addr; on return it will contain the actual size of the peer address.这个值又要传入，又要输出</span></span><br><span class="line"><span class="comment">//同时，accept会阻塞，一直到收到为止，前两个不阻塞</span></span><br></pre></td></tr></table></figure>
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connect(clntSock, (SOCKADDR*)&amp; sockAddr, <span class="keyword">sizeof</span>(SOCKADDR));</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> clientfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>与套接字地址为addr的服务器建立连接，会阻塞</p>
+<h4 id="收发数据"><a href="#收发数据" class="headerlink" title="收发数据"></a>收发数据</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recv</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">void</span> *buf,<span class="keyword">int</span> len,<span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">send</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">void</span> *buf,<span class="keyword">int</span> len,<span class="keyword">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>第四个参数可以直接用NULL，或者是以下的组合<br>MSG_DONTROUTE 不查找表<br>MSG_OOB 接受或者发送带外数据<br>MSG_PEEK 查看数据,并不从系统缓冲区移走数据<br>MSG_WAITALL 等待所有数据<br>每一个socket在被创建之后，系统都会给它分配两个缓冲区，即输入缓冲区和输出缓冲区<br>send函数并不是直接将数据传输到网络中，而是负责将数据写入输出缓冲区，数据从输出缓冲区发送到目标主机是由TCP协议完成的。数据写入到输出缓冲区之后，send函数就可以返回了，数据是否发送出去，是否发送成功，何时到达目标主机，都不由它负责了，而是由协议负责。<br>recv函数也是一样的，它并不是直接从网络中获取数据，而是从输入缓冲区中读取数据。<br>这两个都阻不阻塞取决于缓冲区，如果缓冲区没有足够的空间，send会被阻塞，如果缓冲区没有足够的内容，recv会被阻塞</p>
+<h3 id="udp"><a href="#udp" class="headerlink" title="udp"></a>udp</h3><p>udp不需要建立连接，可以直接传数据<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/winsock2/">winsock2.h</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> WSAAPI <span class="title">sendto</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  SOCKET         s,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="keyword">char</span>     *buf,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>            len,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>            flags,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> sockaddr *to,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>            tolen</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> WSAAPI <span class="title">recvfrom</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  SOCKET   s,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">char</span>     *buf,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>      len,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>      flags,</span></span></span><br><span class="line"><span class="function"><span class="params">  sockaddr *from,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">int</span>      *fromlen</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line">sendto(sock, buf, len, <span class="number">0</span>, &amp;sockAddr, addrLen);</span><br><span class="line">recvfrom(sock , buf , <span class="keyword">sizeof</span>(buf), <span class="number">0</span>, (struct sockaddr*)&amp;addr , &amp;addr_len);<span class="comment">//差不多这样调用就行了</span></span><br></pre></td></tr></table></figure>
+<p>recvfrom是阻塞的，sendto不阻塞</p>
 
       
 
@@ -199,7 +209,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">知识</a>
         		</li>
       		
 		</ul>
@@ -255,7 +265,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,18 +279,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/18/linux%E5%90%84%E7%A7%8D%E5%B0%8F%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          linux各种小命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/13/C-%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++两种类型转换</div>
+    <a href="/2021/03/29/%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">文件编码问题</div>
       <i class="icon-circle-right"></i>
     </a>
   

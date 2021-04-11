@@ -154,6 +154,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cmu15445Lab3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/11/cmu15445Lab3/">cmu15445Lab3</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/11/cmu15445Lab3/" class="archive-article-date">
+  	<time datetime="2021-04-11T02:16:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近Lab越来越难，现在在此记录一下做题中的思考和想法，方便之后查阅和反省。</p>
+        
+          <a class="article-more-a" href="/2021/04/11/cmu15445Lab3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/11/cmu15445Lab3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-详解socket编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -812,86 +888,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/13/C-%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于c-中申明长度为0的数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/13/%E5%85%B3%E4%BA%8Ec-%E4%B8%AD%E7%94%B3%E6%98%8E%E9%95%BF%E5%BA%A6%E4%B8%BA0%E7%9A%84%E6%95%B0%E7%BB%84/">关于c++中申明长度为0的数组</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/13/%E5%85%B3%E4%BA%8Ec-%E4%B8%AD%E7%94%B3%E6%98%8E%E9%95%BF%E5%BA%A6%E4%B8%BA0%E7%9A%84%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2021-03-13T02:02:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今日在看cmu15445时发现这样一句话：  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">pair</span>&lt;KeyType, ValueType&gt; <span class="built_in">array</span>[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-
-<p>当时真是吐血而亡啊，从未见过声明数组为0的我呆在原地不知所措，以为会有什么特别的用法。<br>后来才知道，原来就是字面意思，声明一个长度为0的数组。它的好处在于，放在结构体中的时候，你可以同时给结构体和这个数组申请空间，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">sizeof</span>(Data); <span class="comment">// 4, b[0]不产生空间</span></span><br><span class="line">data *a=(data *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Data)+<span class="number">10</span>); <span class="comment">//这样就自动给b产生了10字节的空间</span></span><br></pre></td></tr></table></figure>
-
-<p>那么为什么不用指针呢？仅仅是申明和回收的方便吗？我觉得还有就是可以节省空间，因为指针是要占8个字节的，但是这样是不占空间，故可以采用这样的方式。（注：并非所有的编译器都支持这一点）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/13/%E5%85%B3%E4%BA%8Ec-%E4%B8%AD%E7%94%B3%E6%98%8E%E9%95%BF%E5%BA%A6%E4%B8%BA0%E7%9A%84%E6%95%B0%E7%BB%84/">展开全文 >></a>
         </p>
       
 

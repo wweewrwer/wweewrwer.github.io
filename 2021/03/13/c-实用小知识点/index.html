@@ -16,7 +16,7 @@
 <meta property="og:description" content="最后更新：2021.4.8   囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-13T09:39:37.000Z">
-<meta property="article:modified_time" content="2021-04-12T09:15:32.340Z">
+<meta property="article:modified_time" content="2021-04-12T11:59:56.235Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="小技巧">
 <meta name="twitter:card" content="summary">
@@ -185,6 +185,7 @@
 <li><a href="#%E8%B0%83%E8%AF%95%E6%97%B6printf%E8%BE%93%E5%87%BA">调试时printf输出</a></li>
 <li><a href="#%E5%8F%B3%E5%80%BC">右值</a></li>
 <li><a href="#unique_ptr">unique_ptr</a></li>
+<li><a href="#emplace_back%E5%92%8Cpush_back">emplace_back和push_back</a></li>
 </ul>
 <!-- /TOC -->
 <h4 id="using-模板别名"><a href="#using-模板别名" class="headerlink" title="using 模板别名"></a>using 模板别名</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> Vec = MyVector&lt;T, MyAlloc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">Vec&lt;<span class="keyword">int</span>&gt; vec;</span><br></pre></td></tr></table></figure>
@@ -196,6 +197,7 @@
 <p>使用时可以放到一个头文件里，没有define MYDEBUG时这个就会被删去,这样就可以用LOG_DEBUG来进行调试啦</p>
 <h4 id="右值"><a href="#右值" class="headerlink" title="右值"></a>右值</h4><p>名称来源是是否可以出现在等号的左边或者右边，只能出现在右边就是右值，而int &amp;&amp;x就表示一个右值引用，即int &amp;&amp;x = xxxxx，xxxxx必须是一个临时马上就销毁的量,必须是一个右值，比如：int &amp;&amp;x = 3;这样的好处是马上就可以拿去move,相当于加这个符就像const一样加一个限制，防止出错</p>
 <h4 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h4><p>在<code>#include&lt;memory&gt;</code>里，这个有两种构造的方法，分别是<code>unique_ptr&lt;int&gt; a = make_unique&lt;int&gt;(17)</code>,<code>unique_ptr&lt;int&gt; a(new int(5))</code>。千万不要只记前一种觉得简单，不然，当你有朝一日，要为一个抽象类创建unique_ptr的时候会成为憨憨的，根本不知道咋类型转化</p>
+<h4 id="emplace-back和push-back"><a href="#emplace-back和push-back" class="headerlink" title="emplace_back和push_back"></a>emplace_back和push_back</h4><p>据传emplace_back比push_back要快，因为省略了构造什么之类的，之后空的时候可以在构造函数里面实验来验证一下，但好像有些情景emplace_back编译不过，这个时候就可以用push_back好了，空了的时候可以去看源码之类</p>
 
       
 

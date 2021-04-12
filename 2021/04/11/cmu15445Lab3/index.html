@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="wweewrwer的博客">
 <meta property="og:description" content="最近Lab越来越难，现在在此记录一下做题中的思考和想法，方便之后查阅和反省。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wweewrwer.github.io/img/cmu15445Lab3fig1.jpg">
+<meta property="og:image" content="https://wweewrwer.github.io/2021/04/11/cmu15445Lab3/img/cmu15445Lab3fig1.jpg">
 <meta property="article:published_time" content="2021-04-11T02:16:18.000Z">
-<meta property="article:modified_time" content="2021-04-11T09:35:03.702Z">
+<meta property="article:modified_time" content="2021-04-12T09:11:14.286Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wweewrwer.github.io/img/cmu15445Lab3fig1.jpg">
+<meta name="twitter:image" content="https://wweewrwer.github.io/2021/04/11/cmu15445Lab3/img/cmu15445Lab3fig1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
   
@@ -185,7 +185,7 @@
 <h3 id="catalog类"><a href="#catalog类" class="headerlink" title="catalog类"></a>catalog类</h3><p>数据库的整个架构，里面有表，每个表有个schema类作为表内的目录？然后每个表内似乎又有index,每个index里面也有一个schema作为目录？</p>
 <h3 id="ExecutorEngine类"><a href="#ExecutorEngine类" class="headerlink" title="ExecutorEngine类"></a>ExecutorEngine类</h3><p>利用factory类产生迭代器，然后next运算完产生所有结果就放回去</p>
 <h3 id="ExecutorFactory类"><a href="#ExecutorFactory类" class="headerlink" title="ExecutorFactory类"></a>ExecutorFactory类</h3><p>这个类貌似就是根据查询计划和ExecutorContext中的各种东西设置创建出迭代器，返回的是AbstractExecutor类，就是提供了这些运算的统一的接口</p>
-<h3 id="AbstractPlanNode类"><a href="#AbstractPlanNode类" class="headerlink" title="AbstractPlanNode类"></a>AbstractPlanNode类</h3><p>有一个负责输出的output_schema_,然后形成一个树的形式，子类也是这个。为什么是一棵树？详见这幅图。<br><img src="/img/cmu15445Lab3fig1.jpg" alt="alt"><br>这样每次就可以产生了询问，然后用子代的结果接到父类上然后继续询问。  </p>
+<h3 id="AbstractPlanNode类"><a href="#AbstractPlanNode类" class="headerlink" title="AbstractPlanNode类"></a>AbstractPlanNode类</h3><p>有一个负责输出的output_schema_,然后形成一个树的形式，子类也是这个。为什么是一棵树？详见这幅图。<br><img src="./img/cmu15445Lab3fig1.jpg" alt="alt"><br>这样每次就可以产生了询问，然后用子代的结果接到父类上然后继续询问。  </p>
 <h3 id="AbstractExpression类"><a href="#AbstractExpression类" class="headerlink" title="AbstractExpression类"></a>AbstractExpression类</h3><p>这个类可以用schema去评估一个tuple（具体这是什么意思我也不懂，唯一知道的就是有些地方有这个东西要去评估为true才行），它的返回值要调用GetAs<bool>才行。</p>
 <h3 id="Transaction类"><a href="#Transaction类" class="headerlink" title="Transaction类"></a>Transaction类</h3><p>这个就是多线程的时候，用来记录自己的页之类的</p>
 <h3 id="TableHeap类"><a href="#TableHeap类" class="headerlink" title="TableHeap类"></a>TableHeap类</h3><p>这个就是储存具体的值的地方，显然可以猜到，它一定有getTuple函数哈哈哈哈哈，顺便它还有迭代器，看到这里有没有觉得突然之间知道这个实验怎么做了。这个的难点就完全是看代码，前面那么多个莫名其妙的类，一看真的是挺吓人让人痛苦的，但一个一个看下来之后。</p>

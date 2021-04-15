@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>c++踩的坑 | wweewrwer的博客</title>
+  <title>gtest小技巧 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我爱c++,c++爱我。(c++好，谁用谁知道)本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
+  <meta name="description" content="本文记录gtest用到的一些知识。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++踩的坑">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/04/13/c-%E8%B8%A9%E7%9A%84%E5%9D%91/index.html">
+<meta property="og:title" content="gtest小技巧">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="我爱c++,c++爱我。(c++好，谁用谁知道)本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
+<meta property="og:description" content="本文记录gtest用到的一些知识。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-13T02:01:36.000Z">
-<meta property="article:modified_time" content="2021-04-13T03:04:18.329Z">
+<meta property="article:published_time" content="2021-04-15T03:10:19.000Z">
+<meta property="article:modified_time" content="2021-04-15T03:12:20.505Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="小技巧">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -155,32 +155,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-c-踩的坑" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-gtest小技巧" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      c++踩的坑
+      gtest小技巧
     </h1>
   
 
         
-        <a href="/2021/04/13/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" class="archive-article-date">
-  	<time datetime="2021-04-13T02:01:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-13</time>
+        <a href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="archive-article-date">
+  	<time datetime="2021-04-15T03:10:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我爱c++,c++爱我。(c++好，谁用谁知道)<br>本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。</p>
+        <p>本文记录gtest用到的一些知识。</p>
 <span id="more"></span>
-<h4 id="类中变量与传进来的参数"><a href="#类中变量与传进来的参数" class="headerlink" title="类中变量与传进来的参数"></a>类中变量与传进来的参数</h4><p>复现：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx) , it_(exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx_-&gt;GetTransaction()))&#123; </span><br><span class="line">    plan_ = plan;</span><br><span class="line">    table_heap_ = exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_.get();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面是这个憨憨类的成员变量</span></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="comment">/** The sequential scan plan node to be executed. */</span></span><br><span class="line">  <span class="keyword">const</span> SeqScanPlanNode *plan_;</span><br><span class="line">  TableHeap *table_heap_;</span><br><span class="line">  TableIterator it_;</span><br></pre></td></tr></table></figure>
-<p>运行报错为段溢出。因为整个项目非常庞大，首先调这个项目，我花了无数时间才终于找到问题出在这个构造函数，然后我凭借我敏锐的直觉认为问题肯定出在it_构造上（这谁看不出来呀），并且，问题一定是访问非法内存。但是，这这这，这么长一串，谁知道哪里溢出，而且因为前面我写了一个非常复杂的数据结构是和这个连在一起的，加之这一句话虽然长但是都很简单，应该不会出错，我一度怀疑是那个数据结构我写崩了修改掉了这边的内存导致这里崩溃。然后，靠着我强悍的不断printf终于发现，居然问题出在GetTableOid函数上崩溃，但是我就傻了，这就返回一个值怎么就崩溃了呢，我只好怀疑plan_是一个空指针，结果，突然发现，这里应该用plan而不是plan_啊，瞬间哭哭了，这憨憨错误调了我三小时，特别是这憨憨项目CMAKE中没加-g，然后我又不大会CMAKE，本想加结果又懒了，最后哭死我了。<br>经验：以后千万要注意构造函数里的绝不能出现类中变量，一定好生检查，同时能写上去的一定不在构造函数语句中写，这样即使误写了也可能那个元素先实例化所以问题不大。还有就是直接用gdb运行这个程序可以直接知道哪里开始崩溃的，虽然c++访问非法内存崩溃报错一向报于千里之外，但是好歹知道是这句话之前出错的呀（哭）。<br>更正：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx), plan_(plan), table_heap_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_.get()),it_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx-&gt;GetTransaction()))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="–gtest-break-on-failure"><a href="#–gtest-break-on-failure" class="headerlink" title="–gtest_break_on_failure"></a>–gtest_break_on_failure</h4><p>遇到错误就停止。</p>
+
       
 
       
@@ -193,7 +191,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
         		</li>
       		
 		</ul>
@@ -249,7 +247,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/13/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -263,18 +261,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          gtest小技巧
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/11/cmu15445Lab3/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cmu15445Lab3</div>
+    <a href="/2021/04/13/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++踩的坑</div>
       <i class="icon-circle-right"></i>
     </a>
   

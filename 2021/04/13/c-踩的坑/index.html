@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
   <title>c++踩的坑 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我爱c++,c++爱我。(c++好，谁用谁知道)本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
+  <meta name="description" content="最后更新时间：2021.4.18 持续更新中~我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++踩的坑">
 <meta property="og:url" content="https://wweewrwer.github.io/2021/04/13/c-%E8%B8%A9%E7%9A%84%E5%9D%91/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="我爱c++,c++爱我。(c++好，谁用谁知道)本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
+<meta property="og:description" content="最后更新时间：2021.4.18 持续更新中~我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-13T02:01:36.000Z">
-<meta property="article:modified_time" content="2021-04-13T03:04:18.329Z">
+<meta property="article:modified_time" content="2021-04-18T04:39:51.867Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
@@ -175,12 +175,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我爱c++,c++爱我。(c++好，谁用谁知道)<br>本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。</p>
+        <p>最后更新时间：2021.4.18 持续更新中~<br>我爱c++,c++爱我。(c++好，谁用谁知道)<br>啊，原来C也好不到哪里去<br>本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。</p>
 <span id="more"></span>
 <h4 id="类中变量与传进来的参数"><a href="#类中变量与传进来的参数" class="headerlink" title="类中变量与传进来的参数"></a>类中变量与传进来的参数</h4><p>复现：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx) , it_(exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx_-&gt;GetTransaction()))&#123; </span><br><span class="line">    plan_ = plan;</span><br><span class="line">    table_heap_ = exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_.get();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面是这个憨憨类的成员变量</span></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="comment">/** The sequential scan plan node to be executed. */</span></span><br><span class="line">  <span class="keyword">const</span> SeqScanPlanNode *plan_;</span><br><span class="line">  TableHeap *table_heap_;</span><br><span class="line">  TableIterator it_;</span><br></pre></td></tr></table></figure>
 <p>运行报错为段溢出。因为整个项目非常庞大，首先调这个项目，我花了无数时间才终于找到问题出在这个构造函数，然后我凭借我敏锐的直觉认为问题肯定出在it_构造上（这谁看不出来呀），并且，问题一定是访问非法内存。但是，这这这，这么长一串，谁知道哪里溢出，而且因为前面我写了一个非常复杂的数据结构是和这个连在一起的，加之这一句话虽然长但是都很简单，应该不会出错，我一度怀疑是那个数据结构我写崩了修改掉了这边的内存导致这里崩溃。然后，靠着我强悍的不断printf终于发现，居然问题出在GetTableOid函数上崩溃，但是我就傻了，这就返回一个值怎么就崩溃了呢，我只好怀疑plan_是一个空指针，结果，突然发现，这里应该用plan而不是plan_啊，瞬间哭哭了，这憨憨错误调了我三小时，特别是这憨憨项目CMAKE中没加-g，然后我又不大会CMAKE，本想加结果又懒了，最后哭死我了。<br>经验：以后千万要注意构造函数里的绝不能出现类中变量，一定好生检查，同时能写上去的一定不在构造函数语句中写，这样即使误写了也可能那个元素先实例化所以问题不大。还有就是直接用gdb运行这个程序可以直接知道哪里开始崩溃的，虽然c++访问非法内存崩溃报错一向报于千里之外，但是好歹知道是这句话之前出错的呀（哭）。<br>更正：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx), plan_(plan), table_heap_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_.get()),it_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx-&gt;GetTransaction()))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="用了ifndef之后c头文件仍然重复定义"><a href="#用了ifndef之后c头文件仍然重复定义" class="headerlink" title="用了ifndef之后c头文件仍然重复定义"></a>用了ifndef之后c头文件仍然重复定义</h4><p>今天我才知道，在C里面，.h文件里是不能放函数和常量的实现的，不然一但几个头文件里都引了这个头文件，就会重复定义，ifndef只能放一个文件里连续申明同一个头文件（啊这），但是C++貌似没有这个问题，一直常量和函数实现经常放.h也没有出错  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> haha;<span class="comment">//这是头文件里的申明</span></span><br><span class="line"><span class="keyword">int</span> haha =<span class="number">0</span>;<span class="comment">//这是在对应.c文件里的赋值</span></span><br></pre></td></tr></table></figure>
       
 
       

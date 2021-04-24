@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>autohotkey学习笔记 | wweewrwer的博客</title>
+  <title>cs144总结 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最后更新时间：2021-04-23 16:41  持续更新中~最近事情好多，以至于连github这几天都没更新了，正好今天为了c++属性自动get,set研究了下这个，做个记录吧，谈一谈自己的理解，不一定正确。">
+  <meta name="description" content="这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="autohotkey学习笔记">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/04/22/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="cs144总结">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/04/24/cs144%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="最后更新时间：2021-04-23 16:41  持续更新中~最近事情好多，以至于连github这几天都没更新了，正好今天为了c++属性自动get,set研究了下这个，做个记录吧，谈一谈自己的理解，不一定正确。">
+<meta property="og:description" content="这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-22T13:42:53.000Z">
-<meta property="article:modified_time" content="2021-04-23T08:44:01.113Z">
+<meta property="article:published_time" content="2021-04-24T10:57:33.000Z">
+<meta property="article:modified_time" content="2021-04-24T13:57:23.399Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="小技巧">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -155,33 +155,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-autohotkey学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cs144总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      autohotkey学习笔记
+      cs144总结
     </h1>
   
 
         
-        <a href="/2021/04/22/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-04-22T13:42:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
+        <a href="/2021/04/24/cs144%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-04-24T10:57:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最后更新时间：2021-04-23 16:41  持续更新中~<br>最近事情好多，以至于连github这几天都没更新了，正好今天为了c++属性自动get,set研究了下这个，做个记录吧，谈一谈自己的理解，不一定正确。</p>
-<span id="more"></span>
-<h3 id="置顶脚本"><a href="#置顶脚本" class="headerlink" title="置顶脚本"></a>置顶脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#d::</span><br><span class="line">winset,AlwaysOnTop,,A</span><br><span class="line">return</span><br></pre></td></tr></table></figure>
-<p>估计这个不支持了，语法高亮都没了，将就看吧哈哈哈，这个就是调windows相关的置顶，注意要return</p>
-<h3 id="c-一键get-set"><a href="#c-一键get-set" class="headerlink" title="c++一键get,set"></a>c++一键get,set</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">:*:yh0::</span><br><span class="line">Input, typeVar, V, &#123;Space&#125;</span><br><span class="line">Input, nameVar, V, &#123;;&#125; ;name_</span><br><span class="line">StringLeft, firstChar, nameVar, 1</span><br><span class="line">StringTrimLeft, noFirstName, nameVar, 1</span><br><span class="line">StringTrimRight, name1, noFirstName, 1</span><br><span class="line">name3 :&#x3D; firstChar name1 ;name</span><br><span class="line">StringUpper, firstChar, firstChar</span><br><span class="line">name2 :&#x3D; firstChar name1 ;Name</span><br><span class="line">send, &#96;n</span><br><span class="line">send, %typeVar%&#123;Space&#125;get%name2%&#123;(&#125;&#123;)&#125;&#123;Space&#125;const&#123;;&#125;&#96;n</span><br><span class="line">send, void&#123;Space&#125;set%name2%&#123;(&#125;const %typeVar%&#123;Space&#125;&#123;&amp;&#125;%name3%&#123;)&#125;&#123;;&#125;&#96;n</span><br><span class="line">send, %typeVar%&#123;Space&#125;get%name2%&#123;(&#125;&#123;)&#125;&#123;Space&#125;const &#123;&#123;&#125; &#123;r&#125;eturn %nameVar%&#123;;&#125; &#123;&#125;&#125;&#96;n</span><br><span class="line">send, void&#123;Space&#125;set%name2%&#123;(&#125;const %typeVar%&#123;Space&#125;&#123;&amp;&#125;%name3%&#123;)&#125; &#123;&#123;&#125; %nameVar% &#123;&#x3D;&#125; %name3% &#123;;&#125; &#123;&#125;&#125;</span><br><span class="line">return</span><br><span class="line">:*:yh1::</span><br><span class="line">Input, typeVar, V, &#123;Space&#125;</span><br><span class="line">Input, nameVar, V, &#123;;&#125; ;name_</span><br><span class="line">StringLeft, firstChar, nameVar, 1</span><br><span class="line">StringTrimLeft, noFirstName, nameVar, 1</span><br><span class="line">StringTrimRight, name1, noFirstName, 1</span><br><span class="line">name3 :&#x3D; firstChar name1 ;name</span><br><span class="line">StringUpper, firstChar, firstChar</span><br><span class="line">name2 :&#x3D; firstChar name1 ;Name</span><br><span class="line">send, &#96;n</span><br><span class="line">;这是直接输入</span><br><span class="line">send, %typeVar%&#123;Space&#125;get%name2%&#123;(&#125;&#123;)&#125;&#123;Space&#125;const &#123;&#123;&#125; &#123;r&#125;eturn %nameVar%&#123;;&#125; &#123;&#125;&#125;&#96;n</span><br><span class="line">send, void&#123;Space&#125;set%name2%&#123;(&#125;const %typeVar%&#123;Space&#125;&#123;&amp;&#125;%name3%&#123;)&#125; &#123;&#123;&#125; %nameVar% &#123;&#x3D;&#125; %name3% &#123;;&#125; &#123;&#125;&#125;</span><br><span class="line">return</span><br><span class="line">:*:yh2::</span><br><span class="line">Input, typeVar, V, &#123;Space&#125;</span><br><span class="line">Input, nameVar, V, &#123;;&#125; ;name_</span><br><span class="line">StringLeft, firstChar, nameVar, 1</span><br><span class="line">StringTrimLeft, noFirstName, nameVar, 1</span><br><span class="line">StringTrimRight, name1, noFirstName, 1</span><br><span class="line">name3 :&#x3D; firstChar name1 ;name</span><br><span class="line">StringUpper, firstChar, firstChar</span><br><span class="line">name2 :&#x3D; firstChar name1 ;Name</span><br><span class="line">;这是剪切板，进行下选择</span><br><span class="line">Clipboard :&#x3D; typeVar &quot; get&quot; name2 &quot;() const;&#96;n&quot; &quot;void set&quot; name2 &quot;(const &quot; typeVar &quot; &amp;&quot; name3 &quot;);&#96;n&quot;</span><br><span class="line">Clipboard :&#x3D; typeVar &quot; get&quot; name2 &quot;() const &#123; return &quot; nameVar &quot;; &#125;&#96;n&quot; &quot;void set&quot; name2 &quot;(const &quot; typeVar &quot; &amp;&quot; name3 &quot;) &#123; &quot; nameVar &quot;&#x3D; &quot; name3 &quot;; &#125;&quot;</span><br><span class="line">return</span><br></pre></td></tr></table></figure>
-<p>代码虽长，简单来说，就是输入yh0之后，再输入int a_;这个格式，自动生成声明和实现，yh1，仅实现，里面的Input就是直接读入，<code>;</code>这个是注释的意思，下面几个就是字符串相关的函数，send就是模拟键鼠，它自动一个一个输入，差不多就是这样，这个就是理解的关键，大体就是它读到你的这个字符串了，就调用下面的指令，直接监控键盘输入的模式，注意英文输入法，否则可能输入法也是这样监控会冲突咋的<br>然后注意下，<code>:=</code>变量是直接用，然后字符串用””，两个字符串（所有的变量都是字符串）中间一个空格就表示拼接，然后send里面，变量是要%%的，符号啥的<code>&#123;&#125;</code>就可以了,里面的每一字符都要输出的，直接空一格和{Space}都是空格的意思，<code>:*:</code>是不需要分隔符的意思,注意return,否则上一个脚本会一路向下，下面的也会被执行</p>
-<h3 id="一键时间"><a href="#一键时间" class="headerlink" title="一键时间"></a>一键时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">::\nowtime::</span><br><span class="line">FormatTime , NowTime , , yyyy&#39;-&#39;MM&#39;-&#39;dd&#39; &#39;HH&#39;:&#39;mm</span><br><span class="line">Clipboard :&#x3D; &quot;最后更新时间：&quot; NowTime &quot;  持续更新中~&quot;</span><br><span class="line">Send, ^v</span><br><span class="line">return</span><br></pre></td></tr></table></figure>
+        <p>这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）</p>
+<span id="more"></span> 
+<h3 id="前缀知识部分"><a href="#前缀知识部分" class="headerlink" title="前缀知识部分"></a>前缀知识部分</h3><h4 id="OSI7层模型："><a href="#OSI7层模型：" class="headerlink" title="OSI7层模型："></a>OSI7层模型：</h4><p>计算机网络第5版33页<br>物理层：传0，1<br>数据链路层：消除链路错误<br>网络层：处理拥塞等<br>传输层：分割且确保顺序<br>会话层：各种服务<br>表示层：关注所传递的语法与语义<br>应用层：各种协议<br>之所以TCP也在控制传输帧的顺序正确，而数据链路层也在，网上的说法有两种：1.TCP是为了统一，因为数据链路层并不一定有，相反，比如一些可以短暂丢包的，像视频，数据链路层一个一个检验反而降低了效率，故数据链路层没有。2.每层都可以有，但谁主张谁举证，哪层需要这个功能哪层就要弄这个。  </p>
+<h4 id="TCP协议位于传输层"><a href="#TCP协议位于传输层" class="headerlink" title="TCP协议位于传输层"></a>TCP协议位于传输层</h4><h3 id="问题重述与解决与总结"><a href="#问题重述与解决与总结" class="headerlink" title="问题重述与解决与总结"></a>问题重述与解决与总结</h3><h4 id="整个实验的目标"><a href="#整个实验的目标" class="headerlink" title="整个实验的目标"></a>整个实验的目标</h4><p>实现基于不可靠数据报文的可靠字节流通信，传输过来的数据包可能丢失，乱序，被改变和重复。</p>
+<h4 id="lab0"><a href="#lab0" class="headerlink" title="lab0"></a>lab0</h4><h5 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h5><p>首先用命令行发了一个取网页的命令，然后在代码中利用它给的socket去实现它。像下面这样</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TCPSocket sock;</span><br><span class="line">sock.connect(Address(host, <span class="string">&quot;http&quot;</span>));</span><br><span class="line">sock.write(<span class="string">&quot;GET &quot;</span> + path + <span class="string">&quot; HTTP/1.1\r\nHost: &quot;</span> + host + <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line">sock.shutdown(SHUT_WR);</span><br><span class="line"><span class="keyword">while</span> (!sock.eof()) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; sock.read();</span><br><span class="line">&#125;</span><br><span class="line">sock.close();</span><br></pre></td></tr></table></figure>
+<p>然后是实现一个可靠字节流类，有点相当于就是在内存里开一片缓存区，有大小限制。从一头读，从另一头写。</p>
+<h5 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h5><p>利用了一个deque双端队列实现（因为读存在一个peek操作，即先读出来，不pop，这是queue做不到的，因为queue只能读第一个，不然就出队了，也放不回去</p>
+<h5 id="遇到的困难"><a href="#遇到的困难" class="headerlink" title="遇到的困难"></a>遇到的困难</h5><p>最大的困难是不明白整个程序要我做什么，因为最开始也不懂什么叫做流类，第一个因为那时完全不会基于socket的编程，因而处理的并不好</p>
+<h4 id="lab1"><a href="#lab1" class="headerlink" title="lab1"></a>lab1</h4><h5 id="问题重述-1"><a href="#问题重述-1" class="headerlink" title="问题重述"></a>问题重述</h5><p>一个stream组装类：有一个最大容量，负责接收乱序的报文，每个报文有一个起始的标识和长度，各个报文可能重叠，乱序等，然后一但可以接上往lab0的流类中写就写。</p>
+<h5 id="问题解决-1"><a href="#问题解决-1" class="headerlink" title="问题解决"></a>问题解决</h5><p>见下</p>
+<h5 id="遇到的困难-1"><a href="#遇到的困难-1" class="headerlink" title="遇到的困难"></a>遇到的困难</h5><p>最初的想法很简单，就是我搞一个map，每个下标对应一个字符，然后写了就在map中删去，当时觉得map就多一个logn的复杂度，没有什么问题，后来超时了，后来想到的解决方法是建一个等同于上限大小的vector,然后下标mod上限来做vector中的下标，但是这样会循环，不知道哪一位是还未写到流类的，哪一个是写过了的，于是再开一个标记数组，每当写到流类了那个位置就false,有新的进来就true，然后每次添加完都检查是否可以往流类里写就可以了</p>
+<h4 id="lab2"><a href="#lab2" class="headerlink" title="lab2"></a>lab2</h4><h5 id="问题重述-2"><a href="#问题重述-2" class="headerlink" title="问题重述"></a>问题重述</h5><p>tcp receiver,负责接收报文，同时返回一个ack表示下一个想收的和windowSize表示多少范围以内的才能发。同时注意ack的转换，网络传的为32位循环，有初始和结束字符，本地为64位，然后stream里没有开始和结束字符。</p>
+<h5 id="问题解决-2"><a href="#问题解决-2" class="headerlink" title="问题解决"></a>问题解决</h5><p>没有什么特别的，就是注意一下ack的储存和转换，和lab1的组装类对接一下就可以了。</p>
+<h5 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h5><p>有一个地方，它把uint32_封装了，但是重载-成了返回int,这个坑了好久（虽然根据实际意义确实应该是int）。</p>
+<h4 id="lab3"><a href="#lab3" class="headerlink" title="lab3"></a>lab3</h4>
       
 
       
@@ -194,7 +203,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		
 		</ul>
@@ -250,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/22/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/24/cs144%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +273,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/04/24/cs144%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          cs144总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">gtest小技巧</div>
+    <a href="/2021/04/22/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">autohotkey学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   

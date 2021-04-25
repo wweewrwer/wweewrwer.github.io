@@ -404,9 +404,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>C++两种类型转换：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T t = <span class="keyword">static_cast</span>&lt;T&gt;(expression);</span><br><span class="line">T t = <span class="keyword">reinterpret_cast</span>&lt;T&gt;(expression);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">T t = <span class="keyword">static_cast</span>&lt;T&gt;(expression);</span><br><span class="line">T t = <span class="keyword">reinterpret_cast</span>&lt;T&gt;(expression);</span><br><span class="line">T t = <span class="keyword">dynamic_cast</span>&lt;T&gt;(expression);<span class="comment">//后来补的</span></span><br></pre></td></tr></table></figure>
 
-<p>简单的理解：前面那个类似于隐式类型转换（比如int转double呀，并不是所有的都可以转），下面那个类似于强行改变对于内存的解释方式（所以什么都可以转，又叫无关类型转换），所以一般用于指针的转换</p>
+<p>简单的理解：前面那个类似于隐式类型转换（比如int转double呀，并不是所有的都可以转），下面rein那个类似于强行改变对于内存的解释方式（所以什么都可以转，又叫无关类型转换），所以一般用于指针的转换，最后那个补的是父类指针或者引用转子类用的，因为多态的缘故，父类指针实际可能指的是子类，故这个时候是可以转的，动态类型转换就是检查一下可不可以，可以才转。</p>
 
       
 

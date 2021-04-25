@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
   <title>c++知识点 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最后更新时间：2021.4.8 持续更新中~ 这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
+  <meta name="description" content="本文创建时间：2021-03-26 10:02:18 持续更新中~ 这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++知识点">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/04/25/c-%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="最后更新时间：2021.4.8 持续更新中~ 这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
+<meta property="og:description" content="本文创建时间：2021-03-26 10:02:18 持续更新中~ 这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-26T02:02:18.000Z">
-<meta property="article:modified_time" content="2021-04-08T07:54:57.084Z">
+<meta property="article:published_time" content="2021-04-25T06:42:00.000Z">
+<meta property="article:modified_time" content="2021-04-25T06:46:56.382Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -167,15 +167,15 @@
   
 
         
-        <a href="/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-03-26T02:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
+        <a href="/2021/04/25/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2021-04-25T06:42:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最后更新时间：2021.4.8 持续更新中~</p>
+        <p>本文创建时间：2021-03-26 10:02:18 持续更新中~</p>
 <p>这是课上c++面向对象的知识点的学习，补充以前没有注意到的零碎的知识点。<br> <span id="more"></span></p>
 <!-- TOC -->
 
@@ -184,6 +184,7 @@
 <li><a href="#%E7%BB%A7%E6%89%BF%E5%92%8C%E6%B4%BE%E7%94%9F">继承和派生</a></li>
 <li><a href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%BB%A5%E5%8F%8A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F">构造函数以及析构函数调用顺序</a></li>
 <li><a href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E5%A4%9A%E6%80%81">虚函数与多态</a><ul>
+<li><a href="#%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0">虚函数的实现</a></li>
 <li><a href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0">纯虚函数</a></li>
 <li><a href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB">抽象类</a></li>
 <li><a href="#override%E5%92%8Cfinal">override和final</a></li>
@@ -205,6 +206,7 @@
 <h4 id="构造函数以及析构函数调用顺序"><a href="#构造函数以及析构函数调用顺序" class="headerlink" title="构造函数以及析构函数调用顺序"></a>构造函数以及析构函数调用顺序</h4><p>A.调用基类构造函数，调用顺序按照他们被继承时声明的顺序（从左往右）<br>B.调用内嵌成员对象的构造函数，调用顺序按照他们在类中声明的顺序<br>C.执行派生类的构造函数体中的语句<br>注意：执行的顺序与构造函数”:”后面的排序是无关的，如<code>myClass():A(),B(),C()</code>这句话并不是先A构造再B，而是完全取决于上述所说的顺序<br>析构函数正好完全相反（就像A中的从左至右都要变成从右至左，B也是声明的顺序的反序<br>注意这两个函数都是不继承的</p>
 <h4 id="虚函数与多态"><a href="#虚函数与多态" class="headerlink" title="虚函数与多态"></a>虚函数与多态</h4><p>关键字virtual,表示希望子类重写（与重载不同，重载相当于添加了功能，例如重载+号使其能对myClass进行运算）。<br>同时，注意，虚函数重写过后，是可以用父类的指针调用的，但非虚函数不行。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">son x;</span><br><span class="line">father *p=&amp;x;</span><br><span class="line">p-&gt;haha();<span class="comment">//其中haha是father中的虚函数，son重写了它，这里会调用son中的实现</span></span><br><span class="line">p-&gt;kuku();<span class="comment">//kuku不是虚函数，这里会调用father中的实现</span></span><br></pre></td></tr></table></figure>
+<h5 id="虚函数的实现"><a href="#虚函数的实现" class="headerlink" title="虚函数的实现"></a>虚函数的实现</h5><p>每个有虚函数的类都有一个虚函数表，然后编译器会在每个类中插入一个指针（我的编译器是类的开始，这样也好理解，这样指针转换了访问是完全一样的），指向虚表，然后子类的虚指针和父类不同，因而父类能调用子类的函数，故有虚函数的sizeof()要加8</p>
 <h5 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h5><p>外加=0。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">haha</span><span class="params">()</span></span>=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
 <h5 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h5><p>带有纯虚函数的类，不能实例化，只能做为基类，用于建立公共接口</p>
@@ -286,7 +288,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/26/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/25/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,18 +302,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据库学习杂记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/25/cmu15445Lab2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cmu15445Lab2</div>
+    <a href="/2021/04/24/cs144%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cs144总结</div>
       <i class="icon-circle-right"></i>
     </a>
   

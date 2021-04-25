@@ -16,7 +16,7 @@
 <meta property="og:description" content="这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-24T10:57:33.000Z">
-<meta property="article:modified_time" content="2021-04-24T13:57:23.399Z">
+<meta property="article:modified_time" content="2021-04-25T03:30:44.878Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -177,8 +177,10 @@
       
         <p>这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）</p>
 <span id="more"></span> 
-<h3 id="前缀知识部分"><a href="#前缀知识部分" class="headerlink" title="前缀知识部分"></a>前缀知识部分</h3><h4 id="OSI7层模型："><a href="#OSI7层模型：" class="headerlink" title="OSI7层模型："></a>OSI7层模型：</h4><p>计算机网络第5版33页<br>物理层：传0，1<br>数据链路层：消除链路错误<br>网络层：处理拥塞等<br>传输层：分割且确保顺序<br>会话层：各种服务<br>表示层：关注所传递的语法与语义<br>应用层：各种协议<br>之所以TCP也在控制传输帧的顺序正确，而数据链路层也在，网上的说法有两种：1.TCP是为了统一，因为数据链路层并不一定有，相反，比如一些可以短暂丢包的，像视频，数据链路层一个一个检验反而降低了效率，故数据链路层没有。2.每层都可以有，但谁主张谁举证，哪层需要这个功能哪层就要弄这个。  </p>
-<h4 id="TCP协议位于传输层"><a href="#TCP协议位于传输层" class="headerlink" title="TCP协议位于传输层"></a>TCP协议位于传输层</h4><h3 id="问题重述与解决与总结"><a href="#问题重述与解决与总结" class="headerlink" title="问题重述与解决与总结"></a>问题重述与解决与总结</h3><h4 id="整个实验的目标"><a href="#整个实验的目标" class="headerlink" title="整个实验的目标"></a>整个实验的目标</h4><p>实现基于不可靠数据报文的可靠字节流通信，传输过来的数据包可能丢失，乱序，被改变和重复。</p>
+<h3 id="前缀知识部分"><a href="#前缀知识部分" class="headerlink" title="前缀知识部分"></a>前缀知识部分</h3><h4 id="OSI7层模型："><a href="#OSI7层模型：" class="headerlink" title="OSI7层模型："></a>OSI7层模型：</h4><p>计算机网络第5版33页<br>物理层：传0，1<br>数据链路层：消除链路错误<br>网络层：处理拥塞等<br>传输层：分割且确保顺序<br>会话层：各种服务<br>表示层：关注所传递的语法与语义<br>应用层：各种协议<br>之所以TCP在传输层也在控制传输帧的顺序正确，而数据链路层也在，网上的说法有两种：1.传输层是为了统一，因为数据链路层并不一定有，相反，比如一些可以短暂丢包的，像视频，数据链路层一个一个检验反而降低了效率，故数据链路层没有。2.每层都可以有，但谁主张谁举证，哪层需要这个功能哪层就要弄这个。3.就TCP而言，tcp是建立在IP上的，IP是无序的，故tcp要控制</p>
+<h4 id="TCP协议位于传输层"><a href="#TCP协议位于传输层" class="headerlink" title="TCP协议位于传输层"></a>TCP协议位于传输层</h4><h4 id="TCP3次握手"><a href="#TCP3次握手" class="headerlink" title="TCP3次握手"></a>TCP3次握手</h4><p>这是为了避免建立重复的连接，理论上讲，第一次你就可以直接发，但是比如这帧慢了，又传了过去，这就会建立两个连接，白白浪费服务器的资源，所以服务器要发一个回去，如果这个收到答复，说明这个是真的连接，就可以开始了，否则是过期的包</p>
+<h4 id="TCP4次挥手"><a href="#TCP4次挥手" class="headerlink" title="TCP4次挥手"></a>TCP4次挥手</h4><p>这个没啥特别的，这个就和下面写代码是一样的，而且这是一种特殊情况。</p>
+<h3 id="问题重述与解决与总结"><a href="#问题重述与解决与总结" class="headerlink" title="问题重述与解决与总结"></a>问题重述与解决与总结</h3><h4 id="整个实验的目标"><a href="#整个实验的目标" class="headerlink" title="整个实验的目标"></a>整个实验的目标</h4><p>实现基于不可靠数据报文的可靠字节流通信，传输过来的数据包可能丢失，乱序，被改变和重复。</p>
 <h4 id="lab0"><a href="#lab0" class="headerlink" title="lab0"></a>lab0</h4><h5 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h5><p>首先用命令行发了一个取网页的命令，然后在代码中利用它给的socket去实现它。像下面这样</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TCPSocket sock;</span><br><span class="line">sock.connect(Address(host, <span class="string">&quot;http&quot;</span>));</span><br><span class="line">sock.write(<span class="string">&quot;GET &quot;</span> + path + <span class="string">&quot; HTTP/1.1\r\nHost: &quot;</span> + host + <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line">sock.shutdown(SHUT_WR);</span><br><span class="line"><span class="keyword">while</span> (!sock.eof()) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; sock.read();</span><br><span class="line">&#125;</span><br><span class="line">sock.close();</span><br></pre></td></tr></table></figure>
 <p>然后是实现一个可靠字节流类，有点相当于就是在内存里开一片缓存区，有大小限制。从一头读，从另一头写。</p>
@@ -190,7 +192,15 @@
 <h4 id="lab2"><a href="#lab2" class="headerlink" title="lab2"></a>lab2</h4><h5 id="问题重述-2"><a href="#问题重述-2" class="headerlink" title="问题重述"></a>问题重述</h5><p>tcp receiver,负责接收报文，同时返回一个ack表示下一个想收的和windowSize表示多少范围以内的才能发。同时注意ack的转换，网络传的为32位循环，有初始和结束字符，本地为64位，然后stream里没有开始和结束字符。</p>
 <h5 id="问题解决-2"><a href="#问题解决-2" class="headerlink" title="问题解决"></a>问题解决</h5><p>没有什么特别的，就是注意一下ack的储存和转换，和lab1的组装类对接一下就可以了。</p>
 <h5 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h5><p>有一个地方，它把uint32_封装了，但是重载-成了返回int,这个坑了好久（虽然根据实际意义确实应该是int）。</p>
-<h4 id="lab3"><a href="#lab3" class="headerlink" title="lab3"></a>lab3</h4>
+<h4 id="lab3"><a href="#lab3" class="headerlink" title="lab3"></a>lab3</h4><h5 id="问题重述-3"><a href="#问题重述-3" class="headerlink" title="问题重述"></a>问题重述</h5><p>tcp sender,复制发送以及超时的重传。</p>
+<h5 id="问题解决-3"><a href="#问题解决-3" class="headerlink" title="问题解决"></a>问题解决</h5><p>主要是细节问题<br>首先有一个队列，储存发送的报文，当ack大于该报文中的最大序号的时候就出队，然后有一个计时器，每当时间到了一定间隔就会重传，然后时间加倍。加倍到一定次数一直没收到就说明出错了。同时，当接受到ack和windowsSize时，要reset计时器，并且立马根据windowSize进行填充。同时，当得到windowsSize为0的时候，且现在已经没有报文在传送了，这个时候要把windowSize视为1，进行填充和传送，而且对这个帧计时器到了不要加倍，这是为了在没有帧的时候把ack传过去（相当于通常捎带，否则直接传）。<br>同时这个传过来的ack和window也要处理，因为这个是因为可能乱序，这个处理方法是首先用ack大的报文更新，因为大的一定是后发的，然后用window大的更新，因为如果ack相同，windows大的说明底层的流类读取了，故要用这个更新。</p>
+<h5 id="遇到的困难-2"><a href="#遇到的困难-2" class="headerlink" title="遇到的困难"></a>遇到的困难</h5><p>主要就是细节非常多，例如在这个实验中有时会传一个很古老的包它的ack完全不在范围内，比如大于你发送的最大的编号了，这样要跳过，还有比如当对方window满了的时候那个windowSize为0的发送，计时不要翻倍，还有因为先后次序问题，当ack相同的时候也是要更新的，还有计时器的状态是停止还是超时还是正在运行三种不同的状态（最开始容易涉及成两种）。</p>
+<h4 id="lab4"><a href="#lab4" class="headerlink" title="lab4"></a>lab4</h4><h5 id="问题重述-4"><a href="#问题重述-4" class="headerlink" title="问题重述"></a>问题重述</h5><p>TCP connection,把之前做的全部连接起来。<br>除此之外，额外要做的就是判断怎么停止连接</p>
+<h5 id="问题解决-4"><a href="#问题解决-4" class="headerlink" title="问题解决"></a>问题解决</h5><p>前一个比较简单，主要就是连接一下，把ack什么的填上去<br>之后那一个比较麻烦，根据两军问题，就是没有办法一定能确保两边都能正常断开连接，有两种断开方式，一种是unclean shutdown,实现就是收到或者发送一个带rst标志位的就停，而发送一个rst的实现就是当计时器已经多次加倍，就发送，或者tcpconnection被关闭了，在它的析构函数里就会发。<br>另一种是clean shutdown,具体实现是首先我这边的都发完了且我发的对方也都收到了（我这边收到了对应的ack，就是fin标志位在sender里设置了，同时next_seq==ack），并且我收到了所有对方发的，这个时候分两种情况：一种是等了一定时间，就直接关闭，第二种是如果我收到所有对方发的的时候我还没发完，那么到这种情况就可以直接关了（因为我之后发的肯定会带那个结束的ack，而我收到了对方关于这个的帧收到的ack，那么它肯定知道了，就可以直接关了）。关闭的核心就是要保证已经发完了。</p>
+<h5 id="遇到的问题-1"><a href="#遇到的问题-1" class="headerlink" title="遇到的问题"></a>遇到的问题</h5><p>之前出现了效率过低的情况，之前没有分析过低在哪里，就直接以为是字符串复制耗时，就像去改成右值然后move,结果后面用gprof才发现是自己实验二map那出了问题。</p>
+<h3 id="整个实验的难点"><a href="#整个实验的难点" class="headerlink" title="整个实验的难点"></a>整个实验的难点</h3><p>1.是各种细节，例如如何判断对方发送结束了，因为对方发过来的最后一帧可能比前面的帧先收到，所以不能靠接收到最后一帧来判断，而是要最后一帧一来就设置最后的编号，当往流类写入最后的编号的时候判断结束。<br>2.有时不能理解到要做什么，那个时候c++基础也比较薄弱，很多东西不理解，也不大会看他人的源代码库之类。</p>
+<h3 id="改进的地方"><a href="#改进的地方" class="headerlink" title="改进的地方"></a>改进的地方</h3><p>1.参数的设置，比如本地缓冲区大小的设置，这个要根据网络情况，比如网络已经很繁忙了，经常丢包，那么还设置很大的话没有必要，同时增大了传输中的包<br>2.重传这些地方可以加以改进，比如网上我看有资料说连续收到3个同样ack的确认就可以认为丢包，重传下一个了，不用等待时间。<br>因为我缺乏实际网络的使用经验，我感觉这两个是可以研究的方向，但是也提不出什么。</p>
+
       
 
       
@@ -272,6 +282,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/04/25/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          c++知识点
+        
+      </div>
+    </a>
   
   
     <a href="/2021/04/22/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">

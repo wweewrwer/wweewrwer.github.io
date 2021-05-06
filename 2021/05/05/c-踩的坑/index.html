@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文创建时间：2021-04-13 10:01:36  持续更新中~ 我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-05T08:13:57.000Z">
-<meta property="article:modified_time" content="2021-05-05T08:18:39.836Z">
+<meta property="article:modified_time" content="2021-05-06T01:08:14.381Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
@@ -185,6 +185,7 @@
 <h4 id="用了ifndef之后c头文件仍然重复定义"><a href="#用了ifndef之后c头文件仍然重复定义" class="headerlink" title="用了ifndef之后c头文件仍然重复定义"></a>用了ifndef之后c头文件仍然重复定义</h4><p>今天我才知道，在C里面，.h文件里是不能放函数和常量的实现的，不然一但几个头文件里都引了这个头文件，就会重复定义，ifndef只能放一个文件里连续申明同一个头文件（啊这），但是C++貌似没有这个问题，一直常量和函数实现经常放.h也没有出错  </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> haha;<span class="comment">//这是头文件里的申明</span></span><br><span class="line"><span class="keyword">int</span> haha =<span class="number">0</span>;<span class="comment">//这是在对应.c文件里的赋值</span></span><br></pre></td></tr></table></figure>
 <h4 id="fstream神奇异常码"><a href="#fstream神奇异常码" class="headerlink" title="fstream神奇异常码"></a>fstream神奇异常码</h4><p>之前自己异想天开的想要打开一个文件读入完后进行写入，谁知道怎么也写不进去，查阅了无数资料才知道，一旦文件读完，c++就会设置异常码，之后再对这个文件进行操作都是无效的，大哭。所以这种时候，要调用f.clear()重置标志位后才能写入。（f即打开的那个流）</p>
+<h4 id="fstream之eof"><a href="#fstream之eof" class="headerlink" title="fstream之eof()"></a>fstream之eof()</h4><p>这个就是判断有没有读完的，但是，它是要读完了再读才会设置，所以，如果用while(!f.eof())很可能多读，最好是用while(f&gt;&gt;a)这样来进行判断</p>
 
       
 

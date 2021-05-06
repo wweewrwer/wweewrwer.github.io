@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文创建时间：2021-03-13 17:39:37  持续更新中~ 囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-06T11:31:11.000Z">
-<meta property="article:modified_time" content="2021-05-06T11:31:18.810Z">
+<meta property="article:modified_time" content="2021-05-06T13:19:22.345Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="小技巧">
 <meta name="twitter:card" content="summary">
@@ -188,6 +188,7 @@
 <li><a href="#emplace_back%E5%92%8Cpush_back">emplace_back和push_back</a></li>
 <li><a href="#%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8%E7%B1%BB">标准异常类</a></li>
 <li><a href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">lambda表达式</a></li>
+<li><a href="#stdfunction">std::function</a></li>
 </ul>
 <!-- /TOC -->
 <h4 id="using-模板别名"><a href="#using-模板别名" class="headerlink" title="using 模板别名"></a>using 模板别名</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> Vec = MyVector&lt;T, MyAlloc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">Vec&lt;<span class="keyword">int</span>&gt; vec;</span><br></pre></td></tr></table></figure>
@@ -205,6 +206,8 @@
 <p>capture list就是当前环境中的变量，parameter就是传入的参数，return type可省。下面给一个例子:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::lower_bound(<span class="built_in">array</span>, <span class="built_in">array</span> + GetSize(), <span class="built_in">std</span>::<span class="built_in">make_pair</span>(key, <span class="built_in">array</span>[<span class="number">0</span>].second),</span><br><span class="line">                [comparator](<span class="keyword">const</span> MappingType &amp;key1, <span class="keyword">const</span> MappingType &amp;key2) &#123;</span><br><span class="line">                            <span class="keyword">return</span> comparator(key1.first, key2.first) &lt; <span class="number">0</span>;</span><br><span class="line">                &#125;) - <span class="built_in">array</span>;</span><br></pre></td></tr></table></figure>
 <p>从这个例子就可以理解capture和parameter的不同了<br>同时在capture list当中，使用<code>=</code>表示传值形式捕获所有变量，<code>&amp;</code>表示传引用形式捕获所有变量，<code>this</code>以传引用捕获类成员，其它见百度</p>
+<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="built_in">std</span>::function&lt;<span class="keyword">bool</span>(<span class="keyword">int</span>,<span class="keyword">int</span>)&gt;f)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这个可以用来替代以前的函数指针，这个的特性比函数指针强很多，能够支持带闭包的lambda表达式作为参数（以前的函数指针不能），同时比函数指针好理解很多。</p>
 
       
 

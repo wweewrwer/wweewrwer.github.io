@@ -154,6 +154,234 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-gtest小技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/">gtest小技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="archive-article-date">
+  	<time datetime="2021-04-15T03:10:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文记录gtest用到的一些知识。</p>
+        
+          <a class="article-more-a" href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/15/gtest%E5%B0%8F%E6%8A%80%E5%B7%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cmu15445Lab3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/11/cmu15445Lab3/">cmu15445Lab3</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/11/cmu15445Lab3/" class="archive-article-date">
+  	<time datetime="2021-04-11T02:16:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最后更新于：2021-05-27 09:59:57<br>2021-05-27 10:00:15记：时隔一个月，终于又抽出了时间完成了这个lab。其实这个lab与其说是写代码实验，不如说是阅读他人代码实验，关键就是在于读他人的代码,其中的难点在于：1.读他人代码的烦躁，有时一读就是几小时毫无进展。2.很多相似的变量混杂，比如在index nested loop join中,单单schema就有输出的inner_schema,outer_schema,table原本的schema,index里的schema,child输出的schema,如果没有搞清楚这下变量的关系，就很容易误解弄错。<br>其中学到的知识点在于：<br>1.深入理解了sql语句，例如，聚合的having作用在聚合之后还是聚合之前，内部聚合的原理等等。<br>2.如何阅读他人的代码：首先命名中名称要弄清楚，特别是一些专业术语，与生活中不太一样的，要搞清楚指的是什么。同时，对于一个新类，不应该一来就去看它定义，而应该在大概搞清楚它的含义后，看它的构造函数声明是不是所有的参数都能理解，最好再结合一下一下实例化的例子，最后如果要知道它是怎么运作的，就再看它的变量，再去看它函数。<br>3.对c++，面向对象的理解。它这个实现是多态的一个极好的例子，将每种操作抽象，提供对应的接口，构成树状结构。同时，利用了传说中的工厂设计模式，即提供统一的接口，而将构造的地方放在一个统一的类里。以后自己写代码，也要这样，在基类提供好对应的接口，从而使子类能够很顺利的运行。<br>4.明白了数据库内部各种指令的实现方式:<strong>首先将每一类指令均进行抽象，建立一个共同的基类executor类，提供init和next接口，init初始化该指令所需的，next如果是查询的话，每次返回一个符合查询的数据元组。同时每个executor类会有一个对应的plan类，提供执行对应指令的要求，例如聚集的plan就提供了是哪个聚集函数，分组，having的情况。而plan类会共有一个child_executor的vecotr,这是为了将指令组织成树状形式，因为sql可能比如左边执行一个聚合，然后右边一个编历，然后这里进行拼接，这样执行该类的时候，它就可以调用child的next得到child的结果，从而实现了组合。最后，所有的指令的执行在一个统一的类里，利用多态将父类指针给它，统一执行即可。</strong><br>5.每次写程序的时候一定要弄清楚对方的设计到底是怎样的，由于多态封装的原因，对于一些类可能出现一些没用的接口，这些到底怎么处理要弄清楚，特别是有返回值或者返回参数的那种，同时这个接口对于这个类只用得到一部分的那种（例如不用参数和返回值，但要用这个接口，就像这里面的next函数，insert和delete都是没有返回参数的，但是要说也可以用next（每次插删一个），那么这个时候，返回参数的值怎么处理就要弄清楚，因为上层抽象过后不知道你的返回参数的问题，比如这里的处理就是inert,delete在Init中就处理完，next永远返回false;<br>———–我是分割线————<br>最近Lab越来越难，现在在此记录一下做题中的思考和想法，方便之后查阅和反省。</p>
+        
+          <a class="article-more-a" href="/2021/04/11/cmu15445Lab3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/11/cmu15445Lab3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-详解socket编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/">详解socket编程</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2021-04-05T03:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前一直觉得socket编程呀，网络编程呀这些很玄乎，实际上，掌握了一定技巧之后，这些并不麻烦，也就是查查资料，按照规范做就行<br>注：此文大概讲讲我觉得重要的地方。<br>
+        
+          <a class="article-more-a" href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">知识</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-文件编码问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -660,238 +888,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/11/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cmu15445Lab1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/10/cmu15445Lab1/">cmu15445Lab1</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/10/cmu15445Lab1/" class="archive-article-date">
-  	<time datetime="2021-03-10T03:50:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>做这样的实验，一定要想清楚，为什么他这样设计呢，这样才可以做，不然函数的功能都实现不了。</p>
-<p>首先lru_replacer维护的是buffer_pool_manager的一个替换名单，也就是说，对于lru_replacer理论上只有buffer_pool_manager来对其进行访问，不会有其它的来。因此，这里它不会有read和write之类像表示这个被做了什么，就只会有Pin,把它定住，unpin把这个放开，victim腾空间。</p>
-<p>而对于buffer_pool_manager,我的猜测是，当要写的时候，用户是不能直接接到硬盘上的，所以才有buffer里面的newPage和delPage,而用户的读写操作，肯定会在更高层面有具体的描述，于是到了这里，就只有fetch,unpin,new这样的操作，你也是无法知道用户具体是在读还是再写的。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/10/cmu15445Lab1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-面向应用的并发编程学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">面向应用的并发编程学习</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-03-05T01:30:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用<br>2021.3.25补：这里将补充写并发的时候遇到的注意事项</p>
-        
-          <a class="article-more-a" href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Windows下Makefile疯狂踩坑记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">Windows下Makefile疯狂踩坑记</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-03-04T08:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为上课要用c++多文件编程的原因，又不想要为了一个c++就去下一个VS（它实在是太大了），加上以前也经常看到makefile，就打算正好借这个机会初步学习一下makefile。但是谁能想到，小小的makefile居然如此麻烦，而且windows下还有些许不同（坑死我了TAT）。因此写一篇文章做为纪念，同时也方便以后自己查阅。<br>注：此文并不提供makefile的教学，仅是给出一个简单的模板，用于解决少量c++多文件编程的问题，方便临时需要用到又没有太多时间学习的同学。<br>
-        
-          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">展开全文 >></a>
         </p>
       
 

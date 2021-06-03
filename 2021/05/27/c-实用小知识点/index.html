@@ -11,12 +11,12 @@
   <meta name="description" content="本文创建时间：2021-03-13 17:39:37  持续更新中~ 囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++实用小知识点">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/05/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/05/27/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
 <meta property="og:description" content="本文创建时间：2021-03-13 17:39:37  持续更新中~ 囿于最近学习C++的机会实在是多（cmu15445实在是太难啦），每个小知识点都单独开一篇博客挺麻烦的，就统一在这一篇里细说一些小的知识点吧">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-05-13T14:06:07.000Z">
-<meta property="article:modified_time" content="2021-05-13T14:06:08.464Z">
+<meta property="article:published_time" content="2021-05-27T02:50:02.000Z">
+<meta property="article:modified_time" content="2021-05-27T03:16:20.473Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="小技巧">
 <meta name="twitter:card" content="summary">
@@ -167,8 +167,8 @@
   
 
         
-        <a href="/2021/05/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-05-13T14:06:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
+        <a href="/2021/05/27/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2021-05-27T02:50:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
 </a>
         
       </header>
@@ -190,6 +190,12 @@
 <li><a href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">lambda表达式</a></li>
 <li><a href="#stdfunction">std::function</a></li>
 <li><a href="#%E5%85%B3%E4%BA%8E%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%A3%B0%E6%98%8E">关于函数模板定义与声明</a></li>
+<li><a href="#c%E6%B5%81">c++流</a><ul>
+<li><a href="#%E5%85%B3%E4%BA%8E%E9%87%8D%E8%BD%BD%E5%92%8C">关于重载&lt;&lt;和&gt;&gt;</a></li>
+<li><a href="#stringstream%E5%92%8Cfstream">stringstream和fstream</a></li>
+<li><a href="#%E6%B5%81%E5%85%B1%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0">流共用的一些函数</a></li>
+</ul>
+</li>
 </ul>
 <!-- /TOC -->
 <h4 id="using-模板别名"><a href="#using-模板别名" class="headerlink" title="using 模板别名"></a>using 模板别名</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> Vec = MyVector&lt;T, MyAlloc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">Vec&lt;<span class="keyword">int</span>&gt; vec;</span><br></pre></td></tr></table></figure>
@@ -211,6 +217,13 @@
 <p>这个可以用来替代以前的函数指针，这个的特性比函数指针强很多，能够支持带闭包的lambda表达式作为参数（以前的函数指针不能），同时比函数指针好理解很多。</p>
 <h4 id="关于函数模板定义与声明"><a href="#关于函数模板定义与声明" class="headerlink" title="关于函数模板定义与声明"></a>关于函数模板定义与声明</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>按照网上的说法，模板的定义与声明不能分离，大意是 普通的函数之所以可以分离，是因为分开编译后链接上；而函数模板因为类型没有定，所以特化的时候必须要看的见实现的，但是如果分离了，在另一个文件中就见不到实现了（这个时候不能跑到别的cpp里去找），而之后函数模板实习的地方也不知道要哪些，所以最后也链接不上（链接可以通过多个文件把符号连起来）故不行。<br>但是，貌似我在之前的数据库项目里看到就是分离了的，不懂它是哪里做了什么。<br>然后在自己的代码里，其实可以的，只要不出现上面那种情况，即用的地方都能看见定义就行了，比如分离了，该函数仅仅是类的私有成员，所有用到该函数的地方都在实现该函数的那个文件里，也是可以的</p>
+<h4 id="c-流"><a href="#c-流" class="headerlink" title="c++流"></a>c++流</h4><h5 id="关于重载-lt-lt-和-gt-gt"><a href="#关于重载-lt-lt-和-gt-gt" class="headerlink" title="关于重载&lt;&lt;和&gt;&gt;"></a>关于重载&lt;&lt;和&gt;&gt;</h5><p>网上关于这个的重载，往往讲了一大堆，其实本质上，这两个方法完全可以理解为+号一样，比如你要重载&lt;&lt;和&gt;&gt;使得你的类能够像int那样输入输出，<code>std::cin&gt;&gt;a</code>,把这个看成加法,<code>std::cin+a</code>,本质就是一个ifstream和class A,如果是+的话，大家肯定很容易就能理解要用友元来重载。同样，你也可以重载使得自己类就像一个流一样，<code>a&lt;&lt;&quot;haha&quot;</code>,把这个看成<code>+</code>就好了，返回值的话同样返回class A就行</p>
+<h5 id="stringstream和fstream"><a href="#stringstream和fstream" class="headerlink" title="stringstream和fstream"></a>stringstream和fstream</h5><p>均继承于iostream,这几个抽象也是抽象的很棒的，都看成了流（当然，貌似网上很多说不好用呀，性能低什么的，bug多什么的，毕竟现在我都只拿来写玩具，感觉还挺不错的），分别用来读字符串和文件。其实,iostream也是可以实例化的，只有你给它的构造函数里填stringbuf甚至可以模拟一个stringstream出来。</p>
+<h5 id="流共用的一些函数"><a href="#流共用的一些函数" class="headerlink" title="流共用的一些函数"></a>流共用的一些函数</h5><p>但是，这些流有一个非常坑的地方，就是错误码，我觉得这个设置简直反人类，一但一个流置了错误码，之后对其的任何读写都不管用，并且你没有意识到这个问题的话根本没有任何提示。同样无语的还有eof()函数，直观上来讲，应该是文件读完了的意思，然而，实际上，这个为true表示上一次读写没有东西可读了，也就是说，很多情况下等这个为true,意味着你上一个什么都没读到（string除外，如果没有换行就结束的话，string可以读到再触发）。因而，判断文件有无读完不能while(!f.eof())，而要用while(f&gt;&gt;a)这种离谱的方式。<br>同时，为了减少错误码的影响，这里给出一个模板：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;limits&gt;</span></span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">std</span>::<span class="built_in">cin</span>.get()!=<span class="string">&#x27;\n&#x27;</span>||<span class="built_in">std</span>::<span class="built_in">cin</span>.fail())&#123;<span class="comment">//是否已换行结束，是否错误</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>.clear();<span class="comment">//清除错误码</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>.ignore(<span class="built_in">std</span>::numeric_limits&lt;<span class="built_in">std</span>::streamsize&gt;::max(), <span class="string">&#x27;\n&#x27;</span>);<span class="comment">//清除换行符前的所有</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以视情况改变，例如不要求以换行结尾的可以不要.get()（但是，删去这句之后，你用cin读1.2读入int它是不会报错的，它会读1，然后把.留着，简直离谱，所以要改也改成空格回车什么的）<br>最后再给一个cin,cout可以读空行的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isEmptyLine</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">istringstream</span>&amp; ss)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> s;</span><br><span class="line">	<span class="built_in">std</span>::getline(<span class="built_in">std</span>::<span class="built_in">cin</span>, s);</span><br><span class="line">	<span class="keyword">if</span> (s == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	s.append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	ss.str(s);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">intInputWithEmptyLine</span><span class="params">(<span class="keyword">int</span> emptyNum)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">istringstream</span> ss;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyLine(ss)) &#123;<span class="comment">//空行返回默认值</span></span><br><span class="line">		<span class="keyword">return</span> emptyNum;</span><br><span class="line">	&#125;</span><br><span class="line">	ss &gt;&gt; x;</span><br><span class="line">	<span class="comment">//确保读入的类型正确且最后以\n收尾不存在多余的字符</span></span><br><span class="line">	<span class="keyword">while</span> (ss.get() != <span class="string">&#x27;\n&#x27;</span> || ss.fail()) &#123;</span><br><span class="line">		ss.clear(); <span class="comment">//清空错误码</span></span><br><span class="line">		ss.ignore(<span class="built_in">std</span>::numeric_limits&lt; <span class="built_in">std</span>::streamsize &gt;::max(), <span class="string">&#x27;\n&#x27;</span>);<span class="comment">//忽略最后多余的字符</span></span><br><span class="line">		<span class="keyword">if</span> (isEmptyLine(ss)) &#123;</span><br><span class="line">			<span class="keyword">return</span> emptyNum;</span><br><span class="line">		&#125;</span><br><span class="line">		ss &gt;&gt; x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，有时候网上说c++的一个缺点就是字符串处理极其不完善，每次都在和字符串斗智斗勇耗费大量时间和精力。确实啊…</p>
 
       
 
@@ -280,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/05/13/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/05/27/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +307,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/05/18/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/05/27/%E9%9D%A2%E8%AF%95%E6%9D%82%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          c++踩的坑
+          面试杂记
         
       </div>
     </a>
   
   
-    <a href="/2021/05/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">计算机各类小技巧</div>
+    <a href="/2021/05/23/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++知识点</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -154,6 +154,158 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cmu15445Lab1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/10/cmu15445Lab1/">cmu15445Lab1</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/10/cmu15445Lab1/" class="archive-article-date">
+  	<time datetime="2021-03-10T03:50:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做这样的实验，一定要想清楚，为什么他这样设计呢，这样才可以做，不然函数的功能都实现不了。</p>
+<p>首先lru_replacer维护的是buffer_pool_manager的一个替换名单，也就是说，对于lru_replacer理论上只有buffer_pool_manager来对其进行访问，不会有其它的来。因此，这里它不会有read和write之类像表示这个被做了什么，就只会有Pin,把它定住，unpin把这个放开，victim腾空间。</p>
+<p>而对于buffer_pool_manager,我的猜测是，当要写的时候，用户是不能直接接到硬盘上的，所以才有buffer里面的newPage和delPage,而用户的读写操作，肯定会在更高层面有具体的描述，于是到了这里，就只有fetch,unpin,new这样的操作，你也是无法知道用户具体是在读还是再写的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/10/cmu15445Lab1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Windows下Makefile疯狂踩坑记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">Windows下Makefile疯狂踩坑记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-03-04T08:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为上课要用c++多文件编程的原因，又不想要为了一个c++就去下一个VS（它实在是太大了），加上以前也经常看到makefile，就打算正好借这个机会初步学习一下makefile。但是谁能想到，小小的makefile居然如此麻烦，而且windows下还有些许不同（坑死我了TAT）。因此写一篇文章做为纪念，同时也方便以后自己查阅。<br>注：此文并不提供makefile的教学，仅是给出一个简单的模板，用于解决少量c++多文件编程的问题，方便临时需要用到又没有太多时间学习的同学。<br>
+        
+          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

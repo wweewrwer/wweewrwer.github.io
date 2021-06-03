@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>面向应用的并发编程学习 | wweewrwer的博客</title>
+  <title>c++踩的坑 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
+  <meta name="description" content="本文创建时间：2021-04-13 10:01:36  持续更新中~ 我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。    类中变量与传进来的参数 用了ifndef之后c头文件仍然重复定义 fstream神奇异常码 fstream之eof() 关于const函数里iterator那些事">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面向应用的并发编程学习">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="c++踩的坑">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。注：本文只大概讲讲概念，然后直接">
+<meta property="og:description" content="本文创建时间：2021-04-13 10:01:36  持续更新中~ 我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。    类中变量与传进来的参数 用了ifndef之后c头文件仍然重复定义 fstream神奇异常码 fstream之eof() 关于const函数里iterator那些事">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-05T01:30:08.000Z">
-<meta property="article:modified_time" content="2021-03-25T13:45:08.811Z">
+<meta property="article:published_time" content="2021-05-29T12:25:45.000Z">
+<meta property="article:modified_time" content="2021-05-29T12:26:54.854Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="小技巧">
-<meta property="article:tag" content="学习">
+<meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -156,46 +155,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-面向应用的并发编程学习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-踩的坑" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      面向应用的并发编程学习
+      c++踩的坑
     </h1>
   
 
         
-        <a href="/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-03-05T01:30:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-05</time>
+        <a href="/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" class="archive-article-date">
+  	<time datetime="2021-05-29T12:25:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用<br>2021.3.25补：这里将补充写并发的时候遇到的注意事项</p>
-<span id="more"></span>
+        <p>本文创建时间：2021-04-13 10:01:36  持续更新中~</p>
+<p>我爱c++,c++爱我。(c++好，谁用谁知道)<br>啊，原来C也好不到哪里去<br>本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。</p>
+<!-- TOC -->
 
-<h3 id="概念厘清"><a href="#概念厘清" class="headerlink" title="概念厘清"></a>概念厘清</h3><h4 id="进程，I-O多路复用，线程"><a href="#进程，I-O多路复用，线程" class="headerlink" title="进程，I/O多路复用，线程"></a>进程，I/O多路复用，线程</h4><p>其中基本的逻辑是，I/O多路复用（后简称多路复用）和线程都运行在一个进程之上，不严谨的来说，即进程&gt;多路复用、线程，进程包括线程和多路复用。<br>通俗的讲解好的网址：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程和线程</a>，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32163005/answer/55772739">多路复用</a>，详细的讲解：CSAPP书上</p>
-<h5 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h5><p>每个进程是有其独立的虚拟地址空间，共享文件表，进程间通信比较困难。</p>
-<h5 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a>I/O多路复用</h5><p>略</p>
-<h5 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h5><p>所有线程共享整个地址空间，主线程和其它线程之间没有严格的父子关系，都是平等的，一个线程可以杀死其它任何的线程。同时他们都读取相同的共享数据。</p>
-<h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><p>通俗的讲解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143797513">锁的思想</a>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fenghualong/p/11568398.html">互斥锁和共享锁</a><br>锁的目的便是为了处理多个线程同时读写同一共享变量存在并发问题。</p>
-<h3 id="c-锁的使用"><a href="#c-锁的使用" class="headerlink" title="c++锁的使用"></a>c++锁的使用</h3><p>这里主要讲解互斥锁和共享锁两种。<br>共享：多个线程可以共享这个锁的拥有权。一般用于数据的读操作，防止数据被写修改。<br>互斥：仅仅一个线程可以拥有这个锁。一般用于写操作。<br>如果一个线程已经获取了互斥锁，则其他线程都无法获取该锁。<br>如果一个线程已经获取了共享锁，则其他任何线程都无法获取互斥锁，但是可以获取共享锁。<br>下面实际结合代码讲解：<br>头文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;mutex&gt;//用于创建互斥锁，其它的都在这个库</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;shared_mutex&gt;//用于创建共享锁，带shared的都在这个库</span></span></span><br></pre></td></tr></table></figure>
-<p>锁的声明</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::mutex mutex;</span><br><span class="line"><span class="built_in">std</span>::shared_mutex shared_mutex;</span><br></pre></td></tr></table></figure>
-<p>普通的锁的使用</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mutex.lock();</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">    mutex.unlock();<span class="comment">//shared_mutex没看到可不可以，我猜可以</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是这个还要unlock，于是产生了一种直接构造函数加锁，析构函数解锁的操作</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::unique_lock lock&#123;mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">happy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::shared_lock lock&#123;shared_mutex&#125;;</span><br><span class="line">    aNotThreadSafeFunction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里互斥锁和共享锁的差别就体现出来了，一旦有一个线讲解程unique_lock过后，其它再到那个句子，就会停下等解锁，而shared_lock过后，其它线程依然可以通过那个句子，但到unique_lock那里就会卡住等解锁。所以shared_lock可以用于读，毕竟可以多个线程同时读，而unique_lock用于写，因为同时只能一个写。<br>最后，c++里的大多都不是线程安全的，而c里面的大多是，具体的使用的时候一定要具体判断呀！</p>
-<h3 id="补：实战踩的坑"><a href="#补：实战踩的坑" class="headerlink" title="补：实战踩的坑"></a>补：实战踩的坑</h3><p>如果出现死锁，可以在每个加锁的地方都输出查看给什么加锁了，方便调试<br>很多地方不要觉得一个函数里加锁就好了，要觉得一个原子操作的地方都加锁，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!haveKey(key))&#123;</span><br><span class="line">    insertKey(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里如果只在insertKey中加锁，就可能出现两个进程都过了haveKey,因而添加重复的情况，故要找这个if的前面就加锁</p>
+<ul>
+<li><a href="#%E7%B1%BB%E4%B8%AD%E5%8F%98%E9%87%8F%E4%B8%8E%E4%BC%A0%E8%BF%9B%E6%9D%A5%E7%9A%84%E5%8F%82%E6%95%B0">类中变量与传进来的参数</a></li>
+<li><a href="#%E7%94%A8%E4%BA%86ifndef%E4%B9%8B%E5%90%8Ec%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%8D%E7%84%B6%E9%87%8D%E5%A4%8D%E5%AE%9A%E4%B9%89">用了ifndef之后c头文件仍然重复定义</a></li>
+<li><a href="#fstream%E7%A5%9E%E5%A5%87%E5%BC%82%E5%B8%B8%E7%A0%81">fstream神奇异常码</a></li>
+<li><a href="#fstream%E4%B9%8Beof">fstream之eof()</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8Econst%E5%87%BD%E6%95%B0%E9%87%8Citerator%E9%82%A3%E4%BA%9B%E4%BA%8B">关于const函数里iterator那些事</a></li>
+</ul>
+<!-- /TOC -->
+<span id="more"></span>
+<h4 id="类中变量与传进来的参数"><a href="#类中变量与传进来的参数" class="headerlink" title="类中变量与传进来的参数"></a>类中变量与传进来的参数</h4><p>复现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx) , it_(exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx_-&gt;GetTransaction()))&#123; </span><br><span class="line">    plan_ = plan;</span><br><span class="line">    table_heap_ = exec_ctx_-&gt;GetCatalog()-&gt;GetTable(plan_-&gt;GetTableOid())-&gt;table_.get();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面是这个憨憨类的成员变量</span></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="comment">/** The sequential scan plan node to be executed. */</span></span><br><span class="line">  <span class="keyword">const</span> SeqScanPlanNode *plan_;</span><br><span class="line">  TableHeap *table_heap_;</span><br><span class="line">  TableIterator it_;</span><br></pre></td></tr></table></figure>
+<p>运行报错为段溢出。因为整个项目非常庞大，首先调这个项目，我花了无数时间才终于找到问题出在这个构造函数，然后我凭借我敏锐的直觉认为问题肯定出在it_构造上（这谁看不出来呀），并且，问题一定是访问非法内存。但是，这这这，这么长一串，谁知道哪里溢出，而且因为前面我写了一个非常复杂的数据结构是和这个连在一起的，加之这一句话虽然长但是都很简单，应该不会出错，我一度怀疑是那个数据结构我写崩了修改掉了这边的内存导致这里崩溃。然后，靠着我强悍的不断printf终于发现，居然问题出在GetTableOid函数上崩溃，但是我就傻了，这就返回一个值怎么就崩溃了呢，我只好怀疑plan_是一个空指针，结果，突然发现，这里应该用plan而不是plan_啊，瞬间哭哭了，这憨憨错误调了我三小时，特别是这憨憨项目CMAKE中没加-g，然后我又不大会CMAKE，本想加结果又懒了，最后哭死我了。<br>经验：以后千万要注意构造函数里的绝不能出现类中变量，一定好生检查，同时能写上去的一定不在构造函数语句中写，这样即使误写了也可能那个元素先实例化所以问题不大。还有就是直接用gdb运行这个程序可以直接知道哪里开始崩溃的，虽然c++访问非法内存崩溃报错一向报于千里之外，但是好歹知道是这句话之前出错的呀（哭）。<br>更正：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::SeqScanExecutor(ExecutorContext *exec_ctx, <span class="keyword">const</span> SeqScanPlanNode *plan) : AbstractExecutor(exec_ctx), plan_(plan), table_heap_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_.get()),it_(exec_ctx-&gt;GetCatalog()-&gt;GetTable(plan-&gt;GetTableOid())-&gt;table_-&gt;Begin(exec_ctx-&gt;GetTransaction()))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="用了ifndef之后c头文件仍然重复定义"><a href="#用了ifndef之后c头文件仍然重复定义" class="headerlink" title="用了ifndef之后c头文件仍然重复定义"></a>用了ifndef之后c头文件仍然重复定义</h4><p>2021-05-29 20:25:55补：貌似C++也会，我也是才知道。。当你在里面定义的不是常量的时候，c好像也会出现这个问题。所以，非要搞全局的话，都extern吧。。<br>今天我才知道，在C里面，.h文件里是不能放函数和常量的实现的，不然一但几个头文件里都引了这个头文件，就会重复定义，ifndef只能放一个文件里连续申明同一个头文件（啊这），但是C++貌似没有这个问题，一直常量和函数实现经常放.h也没有出错  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> haha;<span class="comment">//这是头文件里的申明</span></span><br><span class="line"><span class="keyword">int</span> haha =<span class="number">0</span>;<span class="comment">//这是在对应.c文件里的赋值</span></span><br></pre></td></tr></table></figure>
+<h4 id="fstream神奇异常码"><a href="#fstream神奇异常码" class="headerlink" title="fstream神奇异常码"></a>fstream神奇异常码</h4><p>之前自己异想天开的想要打开一个文件读入完后进行写入，谁知道怎么也写不进去，查阅了无数资料才知道，一旦文件读完，c++就会设置异常码，之后再对这个文件进行操作都是无效的，大哭。所以这种时候，要调用f.clear()重置标志位后才能写入。（f即打开的那个流）</p>
+<h4 id="fstream之eof"><a href="#fstream之eof" class="headerlink" title="fstream之eof()"></a>fstream之eof()</h4><p>这个就是判断有没有读完的，但是，它是要读完了再读才会设置，所以，如果用while(!f.eof())很可能多读，最好是用while(f&gt;&gt;a)这样来进行判断</p>
+<h4 id="关于const函数里iterator那些事"><a href="#关于const函数里iterator那些事" class="headerlink" title="关于const函数里iterator那些事"></a>关于const函数里iterator那些事</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line">  <span class="built_in">list</span>&lt;<span class="built_in">pair</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&gt;::a;</span><br><span class="line">  <span class="built_in">list</span>&lt;<span class="built_in">pair</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&gt;::<span class="function">iterator <span class="title">f</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;<span class="keyword">return</span> a.begin()&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大概就是这么一个函数，然后VS疯狂报错，说const_iterator不能转成iterator,当时我就傻了，想着咋list还没iterator了，然后网上也查了很久的资料，甚至把pair改成了结构体，还做了实验看list有没有iterator。结果，原来是带了const限定符后就不能用iterator了，就会自动使用返回const_iterator的版本。。。欲哭无泪呀，调了一万年。<br>顺便说一句，c++是支持函数带不带const限定符形式的重载的,像这样  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="built_in">std</span>::<span class="built_in">pair</span>&lt;Product*, <span class="keyword">int</span>&gt;&gt;::<span class="function">iterator <span class="title">findProduct</span><span class="params">(<span class="keyword">int</span> ProductId)</span></span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="built_in">std</span>::<span class="built_in">pair</span>&lt;Product*, <span class="keyword">int</span>&gt;&gt;::<span class="function">const_iterator <span class="title">findProduct</span><span class="params">(<span class="keyword">int</span> ProductId)</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这种不算仅返回值不同</p>
 
       
 
@@ -209,11 +213,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
         		</li>
       		
 		</ul>
@@ -269,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/03/05/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,18 +283,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/10/cmu15445Lab1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          cmu15445Lab1
+          面向应用的并发编程学习
         
       </div>
     </a>
   
   
-    <a href="/2021/03/04/Windows%E4%B8%8BMakefile%E7%96%AF%E7%8B%82%E8%B8%A9%E5%9D%91%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Windows下Makefile疯狂踩坑记</div>
+    <a href="/2021/05/27/%E9%9D%A2%E8%AF%95%E6%9D%82%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">面试杂记</div>
       <i class="icon-circle-right"></i>
     </a>
   

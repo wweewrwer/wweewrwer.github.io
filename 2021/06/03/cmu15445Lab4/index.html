@@ -16,7 +16,7 @@
 <meta property="og:description" content="终于到最后一个lab了，现在看完实验要求啥也不懂也一点也不慌了，啊哈哈哈哈，反正刚开始都是不懂的下面开始分析。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-03T06:25:08.000Z">
-<meta property="article:modified_time" content="2021-06-03T12:52:15.190Z">
+<meta property="article:modified_time" content="2021-06-05T09:04:49.604Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
@@ -180,6 +180,11 @@
 
 <h3 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h3><h4 id="TransactionState"><a href="#TransactionState" class="headerlink" title="TransactionState"></a>TransactionState</h4><p>两阶段锁协议<br>Growing:获得锁<br>Shrinking:释放锁<br>Committed:提交<br>Aborted:终止  </p>
 <h4 id="IsolationLevel"><a href="#IsolationLevel" class="headerlink" title="IsolationLevel"></a>IsolationLevel</h4><p>未提交读：允许读取未提交的数据<br>已提交读：允许读取已提交的数据<br>可重复读：一个事务两次读一个数据项期间其它事务不得对其更新  </p>
+<h4 id="Record"><a href="#Record" class="headerlink" title="Record"></a>Record</h4><p>这个应该就是用于恢复的日志  </p>
+<h5 id="Wtype"><a href="#Wtype" class="headerlink" title="Wtype"></a>Wtype</h5><p>就三种，插入，删除和更新</p>
+<h5 id="TableWriteRecord"><a href="#TableWriteRecord" class="headerlink" title="TableWriteRecord"></a>TableWriteRecord</h5><p>由此分析，tuple_应该是存旧的，insert的话可以不用管，结合对代码的阅读可以发现del也是不用管的，然后这个是做了什么操作，而不是若abort了要做什么操作</p>
+<h5 id="IndexWriteRecord"><a href="#IndexWriteRecord" class="headerlink" title="IndexWriteRecord"></a>IndexWriteRecord</h5><p>应该也是正常填就好</p>
+<h4 id="RID"><a href="#RID" class="headerlink" title="RID"></a>RID</h4><p>rid其实是一个记录存在那个page的那个位置，并不是单纯的编号，所以一个tuple不一定有rid的，要是实际储存的才有意义</p>
 
       
 
@@ -262,6 +267,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/06/06/MIT-6-S081/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MIT 6.S081
+        
+      </div>
+    </a>
   
   
     <a href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">

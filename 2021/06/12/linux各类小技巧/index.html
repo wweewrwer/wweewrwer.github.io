@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>MIT 6.S081 | wweewrwer的博客</title>
+  <title>linux各种小技巧 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
+  <meta name="description" content="本文创建时间：2021-03-18 10:34:44  持续更新中~因为经常和用到linux，不免会用一些杂七杂八的命令，因此统一记录在这里方便以后查阅">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT 6.S081">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/06/08/MIT-6-S081/index.html">
+<meta property="og:title" content="linux各种小技巧">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/06/12/linux%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
+<meta property="og:description" content="本文创建时间：2021-03-18 10:34:44  持续更新中~因为经常和用到linux，不免会用一些杂七杂八的命令，因此统一记录在这里方便以后查阅">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-08T11:10:15.000Z">
-<meta property="article:modified_time" content="2021-06-10T04:02:02.743Z">
+<meta property="og:image" content="https://wweewrwer.github.io/img/image-20210612140726136.png">
+<meta property="og:image" content="https://wweewrwer.github.io/img/image-20210612140822511.png">
+<meta property="og:image" content="https://wweewrwer.github.io/img/image-20210612142337605.png">
+<meta property="og:image" content="https://wweewrwer.github.io/img/image-20210612143033913.png">
+<meta property="article:published_time" content="2021-06-12T03:57:54.000Z">
+<meta property="article:modified_time" content="2021-06-12T06:33:09.001Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="小技巧">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wweewrwer.github.io/img/image-20210612140726136.png">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
   
@@ -155,38 +160,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MIT-6-S081" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-linux各类小技巧" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MIT 6.S081
+      linux各种小技巧
     </h1>
   
 
         
-        <a href="/2021/06/08/MIT-6-S081/" class="archive-article-date">
-  	<time datetime="2021-06-08T11:10:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-08</time>
+        <a href="/2021/06/12/linux%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="archive-article-date">
+  	<time datetime="2021-06-12T03:57:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文创建时间：2021-06-06 14:55:32  持续更新中~<br>开新坑啦！<br>这次决定一改前夕，直接一个文件一门课记到底好了。<br>这是系统课<br>（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）  </p>
-<span id="more"></span> 
+        <p>本文创建时间：2021-03-18 10:34:44  持续更新中~<br>因为经常和用到linux，不免会用一些杂七杂八的命令，因此统一记录在这里方便以后查阅</p>
+<span id="more"></span>
 
-<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>采用虚拟机的方式，下载ubuntu server, 安装，记得ssh那里要选，执行下列指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu</span><br></pre></td></tr></table></figure>
+<h4 id="保存目录的压缩命令"><a href="#保存目录的压缩命令" class="headerlink" title="保存目录的压缩命令"></a>保存目录的压缩命令</h4><p>因为有时在linux压缩时要保存目录信息，故记录一下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zip haha.zip src/buffer/buffer_manager.cc src/include/buffer_manager.hh</span><br><span class="line">unzip -l haha.zip</span><br><span class="line">zip -u haha.zip</span><br></pre></td></tr></table></figure>
+<p>第一个命令zip可以把后面两个文件添加到haha.zip，如果没有haha.zip就创建它，里面若已经有了这两个文件则更新。所以，这个命令不是替代，挺方便的。<br>而unzip那个，这是查看对应haha.zip的信息而不解压，可以压缩完检查对不对。<br>第三个自动按上面的目录更新文件，不用再手输了</p>
+<h4 id="VB虚拟机下ubuntu扩大分区指南"><a href="#VB虚拟机下ubuntu扩大分区指南" class="headerlink" title="VB虚拟机下ubuntu扩大分区指南"></a>VB虚拟机下ubuntu扩大分区指南</h4><p>VB扩大分区：</p>
+<p><img src="/img/image-20210612140726136.png" alt="image-20210612140726136"></p>
+<p><img src="/img/image-20210612140822511.png" alt="image-20210612140822511"></p>
+<p>然后，这个只是虚拟分配了，还没有实际分配，要在虚拟机内用fdisk来增加新分区<br>注：以下命令均需加sudo，没加的请复制时自动加上  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk -l /dev/sda <span class="comment">#查看当前有没有加上</span></span><br><span class="line">sudo fdisk /dev/sda <span class="comment">#启动fdisk文件开始操作</span></span><br><span class="line"><span class="comment">#fdisk可以按帮助自行新建分区，我这里是输n，然后一路回车，最后w退出</span></span><br><span class="line"><span class="comment">#A.如果不是扩展根目录，这里可以把分区格式化，若想扩展根目录，请跳过,从B.开始</span></span><br><span class="line">sudo mkfs -t ext4 /dev/sda4 <span class="comment">#格式化，sda不一定是4</span></span><br><span class="line">mkdir /newdata <span class="comment">#创一个文件夹用以挂载</span></span><br><span class="line">mount /dev/sda4 /newdata <span class="comment">#把sda4分区挂载到newdata文件夹，就是往这个文件夹就是往这个分区了</span></span><br><span class="line"><span class="comment">#B.扩展根目录，若不是扩展根目录不用管了</span></span><br><span class="line">vgdisplay -v <span class="comment">#查看，计下下面图片中VG Name</span></span><br><span class="line">pvcreate /dev/sda4 <span class="comment">#为新增的分区创建物理卷</span></span><br><span class="line">pvdisplay /dev/sda4 <span class="comment">#查看新分区</span></span><br><span class="line">vgextend ubuntu-vg /dev/sda4 <span class="comment">#扩展卷分组</span></span><br><span class="line">df -h|grep <span class="string">&#x27;/$&#x27;</span> <span class="comment">#查看文件根系统名称,见下图2</span></span><br><span class="line">sudo lvextend -L +10G /dev/mapper/ubuntu--vg-ubuntu--lv <span class="comment">#扩展逻辑卷空间10G</span></span><br><span class="line">sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv <span class="comment">#对文件系统扩容，貌似如果是centos文件格式为xfs用这个就可以了 sudo xfs_growfs /dev/mapper/ubuntu--vg-ubuntu--lv（前面的步骤我不知道对不对，如果是centos的话，可能可以）</span></span><br><span class="line">df -h <span class="comment">#查看扩展后的结果</span></span><br></pre></td></tr></table></figure>
 
-<p>没想到一天后我就又来啦~ 期末考试还可以再拖一拖哈哈哈<br>然后qemu环境版本太低了<br>采用以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.qemu.org/qemu-5.1.0.tar.xz</span><br><span class="line">sudo apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev</span><br><span class="line">tar xvJf qemu-5.1.0.tar.xz</span><br><span class="line"><span class="built_in">cd</span> qemu-5.1.0</span><br><span class="line">./configure --disable-kvm --disable-werror --prefix=/usr/<span class="built_in">local</span> --target-list=<span class="string">&quot;riscv64-softmmu&quot;</span></span><br><span class="line">make</span><br><span class="line">sudo make install、</span><br><span class="line">sudo apt install gcc-riscv64-unknown-elf</span><br></pre></td></tr></table></figure>
-
-<p>然后移步<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.S081/2020/labs/util.html">此处</a>如果可以<code>make qemu</code>的话应该就没问题啦<br>后续评测要用Python,这里可以装一下呀</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python</span><br></pre></td></tr></table></figure>
-
+<p><img src="/img/image-20210612142337605.png" alt="image-20210612142337605"></p>
+<p><img src="/img/image-20210612143033913.png" alt="image-20210612143033913"></p>
 
       
 
@@ -200,7 +207,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
         		</li>
       		
 		</ul>
@@ -256,7 +263,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/06/08/MIT-6-S081/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/06/12/linux%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,18 +277,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/06/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          计算机各类小技巧
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/06/06/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">c++实用小知识点</div>
+    <a href="/2021/06/12/MIT-6-S081/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MIT 6.S081</div>
       <i class="icon-circle-right"></i>
     </a>
   

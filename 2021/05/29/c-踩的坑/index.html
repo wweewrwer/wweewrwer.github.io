@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文创建时间：2021-04-13 10:01:36  持续更新中~ 我爱c++,c++爱我。(c++好，谁用谁知道)啊，原来C也好不到哪里去本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。    类中变量与传进来的参数 用了ifndef之后c头文件仍然重复定义 fstream神奇异常码 fstream之eof() 关于const函数里iterator那些事">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-29T12:25:45.000Z">
-<meta property="article:modified_time" content="2021-05-29T12:26:54.854Z">
+<meta property="article:modified_time" content="2021-06-13T06:27:28.546Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
@@ -185,6 +185,7 @@
 <li><a href="#fstream%E7%A5%9E%E5%A5%87%E5%BC%82%E5%B8%B8%E7%A0%81">fstream神奇异常码</a></li>
 <li><a href="#fstream%E4%B9%8Beof">fstream之eof()</a></li>
 <li><a href="#%E5%85%B3%E4%BA%8Econst%E5%87%BD%E6%95%B0%E9%87%8Citerator%E9%82%A3%E4%BA%9B%E4%BA%8B">关于const函数里iterator那些事</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8Evector%E8%BE%B9%E9%81%8D%E5%8E%86%E8%BE%B9push_back">关于vector边遍历边push_back</a></li>
 </ul>
 <!-- /TOC -->
 <span id="more"></span>
@@ -200,6 +201,7 @@
 <p>大概就是这么一个函数，然后VS疯狂报错，说const_iterator不能转成iterator,当时我就傻了，想着咋list还没iterator了，然后网上也查了很久的资料，甚至把pair改成了结构体，还做了实验看list有没有iterator。结果，原来是带了const限定符后就不能用iterator了，就会自动使用返回const_iterator的版本。。。欲哭无泪呀，调了一万年。<br>顺便说一句，c++是支持函数带不带const限定符形式的重载的,像这样  </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="built_in">std</span>::<span class="built_in">pair</span>&lt;Product*, <span class="keyword">int</span>&gt;&gt;::<span class="function">iterator <span class="title">findProduct</span><span class="params">(<span class="keyword">int</span> ProductId)</span></span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="built_in">std</span>::<span class="built_in">pair</span>&lt;Product*, <span class="keyword">int</span>&gt;&gt;::<span class="function">const_iterator <span class="title">findProduct</span><span class="params">(<span class="keyword">int</span> ProductId)</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure>
 <p>这种不算仅返回值不同</p>
+<h4 id="关于vector边遍历边push-back"><a href="#关于vector边遍历边push-back" class="headerlink" title="关于vector边遍历边push_back"></a>关于vector边遍历边push_back</h4><p>这会导致非常奇怪的bug，我也不懂为什么，我是用的for(auto:…)编历，然后非常奇怪，所以以后这种要编历添加的，可以先弄成队列，最后再转回来，以防意外。</p>
 
       
 
@@ -425,6 +427,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
             
             <div class="clearfix"></div>

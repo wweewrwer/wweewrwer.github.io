@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wweewrwer.github.io/img/condition_variable.jpg">
 <meta property="article:published_time" content="2021-06-03T03:50:45.000Z">
-<meta property="article:modified_time" content="2021-06-06T07:27:55.983Z">
+<meta property="article:modified_time" content="2021-08-15T04:22:20.793Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="小技巧">
 <meta property="article:tag" content="学习">
@@ -179,6 +179,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文创建时间：2021-03-05 09:30:08  持续更新中~<br>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用<br>2021.3.25补：这里将补充写并发的时候遇到的注意事项</p>
+<!-- TOC -->
+
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5%E5%8E%98%E6%B8%85">概念厘清</a><ul>
+<li><a href="#%E8%BF%9B%E7%A8%8Bio%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B">进程，I/O多路复用，线程</a><ul>
+<li><a href="#%E8%BF%9B%E7%A8%8B">进程</a></li>
+<li><a href="#io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8">I/O多路复用</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B">线程</a></li>
+</ul>
+</li>
+<li><a href="#%E9%94%81">锁</a></li>
+<li><a href="#%E6%96%B0%E7%9A%84%E6%A6%82%E5%BF%B5">新的概念</a></li>
+</ul>
+</li>
+<li><a href="#c%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F">C++条件变量</a></li>
+<li><a href="#c%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8">c++锁的使用</a></li>
+<li><a href="#%E8%A1%A5%E5%AE%9E%E6%88%98%E8%B8%A9%E7%9A%84%E5%9D%91">补：实战踩的坑</a></li>
+</ul>
+<!-- /TOC -->
 <span id="more"></span>
 <h3 id="概念厘清"><a href="#概念厘清" class="headerlink" title="概念厘清"></a>概念厘清</h3><h4 id="进程，I-O多路复用，线程"><a href="#进程，I-O多路复用，线程" class="headerlink" title="进程，I/O多路复用，线程"></a>进程，I/O多路复用，线程</h4><p>其中基本的逻辑是，I/O多路复用（后简称多路复用）和线程都运行在一个进程之上，不严谨的来说，即进程&gt;多路复用、线程，进程包括线程和多路复用。<br>通俗的讲解好的网址：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程和线程</a>，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32163005/answer/55772739">多路复用</a>，详细的讲解：CSAPP书上</p>
 <h5 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h5><p>每个进程是有其独立的虚拟地址空间，共享文件表，进程间通信比较困难。</p>
@@ -433,11 +452,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">置顶</a>
               </li>
             
             <div class="clearfix"></div>

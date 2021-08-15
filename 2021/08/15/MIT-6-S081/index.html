@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>Tag: 知识 | wweewrwer的博客</title>
+  <title>MIT 6.S081 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="aaaa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="wweewrwer的博客">
-<meta property="og:url" content="https://wweewrwer.github.io/tags/%E7%9F%A5%E8%AF%86/index.html">
+  <meta name="description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT 6.S081">
+<meta property="og:url" content="https://wweewrwer.github.io/2021/08/15/MIT-6-S081/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="aaaa">
+<meta property="og:description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-15T04:18:00.000Z">
+<meta property="article:modified_time" content="2021-08-15T04:18:07.084Z">
 <meta property="article:author" content="wweewrwer">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -152,60 +156,265 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MIT-6-S081" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-04-05T03:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/05/%E8%AF%A6%E8%A7%A3socket%E7%BC%96%E7%A8%8B/">详解socket编程</a>
+    <h1 class="article-title" itemprop="name">
+      MIT 6.S081
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/08/15/MIT-6-S081/" class="archive-article-date">
+  	<time datetime="2021-08-15T04:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文创建时间：2021-06-06 14:55:32  持续更新中~<br>开新坑啦！<br>这次决定一改前夕，直接一个文件一门课记到底好了。<br>这是系统课<br>（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）  </p>
+<span id="more"></span> 
+
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>特别提示：开虚拟机开大一点，我当时开的16G，最后VSC因为没有空间连不上（我也不知道为啥就满了，可能是之前安装环境时不停摸索，装了太多没用的东西），然后查问题就查了一个多小时，研究如何扩大根分区又搞了两个多小时，真的是哭哭了<br>采用虚拟机的方式，下载ubuntu server, 安装，记得ssh那里要选，执行下列指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu</span><br></pre></td></tr></table></figure>
+
+<p>没想到一天后我就又来啦~ 期末考试还可以再拖一拖哈哈哈<br>然后qemu环境版本太低了<br>采用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.qemu.org/qemu-5.1.0.tar.xz</span><br><span class="line">sudo apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev</span><br><span class="line">tar xvJf qemu-5.1.0.tar.xz</span><br><span class="line"><span class="built_in">cd</span> qemu-5.1.0</span><br><span class="line">./configure --disable-kvm --disable-werror --prefix=/usr/<span class="built_in">local</span> --target-list=<span class="string">&quot;riscv64-softmmu&quot;</span></span><br><span class="line">make</span><br><span class="line">sudo make install、</span><br><span class="line">sudo apt install gcc-riscv64-unknown-elf</span><br></pre></td></tr></table></figure>
+
+<p>然后移步<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.S081/2020/labs/util.html">此处</a>如果可以<code>make qemu</code>的话应该就没问题啦<br>后续评测要用Python,这里可以装一下呀</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python</span><br></pre></td></tr></table></figure>
+
+<h4 id="调试方法"><a href="#调试方法" class="headerlink" title="调试方法"></a>调试方法</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">make qemu-gdb #窗口1</span><br><span class="line">echo set auto-load safe-path / &gt;&gt; ~/.gdbinit #窗口2第一次运行gdb</span><br><span class="line">set riscv use-compressed-breakpoints yes #这句话要加到gdbinit中</span><br><span class="line"></span><br><span class="line">gdb-multiarch -q kernel/kernel #窗口2,调试内核</span><br><span class="line">gdb-multiarch -q user/_echo #想要调试具体的程序</span><br><span class="line"></span><br><span class="line">b main #即可</span><br><span class="line"></span><br><span class="line">tui enable #打开源代码展示窗口</span><br><span class="line">ctrl-a x #关闭qemu</span><br></pre></td></tr></table></figure>
+
+<h4 id="LAB2补"><a href="#LAB2补" class="headerlink" title="LAB2补"></a>LAB2补</h4><p>之前lab2是没有笔记的，结果做完过后就忘的差不多了，所以现在来重学补做一个。</p>
+<p>实现操作系统的主要原因：隔离性和分时复用（multiplexing)。实现隔离性的方法：User/kernel mode和虚拟内存。</p>
+<p>Kernel和User mode,用来隔离操作系统内核和用户应用程序。user mode只能执行普通权限的指令，如寄存器加减，而kernel mode则可以执行一些直接操纵硬件的指令和设置保护的指令，如设置page table寄存器，关闭时钟中断。应用程序要想转入内核，需要一个专门的指令，ECALL，传入一个数字表示应用程序想调用的System Call。在XV6中，每一个应用程序发起的系统调用都会调用syscall函数，该函数会检查ECALL参数，判断有没有资格去执行对应函数。</p>
+<p>System calls，应用程序转移到内核执行的基本方法。</p>
+<p>宏内核：整个操作系统代码都运行在kernel mode。缺点：bug多，任何一个操作系统的bug都有可能成为漏洞。优点：将如文件系统，虚拟内存等子模块都集成在了一起，性能好。<br>微内核：希望kernel mode运行尽可能少的代码。大部分操作系统运行在内核外。优点：简单，更少的bug。缺点：反复跳转带来的性能损耗</p>
+<h4 id="LAB3"><a href="#LAB3" class="headerlink" title="LAB3"></a>LAB3</h4><p>（时隔一个月再次开新坑啦，憨憨学校期末考试整整浪费我一个月的时间，为什么我都交了学费了还要上课考试，关键还净学垃圾，直接给毕业证不好嘛。大哭）</p>
+<p>内核页表：<br>![img](/img/image (171).png)</p>
+<p>用户页表：注意：xv6这个图长的很奇怪（注意栈和堆的位置），它是这样操作的：栈的大小是固定的，就是一个pagesize，然后在这个pagesize里面，它是自高地址向低地址增长的，而堆不是固定的，可以sbrk的，它是从栈的顶部，自下向上增长，所以这个图的栈和堆，并不是从两边增长到中间，而是只有堆向上增长，直到trapframe<br>![img](/img/image (205).png)</p>
+<p>三级页表：![img](/img/image (167).png)<br>课程是第四节的，主题为虚拟内存。<br>名词解释：pte: page table entries(页表条目)<br>PTE_V: 该页表是否可用 PTE_R：控制是否可读 PTE_W：控制是否可写 PTE_X:该页表内容是否可以被解释为指令 PTE_U：该PTE是否能在user mode使用<br>虚拟内存的作用：1.隔离性  2.提供了一层抽象<br>页表具体机制和细节：<br>1.每个程序都有自己独立的表单,虚拟-&gt;物理<br>2.通常保存在内存中，页表的地址保存在寄存器中<br>3.每个page一个条目<br>4.三级页表：PPN：物理page号，最高级的页表的地址存在寄存器中，每一级利用PPN得到对应的页表的地址，利用Lx找到是第几个，然后找到下一级页表<br>5.页表缓存：TLB，缓存最近访问的，这样就不需要在三级页表中访问三次了。TLB的具体实现细节不是操作系统的范畴，是处理器的一些逻辑，操作系统与TLB唯一相关的就是切换Page table时，要告诉处理器清空TLB。(三级页表也是硬件实现的，但是在XV6中1.XV6需要对page table编程所以它首先要能够模拟page table,，故也实现了walk函数)  </p>
+<p>具体实验我就不说了，自己太菜了全程都是在看别人的代码，说一下做完代码后的一些理解吧。</p>
+<p>Q: 三级页表为什么省内存<br>A: 因为第一级页表中空的PTE可以不申请其第二级和第三级的内存，等到其实际使用了再申请，故省内存。</p>
+<p>Q: 三级页表和那个Kernel address space有什么关系<br>A: 三级页表是存的方式，kernel address space是具体内容，就好比kernel address space是一杯水，三级页表和一级页表则分别是一个方杯子和一个圆杯子，用哪个杯子来装水和水本身是什么组成的是没有关系的，它们的都可以装水。即 三级页表和kernel address space的内容是没有关系的</p>
+<p>Q：那又有process address space又有kernel address space它们分属不同的页表，申请实际的物理内存不会冲突吗<br>A：申请到的内存由底层决定，好比一个停车场同时有10个人来申请车位，停车场管理员依次分配管理即可。产生这个问题的原因是各个知识点没有理清，比较混沌，才会产生这个问题</p>
+<p>Q：那用户栈和内核栈又是什么？有什么区别？它们的大小是固定的吗？<br>A:  先回答最后一个问题，在实际的操作系统中，可能不是固定的，比如可能动态增长，但是，在XV6中，见3.6的最后“If the user stack overflows and the process tries to use an address below the stack, the hardware will generate a page-fault exception because the mapping is not valid. A real-world operating system might instead automatically allocate more memory for the user stack when it overflows.”，即是固定的<br>      然后要了解这两类栈，首先得回想起栈是干什么的，可以结合以前自己学c/c++语言的知识，栈上面存放着一些局部变量和函数参数。进程通过系统调用进入内核后所使用的栈即为内核栈，而平时使用的则是用户空间的栈。<br>Q：虚拟地址到物理地址是系统做的吗？<br>A：不是，是由硬件完成的，只有处理缺页需要硬件和操作系统合作完成。cpu中有一个页表地址寄存器指向当前页表，运行时虚拟地址会自动翻译。</p>
+<p>实现细节方面的问题：</p>
+<p>Q：为什么能把用户地址空间的映射添加进内核页表？虚拟地址不会冲突吗？<br>A:  见Lab说明Simplify问题里的那段话，有进行说明，之所以要取消CLINT的映射也是这个原因（因为CLINT在题目要求的下限下面，故会被覆盖，同时按照piazza上其它人的回答，CLINT只有在很初始的地方才用，用户内核页表不映射它也没关系）</p>
+<h4 id="LEC5（改为lec记录方便一点）"><a href="#LEC5（改为lec记录方便一点）" class="headerlink" title="LEC5（改为lec记录方便一点）"></a>LEC5（改为lec记录方便一点）</h4><h5 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h5><p>ISA（Instruction Sets Architecture）: ISA就是处理器能够理解的指令集<br>C++ .o文件：目标文件，可被处理器理解 .asm：汇编文件，相较于.s文件.asm文件中包含了大量的额外标注，在.o文件过后进行链接则可以生成目标程序<br>汇编：支持基于label的跳转<br>risc-v精简指令集，x86复杂指令集<br>汇编：.section .text表示这里是代码，回想之间用户空间内存的图，.global表示可以在其它文件中调用这个函数<br>ABI name:应用程序二进制接口<br>callee：被调用， calleer：调用<br>caller saved分别表示调用者保存（即这个寄存器的值，需要函数调用者自己保存好，caller saved可能被其它函数重写）（代表寄存器为地址寄存器）<br>栈帧：（帧可以理解为单元的意思），栈：高地址到低地址，return address会出现在stack frame的第一位，指向前一个stack frame的指针也会出现在栈中的固定位置。sp(stack pointer)指向stack底部，fp(frame pointer)指向stack frame的顶部，使用fp来操纵stack frame，确保一定指向正确的函数，而sp相应的就是对栈本身进行操纵（栈增栈减呀之类的）<br>汇编函数三部分：prologue(序言)，body,epilogue（后记），prologue即创建栈帧（即对sp寄存器操作），一些leaf函数（即没有调用其它函数的函数）可能没有这一部分<br>常见寄存器记录：sp栈顶指针，ra返回地址<br>寄存器表：  ![img](/img/image (315).png)</p>
+<p>栈帧：就是一种结构，栈就是由一个一个栈帧构成，用户栈和内核栈上都有<br>![img](/img/image (263).png)</p>
+<h4 id="LEC6"><a href="#LEC6" class="headerlink" title="LEC6"></a>LEC6</h4><p>这里是讲系统调用，不是中断，但是都是用的相同的机制<br>trap机制：即用户空间和内核空间的切换<br>具体发生的情况为：程序执行系统调用，程序出现类似page fault、运算时除以0的错误，或者一个设备触发了中断使得当前程序运行需要响应内核设备驱动<br>非常重要，该机制要尽可能简单<br>切换的时候要关注的：sp（堆栈寄存器），pc（程序计数器），表示当前mode的标志位（表明当前在supervisor mode还是user mode）。控制CPU工作方式的寄存器（supervisor address translation and protection)：satp（包含了指向page table的物理内存地址）。STVEC寄存器：指向内核中处理trap的指令的起始地址。SEPC：trap过程中保存程序计数器的值。<br>中断过程：1.首先，保存32个用户寄存器 2.改变mode为内核模式 3.修改satp指向内核的page table。 4.将堆栈寄存器指向位于内核的一个地址，需要一个堆栈来调用内核的c函数 5.跳入内核的c代码<br>trap过程不能依赖用户空间的东西，因为安全和隔离。supervisor mode能做的事：1.读写控制寄存器（如satp,stvec,sepc等） 2.可以使用PTE_U为0的页表<br>注：supervisor mode也不能任意读写物理地址，也要通过page table访问（这样好像理解了每个进程单独内核页表的作用，这样每个进程就没办法操作其它的进程的内存）<br>调用过程：uservec-trampoline然后是uservec之后usertrap随后执行syscall随后执行对应的sys调用<br>trap.c usertrapret完成部分返回用户空间的工作![img](/img/image (183).png)</p>
+<p>进入内核的流程：  </p>
+<ol>
+<li>ecall:</li>
+</ol>
+<ul>
+<li><p>改为supervisor mode。  </p>
+</li>
+<li><p>将程序计数器的值保存在sepc寄存器。  </p>
+</li>
+<li><p>将程序计数器改动来到trampoline page（该page包含了内核trap的处理代码）</p>
+</li>
+</ul>
+<ol start="2">
+<li>进入uservec函数，开始执行trampoline page处的指令，先csrrw交换a0和sscratch（sscratch会事先存好trapframe page的虚拟地址）的数据，这样腾出来a0寄存器（因为要保护原有寄存器的内存），同时得到了指向trapframe page的内存，可以去保存其它数据。内核要首先设置好stvec寄存器，使它指向trampoline page的起始位置，然后ecall后就按该指令跳转。注意trampoline page不设置pte_u，这样用户空间是不能写它的。此时执行trapframe page后面的指令，就是保存其它的寄存器。随后加载内核的stack pointer。然后向tp寄存器写入数据（这个寄存器保存cpu核的编号）。之后satp寄存器。注意trampoline page在user page table和kernel page table的映射都是一样的（名字来源：就像弹跳了一下，从用户空间到内核空间，故叫蹦床界面）最后跳转到内核的c代码</li>
+<li>此时从usertrap函数开始。位于trap.c。设置stvec寄存器指向内核空间trap处理代码的位置。保存sepc寄存器到该进程关联的内存（因为不然可能再次trap，然后导致保存的被覆盖）这里保存到trapframe中，防止被覆盖。利用scause寄存器找出现在触发trap的原因。之后保存的sepc+4，因为要恢复到ecall的下一条指令。此时打开中断开关，允许中断的出现</li>
+<li>接着调用syscall函数，该函数定义在syscall.c。根据系统调用的编号查找相应的系统调用函数</li>
+<li>之后回到trap.c中的usertrap函数，检查用户进程是否被杀掉，被杀掉就不恢复了。</li>
+<li>接着调用usertrapret函数。首先关闭中断，此时将stvec指向用户空间的trap处，接下来填入trapframe，存储kernel page table的指针，用户进程的kernel stack,usertrap函数的指针，tp寄存器中读取的当前cpu核的编号，并存储在trapframe中。接着设置sstatus寄存器。接着sret，设置sepc寄存器的值</li>
+<li>接下来进入userret函数，切换page table,清空页表缓存，交换a0和ssratch，然后恢复其它寄存器，然后再交换sscratch寄存器和a0的值，然后执行sret，回到user mode,sepc拷贝到pc,重新打开中断。然后回到用户空间中。</li>
+</ol>
+<p>ecall之后还有保存寄存器，切换到kernel page table，创建内核栈，跳转到内核中c代码的合理位置一系列的工作。ecall并不完成这些，而是软件完成，有些机器会硬件完成，但risc-v不会，因为risc-v想要为软件和操作系统的程序员提供最大的灵活性，比如可能某些操作系统可以不切换page table的前提下执行部分系统调用，如果ecall都做了，这就不行了，增加了开销</p>
+<p>proc.h trapframe保存了xv6在trapframe page中存放了什么，里面有位置用于保存用户寄存器的数据</p>
+<h4 id="lab-traps"><a href="#lab-traps" class="headerlink" title="lab traps"></a>lab traps</h4><ul>
+<li><p>实验一</p>
+<p>其中auipc,jalr不太直观，引一下piazza上的回答：<br>jalr imm(x)：pc跳转到寄存器x+立即数imm的地址<br>auipc x imm: 将立即数左移12位，低12位补零，然后把这个数和当前pc值相加，然后把求和值存给寄存器x  </p>
+</li>
+<li><p>实验二</p>
+<p>理解栈帧的格式然后按题意即可（注：这里所有的栈帧都在一个page上）</p>
+</li>
+<li><p>实验三</p>
+<p>task0: 难点在于厘清什么时候在内核模式，什么时候在用户模式，实现的方式在于控制内核模式返回用户模式的指针指向要调用的函数。<br>task1/2:这个前面的概念搞清楚了貌似没有什么难得，自信地proc里多加东西就可以了  </p>
+</li>
+</ul>
+<h4 id="LEC8"><a href="#LEC8" class="headerlink" title="LEC8"></a>LEC8</h4><p>page fault:<br>要处理page fault要知道：<br>1.出错的虚拟地址，保存在stval寄存器<br>2.出错的原因，scause（Supervisor cause）寄存器储存出错的原因<br>3.触发page fault指令的地址，sepc（Supervisor Exception Program Counter）寄存器<br>Lazy allocation:应用程序申请内存的时候，不实际增加内存，当它用到的时候，触发page fault,然后再增加，避免应用程序申请了不用的内存而产生浪费<br>实现的基本思路：首先要注意有两个地方要改（而不是一个），第一是前面说的用到未分配内存要增加，第二个是释放内存遇到还未分配的要跳过<br>Zero fill on demand:我们很多时候会拥有大量内容全是0的page，因此可以只分配一个page，该page全是0，然后将虚拟地址上全0的page都map到该物理page上，这样至少在程序启动时能节省大量的物理内存分配。然后将该page标记为只读，一但尝试写就会page fault，然后新建一个page，更新为可读可写，更新mapping关系，将其内容设置为0，并重新执行指令<br>注意：一个trap的代价是相当高的，可以看trap的处理代码，里面至少有上百个store指令用来储存寄存器等，还有一些其它的开销<br>copy on write fork: 当fork接exec时，fork会拷贝原来的地址空间，而exec会丢掉原来的地址空间，这样就产生了浪费。这里的优化就是当发生拷贝时，不实际拷贝，而是指向同一个地方，当要写时再拷贝。要注意很多细节（例如何判断是copy on write fork，而不是非法写,一个进程释放的时候怎么办之类）<br>Demand paging: 不立即将程序的text,data加载进内存，等到需要的时候再加载。同时在内存不够的时候，可以撤回已经分发的page，可以通过LRU来实现，同时额外标记有无被修改，优先撤回一定时间内没有被修改的<br>Memory mapped files:将完整或者部分文件加载到内存中，这样就可以通过内存地址相关的load和store来操纵文件，然后通过dirty标志位写回。现代操作系统会提供一个叫mmap的系统调用，一般该调用也是lazy的，需要的时候再加载  </p>
+<h4 id="Lab-lazy-page-allocation"><a href="#Lab-lazy-page-allocation" class="headerlink" title="Lab lazy page allocation"></a>Lab lazy page allocation</h4><p>实验二：记一个自己的错误点：为什么不能记录之前增长到哪里了然后直接用growproc到va这个地方？因为之前增长到的地方和va之间可能也有没有用的，这样就没有充分的省空间了<br>实验三：基本就是实验二的补充  </p>
+<h4 id="LEC-9"><a href="#LEC-9" class="headerlink" title="LEC 9"></a>LEC 9</h4><p>电脑小知识：计算机大部分内存都会在使用中，但是大部分内存并没有被应用程序所使用，而是被buff/cache用掉了。这在一个操作系统中还挺常见的，因为我们不想让物理内存就在那闲置着，我们想让物理内存被用起来，所以这里大块的内存被用作buff/cache。（怪不得我电脑每次16G内存都占用这么高，搞得我一直在想难道8G内存的是怎么用的电脑）<br>中断这里要理解一下哪些是硬件实现，哪些是软件实现，实际上，硬件可以就理解成一个接口，硬件可以提供接口当前是否允许中断，然后软件来操作，同时发生中断了转到中断程序这个（在这个实验里）也是硬件实现的（网上说好像也可以软件)<br>系统调用与中断的区别：  </p>
+<ol>
+<li><p>asynchronous。当硬件生成中断时，Interrupt handler与当前运行的进程在CPU上没有任何关联。但如果是系统调用的话，系统调用发生在运行进程的context下。</p>
+</li>
+<li><p>concurrency。对于中断来说，CPU和生成中断的设备是并行的在运行。网卡自己独立的处理来自网络的packet，然后在某个时间点产生中断，但是同时，CPU也在运行。所以我们在CPU和设备之间是真正的并行的，我们必须管理这里的并行。</p>
+</li>
+<li><p>program device。LEC9主要关注外部设备，例如网卡，UART，而这些设备需要被编程。每个设备都有一个编程手册，就像RISC-V有一个包含了指令和寄存器的手册一样。设备的编程手册包含了它有什么样的寄存器，它能执行什么样的操作，在读写控制寄存器的时候，设备会如何响应。不过通常来说，设备的手册不如RISC-V的手册清晰，这会使得对于设备的编程会更加复杂。</p>
+</li>
+</ol>
+<p>注意，目前是看外部设备的中断，实际上还有定时器和软件中断。<br>各类设备会映射到内核内存地址的某处，通过向相应的设备地址执行load/store指令就可以对该设备进行编程<br>处理器通过platform level interrupt control，即PLIC来处理设备中断，具体流程为PLIC会通知当前有一个待处理的中断-&gt;其中一个CPU核会Claim接收中断，这样PLIC就不会把中断发给其他的CPU处理-&gt;CPU核处理完中断之后，CPU会通知PLIC-&gt;PLIC将不再保存中断的信息。注意PLIC只是分发中断，内核可以对中断优先级进行编程等，这里非常灵活。<br>管理设备的代码称为驱动，所有的驱动都在内核中。大部分驱动可以分为两部分，bottom/top。bottom通常是interrupt handler，它不运行在任何特定的进程的context中，只是处理中断。top是用户进程和内核其它部分调用的接口。通常情况下驱动有一些队列，top和bottom部分都会从队列中读写数据<br>RISC-V与中断相关的寄存器：  </p>
+<ul>
+<li>SIE（Supervisor Interrupt Enable）寄存器。这个寄存器中有一个bit（E）专门针对例如UART的外部设备的中断；有一个bit（S）专门针对软件中断，软件中断可能由一个CPU核触发给另一个CPU核；还有一个bit（T）专门针对定时器中断。  </li>
+<li>SSTATUS（Supervisor Status）寄存器。这个寄存器中有一个bit来打开或者关闭中断。这个寄存器中有一个bit来打开或者关闭中断。每一个CPU核都有独立的SIE和SSTATUS寄存器，除了通过SIE寄存器来单独控制特定的中断，还可以通过SSTATUS寄存器中的一个bit来控制所有的中断。</li>
+<li>SIP（Supervisor Interrupt Pending）寄存器。当发生中断时，处理器可以通过查看这个寄存器知道当前是什么类型的中断。</li>
+<li>SCAUSE寄存器，表明当前状态的原因是中断。</li>
+<li>STVEC寄存器，保存当trap，page fault或者中断发生时，CPU运行的用户程序的程序计数器，这样才能在稍后恢复程序的运行。<br>后两个寄存器在中断处理流程中与之前系统调用的工作方式基本一样。<br>流程：</li>
+</ul>
+<ol>
+<li><p>start.c中的start函数，所有的中断都设置在Supervisor mode，之后设置SIE寄存器来接收External，软件和定时器中断，之后初始化定时器</p>
+</li>
+<li><p>接下来这里只考虑external中断。进入main函数，依次进行init，例如这里进行了uartinit</p>
+</li>
+<li><p>接下来设置PLIC，使中断能被CPU感知。具体方法为在main函数里，调用plicinit函数设置接收哪些中断</p>
+</li>
+<li><p>然后plicinithart函数，每个核均需调用plicinithart函数表明对哪些外设中断感兴趣，并设置中断优先级。</p>
+</li>
+<li><p>调用scheduler函数，该函数首先调用intr_on使CPU能接收中断，然后开始运行进程</p>
+</li>
+</ol>
+<p>UART驱动的top部分：创建console设备，文件描述符0，之后通过dup创建stdout和stderr。所以这里文件描述符0,1,2都是表示console（在unix中，设备由文件表示）。然后当要往console写时，前面部分就和平常一样，fprintf呀之类的，然后进入sys_write系统调用，调用filewrite函数，判断文件描述符的类型，如果是设备，则执行相应的write函数，在里面调用uartputc函数将字符写入到UART设备，然后通过uartstart通知设备执行操作，<br>UART驱动的bottom部分：当向console输出字符时发生了中断：1.清除SIE寄存器相应的bit，防止被其它中断干扰。2.设置sepc为当前程序计数器。3.保存当前的mode。4.将mode设置为supervisor mode。5.最后将程序计数器的值设置为STVEC的值。（注：STVEC会指向uservec函数，见前面系统调用部分，这一部分代码之前处理了系统调用和Page fault,现在来处理中断）6.然后进入trap.c中的devintr函数，首先通过SCAUSE寄存器判断当前中断是否是来自外设的中断，如果是，再调用plic_claim函数来获取中断。该函数中CPU核会告知PLIC要处理中断，之后PLIC_SCLAIM将中断号返回，之后调用uartintr函数，会从UART的接受寄存器中读取数据然后传递给consoleintr函数，之后代码运行到uartstart函数，该函数会将Shell存储在buffer中的任意字符送出<br>与Interrupt相关的并发：1.设备与CPU是并行运行的。 2.中断会停止当前运行的程序。3.驱动的top和bottom部分是并行运行的。<br>这里生产者和消费者解耦是通过一个buffer进行的，这样他们可以同时运行。<br>中断的发展：现在除了interrupt还有polling(轮询)，即CPU一直不停的轮询设备，直到设备有了数据。对于快设备，经常interrupt的开销很高，因而可以采用polling。一些驱动会在polling和interrupt之间动态的切换  </p>
+<h4 id="LEC10"><a href="#LEC10" class="headerlink" title="LEC10"></a>LEC10</h4><p>race condition(竞争条件)：由于两个或者多个进程竞争使用不能被同时访问的资源，使得这些进程有可能因为时间上推进的先后原因而出现问题<br>锁的作用：避免丢失更新。打包多个操作，使它们具有原子性。维护共享数据结构的不变性。<br>deadly embrace(死锁)：这里的解决方法是对锁进行排序，所有的操作必须按相同的顺序获取锁。（例如你要对d1,d2加锁，必须都先获取d1锁，然后才能获取d2锁）不过在设计一个操作系统的时候，定义一个全局的锁的顺序会有些问题。如果一个模块m1中方法g调用了另一个模块m2中的方法f，那么m1中的方法g需要知道m2的方法f使用了哪些锁。因为如果m2使用了一些锁，那么m1的方法g必须集合f和g中的锁，并形成一个全局的锁的排序。这意味着在m2中的锁必须对m1可见，这样m1才能以恰当的方法调用m2。但是这样又违背了代码抽象的原则。在完美的情况下，代码抽象要求m1完全不知道m2是如何实现的。但是不幸的是，具体实现中，m2内部的锁需要泄露给m1，这样m1才能完成全局锁排序。所以当你设计一些更大的系统时，锁使得代码的模块化更加的复杂了。<br>通常来说，这里开发的流程是：先以coarse-grained lock（注，也就是大锁）开始。再对程序进行测试，来看一下程序是否能使用多核。如果可以的话，那么工作就结束了，你对于锁的设计足够好了；如果不可以的话，那意味着锁存在竞争，多个进程会尝试获取同一个锁，因此它们将会序列化的执行，性能也上不去，之后你就需要重构程序。<br>锁的实现：主要是通过利用硬件的方式，有很多种，通过硬件锁确保软件锁不会被同时获得。注意，一条普通硬件指令不一定是原子操作，例如store指令会取决于具体的实现，可能不是原子的<br>这里锁要处理两类并发：一类是不同CPU之间的并发，一类是相同CPU上中断和普通程序之间的并发。<br>注意编译器或者处理器可能通过重排指令来获得更好的性能，但是对于并发执行，一些重排可能会出现问题，因此，为了告诉编译器和硬件不要这样做，我们需要使用memory fence或者叫做synchronize指令，来确定指令的移动范围。对于synchronize指令，任何在它之前的load/store指令，都不能移动到它之后。锁的acquire和release函数都包含了synchronize指令。</p>
+<h4 id="LAB6"><a href="#LAB6" class="headerlink" title="LAB6"></a>LAB6</h4><p>pte组成:<br>![img](/img/image (154).png)</p>
+<p>厘清概念：<br>Q：两个进程的页表共用吗？freewalk有影响吗？<br>A：不共用，共用的是物理地址，页表都是各自单独的。所以freewalk那里是没有影响的，因为那里在清除页表，和物理内存没有关系</p>
+<p>Q：用以标记的数组要开多大？<br>A: 首先要注意厘清虚拟地址和物理地址，然后观察代码可以发现，我们是从KERNBASE开始向前延申len=128*1024*1024,那么开len即可，然后以(pa-kernbase)/pagesize作为下标即可，这样的时候就要注意要kalloc的才标记，像很多在KERNBASE之前的就不要标记了，不然要溢出，而且这一块属于系统的也不在我们的处理范围内。  </p>
+<h4 id="LEC11"><a href="#LEC11" class="headerlink" title="LEC11"></a>LEC11</h4><p>多线程的原因：1.让计算机支持同一时间不是只执行一个任务，或者让计算机执行分时复用的任务 2.让程序的结构变得简单 3.使用多线程可以通过并行运算，在拥有多核CPU的计算机上获得更快的处理速度<br>线程可以认为是一种在有多个任务时简化编程的抽象。一个线程可以认为是串行执行代码的单元。在这里，认为线程就是单个串行执行代码的单元，它只占用一个CPU并且以普通的方式一个接一个的执行指令。<br>线程的状态：1.程序计数器（Program Counter），它表示当前线程执行指令的位置。2.保存变量的寄存器。3.程序的Stack。通常来说每个线程都有属于自己的Stack，Stack记录了函数调用的记录，并反映了当前线程的执行点。<br>多线程的策略：1.多个核上使用多个cpu 2.（主要）一个CPU在多个线程之间来回切换。<br>xv6每个进程只有一个线程（注：单进程的多用户线程共享内存，进程之间用户线程不共享内存，但是进程之间内核线程是共享内存）。同时，除了进程之外，还有一些其他的方式可以支持在一台计算机上交织的运行多个任务，如event-driven programming或者state machine。在所有的支持多任务的方法中，线程技术并不是非常有效的方法，但是线程通常是最方便，对程序员最友好的，并且可以用来支持大量不同任务的方法。<br>实现内核中线程系统的挑战：1.如何实现线程间的切换。2.决定线程的哪些信息是必须保存的，并且在哪保存它们。3.如何处理运算密集型线程（compute bound thread）（对于线程切换，很多直观的实现是由线程自己自愿的保存自己的状态，再让其他的线程运行。但是如果我们有一些程序正在执行一些可能要花费数小时的长时间计算任务，这样的线程并不能自愿的出让CPU给其他的线程运行。所以这里需要能从长时间运行的运算密集型线程撤回对于CPU的控制，将其放置于一边，稍后再运行它）<br>处理3的方式：利用定时器中断。这样的流程叫pre-emptive scheduling，即用户代码本身没有出让CPU，定时器中断仍然会将CPU的控制权拿走，并出让给线程调度器。相对的叫voluntary scheduling。<br>在调度时，要能区分以下几类线程：1.当前在CPU上运行的线程(对应xv6的RUNNING线程状态），2.一旦CPU有空闲时间就想要运行在CPU上的线程（RUNABLE） 3.以及不想运行在CPU上的线程，因为这些线程可能在等待I/O或者其他事件（SLEEPING)<br>从一个进程切换到另一个进程的流程：  （注：实际上XV6切换线程的绝大部分场景都不是因为定时器中断）</p>
+<ol>
+<li><p>从第一个用户进程接入到内核中，保存用户进程的状态并运行第一个用户进程的内核线程。具体实现为内核线程调用swtch函数，将用户寄存器存在trapframe中，内核线程的寄存器存在context中。</p>
+</li>
+<li><p>再从第一个用户进程的内核线程切换到第二个用户进程的内核线程。具体做法为首先内核线程切换到CPU对应的调度器线程。然后执行schedulder函数，找到下一个要执行的进程p2，调用swtch函数，然后将p2从之前的swtch中恢复，然后返回到进程P2所在的系统调用或者中断处理程序中</p>
+</li>
+<li><p>之后，第二个用户进程的内核线程暂停自己，并恢复第二个用户进程的用户寄存器。这里就和之前LEC6是差不多的</p>
+</li>
+<li><p>最后返回到第二个用户进程继续执行。</p>
+</li>
+</ol>
+<p>每个CPU都有一个完全不同的调度器线程。调度器线程也是一种内核线程，它也有自己的context对象。任何运行在CPU1上的进程，当它决定出让CPU，它都会切换到CPU1对应的调度器线程，并由调度器线程切换到下一个进程。<br>注：context swithcing通常指一个线程切换到另一个线程，有时也指从一个用户进程切换到另一个用户进程的完整过程，偶尔也指从用户空间和内核空间之间的切换，LEC10指一个内核线程和调度器线程之间的切换<br>具体代码分析：yield函数：当前进程会出让CPU并让另一个进程运行。sched函数：做合理性检查。然后swtch函数：保存当前的内核线程的寄存器，同时将要切换的线程的寄存器恢复到CPU的寄存器中，同时ra(return address)寄存器保存为scheduler函数<br>Linux多线程：几乎可以认为Linux中的每个线程都是一个完整的进程。Linux中，我们平常说一个进程中的多个线程，本质上是共享同一块内存的多个独立进程。所以Linux中一个进程的多个线程仍然是通过一个内存地址空间执行代码。<br>个人感悟：所以这里的切换进程，即是切换上下文（context）然后继续执行就可以了，上下文变了相当于就是变了一个进程了</p>
+<h4 id="LAB-7"><a href="#LAB-7" class="headerlink" title="LAB 7"></a>LAB 7</h4><p>这个实验比较简单，照着做就行了，唯一的两个坑点：1.第一部分注意栈是从高地址到低地址的，不能直接给sp赋stack的开头，而应该赋结尾。2.第三部分虚假唤醒问题，据说由于硬件层的问题，条件变量有可能是卡不住的，所以尽量用while而不是if(虽然这题感觉用if比while简单很多，并且好像也不会错)。</p>
+<h4 id="LEC13"><a href="#LEC13" class="headerlink" title="LEC13"></a>LEC13</h4><p>在sched函数中，进程p不能持有除p-&gt;lock外的其它锁，不然可能导致死锁，例如假如只有一个CPU核，进程切换了另一个进程，而另一个进程想要使用该锁时就可能产生死锁（假如该锁是自旋锁的话）（这里感觉有一点点奇奇怪怪，可能是因为是自旋锁的原因，XV6里面在获取锁的过程中是会关中断的，就是该进程在等待锁的时候是无法切换的)（不过它这里保证了切换的时候不加锁，那么相当于进程在等的话意外着当前有进程正在用，那么很快就会结束，所以也不是很影响性能）<br>coordination：出让CPU，直到等待的事件发生再恢复执行（例如等待键盘输入）。<br>sleep和wakeup机制：在等待的过程调用sleep函数出让cpu，然后满足条件的地方调用wakeup函数。(这里sleep的方式为出让CPU，并设置状态为SLEEPING，而wakeup并不是拿回CPU，而是将其设置为RUNABLE，这样上一讲里的上下文切换时就可以切换到这个地方)由于上述切进程我们不能持有锁的原因，故我们的sleep和wakeup需要有一个参数放锁。用于进入sleep之后解锁。这里sleep需要保证原子性的将进程设置为SLEEPING状态并同时释放锁。这里的sleep和wakeup和条件变量很像，也是要放循环里，不过这里不是因为硬件虚假唤醒的原因，而是比如有两个进程都在sleep等待往硬件中写，这时硬件准备好了，两个都会被唤醒，但是应该只有一个能写，故要while。<br>wakeup实现：查看进程表单查找要唤醒的线程，设置该进程的状态为RUNNABLE。注意查找比对的时候要先获得进程锁<br>sleep实现：先获得进程锁，然后解开传入的锁，并设置状态，由于有进程锁，所以现在wakeup不能解开，这样就保证了原子性<br>进程退出的问题：<br>1.当程序主动调用exit时，我们需要一种方法让线程能释放最后几个对于运行代码来说关键的资源。<br>2.我们不能直接单方面的kill或者exit一个进程，因为：该线程可能正在另一个CPU核上运行，并使用着自己的栈；也可能该线程正在内核中持有了锁；也可能该线程正在更新一个复杂的内核数据，如果我们直接就把线程杀掉了，我们可能在线程完成更新复杂的内核数据过程中就把线程杀掉了。<br>exit进程的实现：释放进程的内存和page table，关闭已经打开的文件，同时，若为子进程，需要将父进程从wait中唤醒，若为父进程，需要将子进程设置为init进程的子进程。设置状态为ZOMBIE,因为资源还没被完全释放，进入sched函数进到调度器线程。(注意，具体实现的细节甚至要考虑子进程和父进程同时退出的这些情况)<br>wait调用：里面包括一个大的循环，当一个进程调用了wait系统调用，它会扫描进程表单，找到父进程是自己且状态是ZOMBIE的进程，然后调用freeproc函数释放这些进程的资源并将其设置为unused。（注意在unix里，每一个子进程退出都需要一个wait，init进程的工作就是在一个循环里不停的调用wait)<br>kill调用：直接关掉一个进程是有风险的，在xv6和其它unix系统中kill实际干的事很少，它只是找到目标进程，然后将该结构体的killed标志位设为1，同时如果是sleeping状态，设置为runnable（这是防止比如在等控制台输入这种情况，不然要一直等下去才能退出，同时要支持这种情况，需要在sleep的while循环中添加if killed退出的语句，这样开始执行就可以退出了，如果必须等待的话，就不加这个判断，这样唤醒之后又会不满足while条件再次sleep），然后等到其到达安全的位置，再主动调用exit系统调用。所以，kill系统调用并不是真正的立即停止进程的运行，它更像是这样：如果进程在用户空间，那么下一次它执行系统调用它就会退出，又或者目标进程正在执行用户代码，当时下一次定时器中断或者其他中断触发了，进程才会退出。所以从一个进程调用kill，到另一个进程真正退出，中间可能有很明显的延时。<br>注意：init进程是不退出的，在一些发生错误的情况是会退出，这种情况下系统会崩溃</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/08/15/MIT-6-S081/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vim中阶技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -228,9 +437,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -302,11 +511,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">置顶</a>
               </li>
             
             <div class="clearfix"></div>

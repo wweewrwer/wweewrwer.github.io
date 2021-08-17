@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-15T04:18:00.000Z">
-<meta property="article:modified_time" content="2021-08-15T04:18:07.084Z">
+<meta property="article:modified_time" content="2021-08-17T07:35:11.607Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta property="article:tag" content="学习">
@@ -292,6 +292,32 @@
 <p>每个CPU都有一个完全不同的调度器线程。调度器线程也是一种内核线程，它也有自己的context对象。任何运行在CPU1上的进程，当它决定出让CPU，它都会切换到CPU1对应的调度器线程，并由调度器线程切换到下一个进程。<br>注：context swithcing通常指一个线程切换到另一个线程，有时也指从一个用户进程切换到另一个用户进程的完整过程，偶尔也指从用户空间和内核空间之间的切换，LEC10指一个内核线程和调度器线程之间的切换<br>具体代码分析：yield函数：当前进程会出让CPU并让另一个进程运行。sched函数：做合理性检查。然后swtch函数：保存当前的内核线程的寄存器，同时将要切换的线程的寄存器恢复到CPU的寄存器中，同时ra(return address)寄存器保存为scheduler函数<br>Linux多线程：几乎可以认为Linux中的每个线程都是一个完整的进程。Linux中，我们平常说一个进程中的多个线程，本质上是共享同一块内存的多个独立进程。所以Linux中一个进程的多个线程仍然是通过一个内存地址空间执行代码。<br>个人感悟：所以这里的切换进程，即是切换上下文（context）然后继续执行就可以了，上下文变了相当于就是变了一个进程了</p>
 <h4 id="LAB-7"><a href="#LAB-7" class="headerlink" title="LAB 7"></a>LAB 7</h4><p>这个实验比较简单，照着做就行了，唯一的两个坑点：1.第一部分注意栈是从高地址到低地址的，不能直接给sp赋stack的开头，而应该赋结尾。2.第三部分虚假唤醒问题，据说由于硬件层的问题，条件变量有可能是卡不住的，所以尽量用while而不是if(虽然这题感觉用if比while简单很多，并且好像也不会错)。</p>
 <h4 id="LEC13"><a href="#LEC13" class="headerlink" title="LEC13"></a>LEC13</h4><p>在sched函数中，进程p不能持有除p-&gt;lock外的其它锁，不然可能导致死锁，例如假如只有一个CPU核，进程切换了另一个进程，而另一个进程想要使用该锁时就可能产生死锁（假如该锁是自旋锁的话）（这里感觉有一点点奇奇怪怪，可能是因为是自旋锁的原因，XV6里面在获取锁的过程中是会关中断的，就是该进程在等待锁的时候是无法切换的)（不过它这里保证了切换的时候不加锁，那么相当于进程在等的话意外着当前有进程正在用，那么很快就会结束，所以也不是很影响性能）<br>coordination：出让CPU，直到等待的事件发生再恢复执行（例如等待键盘输入）。<br>sleep和wakeup机制：在等待的过程调用sleep函数出让cpu，然后满足条件的地方调用wakeup函数。(这里sleep的方式为出让CPU，并设置状态为SLEEPING，而wakeup并不是拿回CPU，而是将其设置为RUNABLE，这样上一讲里的上下文切换时就可以切换到这个地方)由于上述切进程我们不能持有锁的原因，故我们的sleep和wakeup需要有一个参数放锁。用于进入sleep之后解锁。这里sleep需要保证原子性的将进程设置为SLEEPING状态并同时释放锁。这里的sleep和wakeup和条件变量很像，也是要放循环里，不过这里不是因为硬件虚假唤醒的原因，而是比如有两个进程都在sleep等待往硬件中写，这时硬件准备好了，两个都会被唤醒，但是应该只有一个能写，故要while。<br>wakeup实现：查看进程表单查找要唤醒的线程，设置该进程的状态为RUNNABLE。注意查找比对的时候要先获得进程锁<br>sleep实现：先获得进程锁，然后解开传入的锁，并设置状态，由于有进程锁，所以现在wakeup不能解开，这样就保证了原子性<br>进程退出的问题：<br>1.当程序主动调用exit时，我们需要一种方法让线程能释放最后几个对于运行代码来说关键的资源。<br>2.我们不能直接单方面的kill或者exit一个进程，因为：该线程可能正在另一个CPU核上运行，并使用着自己的栈；也可能该线程正在内核中持有了锁；也可能该线程正在更新一个复杂的内核数据，如果我们直接就把线程杀掉了，我们可能在线程完成更新复杂的内核数据过程中就把线程杀掉了。<br>exit进程的实现：释放进程的内存和page table，关闭已经打开的文件，同时，若为子进程，需要将父进程从wait中唤醒，若为父进程，需要将子进程设置为init进程的子进程。设置状态为ZOMBIE,因为资源还没被完全释放，进入sched函数进到调度器线程。(注意，具体实现的细节甚至要考虑子进程和父进程同时退出的这些情况)<br>wait调用：里面包括一个大的循环，当一个进程调用了wait系统调用，它会扫描进程表单，找到父进程是自己且状态是ZOMBIE的进程，然后调用freeproc函数释放这些进程的资源并将其设置为unused。（注意在unix里，每一个子进程退出都需要一个wait，init进程的工作就是在一个循环里不停的调用wait)<br>kill调用：直接关掉一个进程是有风险的，在xv6和其它unix系统中kill实际干的事很少，它只是找到目标进程，然后将该结构体的killed标志位设为1，同时如果是sleeping状态，设置为runnable（这是防止比如在等控制台输入这种情况，不然要一直等下去才能退出，同时要支持这种情况，需要在sleep的while循环中添加if killed退出的语句，这样开始执行就可以退出了，如果必须等待的话，就不加这个判断，这样唤醒之后又会不满足while条件再次sleep），然后等到其到达安全的位置，再主动调用exit系统调用。所以，kill系统调用并不是真正的立即停止进程的运行，它更像是这样：如果进程在用户空间，那么下一次它执行系统调用它就会退出，又或者目标进程正在执行用户代码，当时下一次定时器中断或者其他中断触发了，进程才会退出。所以从一个进程调用kill，到另一个进程真正退出，中间可能有很明显的延时。<br>注意：init进程是不退出的，在一些发生错误的情况是会退出，这种情况下系统会崩溃</p>
+<h4 id="LAB-8"><a href="#LAB-8" class="headerlink" title="LAB 8"></a>LAB 8</h4><p>实验一二部分思路基本都是一样的，以第一个为例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">run</span> *<span class="title">freelist</span>;</span></span><br><span class="line">&#125; kmem[NCPU];</span><br></pre></td></tr></table></figure>
+
+<p>第二个也是一样，就是把总的空间细分成很多部分。那么问题转变为如何处理一个链表满了，另一个链表还有空的情况。两个解决方法也是一样的，就是从该链表开始，依次查找下一个链表有没有空，如果有空，就使用这个，第二部分的话要额外增加了把对应的空位移到自己的链表下。<br>除此外，第二个的还有注意hash函数，不能仅仅对dev取hash,因为貌似有一直操作某个dev的情况，hash改为’(dev*a_prime+blockno)%nbucket’就好了。<br>(顺便，最近的lab相比lab3确实轻松不少呢，感觉这两个其实和前面的easy和moderate差不多)</p>
+<h4 id="LEC14"><a href="#LEC14" class="headerlink" title="LEC14"></a>LEC14</h4><p>文件系统不是唯一存储系统的方式，例如数据库也能持久化的存储数据，但是它的API就和文件系统完全不一样。<br>inode:代表一个文件的对象，不依赖于文件名。inode通过自身的编号来进行区分。有一个link count来跟踪指向这个inode的文件名的数量。还有一个openfd count，当前打开了文件的文件描述符。一个文件只有当这两个计数器都为0的时候才能被删除。此外，还有type字段，表明inode是文件还是目录。size字段，表明了文件数据有多少个字节。在XV6中接下来是一些block的编号，例如编号0，编号1，等等。XV6的inode中总共有12个block编号。这些被称为direct block number。这12个block编号指向了构成文件的前12个block。之后还有一个indirect block number，它对应了磁盘上一个block，这个block包含了256个block number，这256个block number包含了文件的数据。<br>文件系统分层：</p>
+<ul>
+<li>在最底层是磁盘，也就是一些实际保存数据的存储设备。</li>
+<li>在这之上是buffer cache或者说block cache，这些cache可以避免频繁的读写磁盘。这里我们将磁盘中的数据保存在了内存中。</li>
+<li>为了保证持久性，再往上通常会有一个logging层。</li>
+<li>在logging层之上，XV6有inode cache，这主要是为了同步（synchronization）。inode通常小于一个disk block，所以多个inode通常会打包存储在一个disk block中。</li>
+<li>再往上就是inode本身了。它实现了read/write。</li>
+<li>再往上，就是文件名，和文件描述符操作。</li>
+</ul>
+<p>不同的文件系统组织方式和每一层可能都略有不同，有的时候分层也没有那么严格，但是从概念上来说这里的结构对于理解文件系统是有帮助的。</p>
+<p>SSD通常是0.1到1毫秒的访问时间，而HDD通常是在10毫秒量级完成读写一个disk block。sector通常是磁盘驱动可以读写的最小单元，它过去通常是512字节。block通常是操作系统或者文件系统视角的数据。它由文件系统定义，在XV6中它是1024字节。所以XV6中一个block对应两个sector。通常来说一个block对应了一个或者多个sector。有时sector也被称为block。可以将磁盘看作是一个巨大的block的数组，数组从0开始，一直增长到磁盘的最后。<br>xv6磁盘具体布局：</p>
+<ul>
+<li>block0要么没有用，要么被用作boot sector来启动操作系统。</li>
+<li>block1通常被称为super block，它描述了文件系统。它可能包含磁盘上有多少个block共同构成了文件系统这样的信息。</li>
+<li>在XV6中，log从block2开始，到block32结束。实际上log的大小可能不同，这里在super block中会定义log就是30个block。</li>
+<li>接下来在block32到block45之间，XV6存储了inode。我之前说过多个inode会打包存在一个block中，一个inode是64字节。</li>
+<li>之后是bitmap block，这是我们构建文件系统的默认方法，它只占据一个block。它记录了数据block是否空闲。</li>
+<li>之后就全是数据block了，数据block存储了文件的内容和目录的内容。</li>
+</ul>
+<p>通常来说，bitmap block，inode blocks和log blocks被统称为metadata block。<br>目录本质上是一个文件加上一些文件系统能够理解的结构，xv6中每个目录包含了很多entry，每条包含文件名和对应的inode编号<br>具体代码分析：创建inode: sys_open-&gt;create-&gt;ialloc，如果多个进程，在之前看的bio文件是有锁的。<br>sleep lock:就是允许中断的锁，与自旋锁相对，持有锁的过程中sleep  </p>
+<h4 id="LEC15"><a href="#LEC15" class="headerlink" title="LEC15"></a>LEC15</h4><p>log:同时具有原子性的系统调用，快速恢复和高性能<br>log的原理：首先全部写到log区后才标注commit，全部写到文件系统后install,然后clean（不太懂这里install为什么和clean分开）<br>具体代码：begin_op表示开始一个事务，end_op表示事务结束，中间的写block操作具有原子性。end_op首先调用commit函数，然后commit中会调用install，install完成后会将log header中n设为0表示清除log,写回到磁盘。<br>难点：log区域的大小要思考，不能被溢出，特别是当并发的时候，这样即使能够容纳单个文件操作，多个也可能将其溢出<br>group commit:为了避免commit顺序的影响  </p>
+<h3 id="LAB9"><a href="#LAB9" class="headerlink" title="LAB9"></a>LAB9</h3><p>实验二：软连接：（网上的解释）相当于新建立一个文件，这个文件专门用来指向别的文件（类似于windows下的快捷方式）。<br>硬连接：就是原来的inode的link count+1。<br>下面是一些问题自己的理解：<br>Q: inode和dinode具体是什么关系？<br>A: 可以认为inode是dinode在内存的映射，我们通过操纵inode来进行。<br>Q:iunlock和iunlockput又是什么关系？<br>A:put就是减少一次引用次数，减到0这个inode就可以回收了，绝大多数地方都需要put回收掉，除非明确建立了文件描述符之类  </p>
 
       
 

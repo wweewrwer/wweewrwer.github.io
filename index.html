@@ -224,6 +224,403 @@
 
 
   
+    <article id="post-gem5安装踩坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/22/gem5%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/">gem5安装踩坑</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/22/gem5%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/" class="archive-article-date">
+  	<time datetime="2021-09-22T08:31:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>太难了，现在装个软件，从上午一直装到晚上，泪从中来。记一下遇到的问题帮助后来的人。自己的环境是virtualBox ubuntu 20.04。</p>
+<h4 id="无法连接googlesource不能使用"><a href="#无法连接googlesource不能使用" class="headerlink" title="无法连接googlesource不能使用"></a>无法连接googlesource不能使用</h4><p>解决办法：将Github仓库里的源代码clone到Gitee上，再从Gitee上clone下源代码。</p>
+<p>错误方法：在windows下下载，拷到虚拟机（会出问题，血泪史）</p>
+<h4 id="python版本问题"><a href="#python版本问题" class="headerlink" title="python版本问题"></a>python版本问题</h4><p>解决方法：上网查找正确的依赖，官网上的不全，我的是补充安装了<code>sudo apt install python3-dev</code>才行</p>
+<h4 id="util-cpt-upgrader-py-Permission-denied"><a href="#util-cpt-upgrader-py-Permission-denied" class="headerlink" title="util/cpt_upgrader.py: Permission denied"></a>util/cpt_upgrader.py: Permission denied</h4><p>解决方法：sudo chmod 777 ./util/cpt_upgrader.py，给权限，这是我从windows下把文件拷过来才出现的问题</p>
+<h4 id="fatal-error-Killed-signal-terminated-program-cc1plus"><a href="#fatal-error-Killed-signal-terminated-program-cc1plus" class="headerlink" title="fatal error:Killed signal terminated program cc1plus"></a>fatal error:Killed signal terminated program cc1plus</h4><p>分配的内存小了，之前是4G，现在改成8G了</p>
+<h4 id="vscode-ssh连接虚拟机安装莫名断开最后I-O出错"><a href="#vscode-ssh连接虚拟机安装莫名断开最后I-O出错" class="headerlink" title="vscode ssh连接虚拟机安装莫名断开最后I/O出错"></a>vscode ssh连接虚拟机安装莫名断开最后I/O出错</h4><p>建议有条件不要通过ssh连接上安装，最好直接虚拟机上操作，虽然我不知道为啥本地连本地连接会断开</p>
+<h4 id="后续教程实践踩坑"><a href="#后续教程实践踩坑" class="headerlink" title="后续教程实践踩坑"></a>后续教程实践踩坑</h4><p>它官方的教程里面不知道是落后版本或者还是什么其它原因，代码不少地方都有错误，强烈建议不要自己跟着教程写代码，而是在它给的源文件里进行删减，这样能节省大量找问题的时间</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/22/gem5%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-autohotkey学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/18/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">autohotkey学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/18/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-09-18T03:23:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>创建时间：2021-04-22 21:42:53  持续更新中~<br>最近事情好多，以至于连github这几天都没更新了，正好今天为了c++属性自动get,set研究了下这个，做个记录吧，谈一谈自己的理解，不一定正确。</p>
+        
+          <a class="article-more-a" href="/2021/09/18/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/18/autohotkey%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vim中阶技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/16/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/">vim中阶技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/16/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/" class="archive-article-date">
+  	<time datetime="2021-09-16T02:44:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文创建时间：2021-06-14 11:57:50  持续更新中~<br>这个就来计自己vim入门后学的一些奇奇怪怪的技巧吧。（尽学这些没用的了，哭了）</p>
+        
+          <a class="article-more-a" href="/2021/09/16/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/16/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-golang学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/11/golang%E5%AD%A6%E4%B9%A0/">golang学习</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/11/golang%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2021-09-11T08:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里记录下go以及学习go的过程中用到的知识。 </p>
+        
+          <a class="article-more-a" href="/2021/09/11/golang%E5%AD%A6%E4%B9%A0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/11/golang%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-rpc学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/10/rpc%E5%AD%A6%E4%B9%A0/">rpc学习</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/10/rpc%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2021-09-10T08:40:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。  </p>
+<h3 id="概念上的厘清"><a href="#概念上的厘清" class="headerlink" title="概念上的厘清"></a>概念上的厘清</h3><p>tcp和http的区别：对应网络模型的不同层，tcp在传输层，http在应用层。http是一个请求-响应协议，规定客户端发送给服务器什么样的消息和得到什么样的响应。http(超文本传输协议)，目的就是传输超文本。（顺便学了下计网教材，了解了一下这些前端的知识）DOM（文档对象模型）是程序访问HTML页面的一种表示，提供了改变部分页面内容的简单方法。XML（可扩展标记语言）用于客户端和服务端之间传数据。客户端也可以运行一些脚本，直接就生成界面。服务端通过CGI（公共网关接口）或者内嵌脚本的方式访问数据库应用程序等。<br>http和rpc：这个就很众说纷纭了，个人感觉如果是出于学知识的必要，在现在的基础上，完全没有必要了解这个区别在哪。因为要了解不同和优劣，应该至少是掌握了一个，考虑学不学另一个或者掌握了两个考虑用那个的时候考虑的，现在自己一个也不会，讨论不同完全是空中楼阁。并且我认为，当你真正学了这个东西之后，这些差异根本就是一目了然的。当然面试会不会问另说。具体可以参见网上的答案。  </p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>rpc：远程过程调用，通俗的说，即本地调用远程（其它进程，服务器上的等等）的函数，看下面这个实例就可以明白是什么意思了（没必要细究，有一个直观的了解就可以了）<br>go实例：基于官方的net/rpc库。</p>
+<p>server</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;net&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;net/rpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Arith <span class="keyword">int</span></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span>&#123;</span><br><span class="line">	A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Ans <span class="keyword">struct</span>&#123;</span><br><span class="line">	Ans <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(_ *Arith)</span> <span class="title">Calc</span><span class="params">(args Args,ans *Ans)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">	ans.Ans=args.A+args.B</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	rpc.Register(<span class="built_in">new</span>(Arith))</span><br><span class="line">	rpc.HandleHTTP()</span><br><span class="line"></span><br><span class="line">	lis, err := net.Listen(<span class="string">&quot;tcp&quot;</span>,<span class="string">&quot;127.0.0.1:8095&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err!= <span class="literal">nil</span>&#123;</span><br><span class="line">		log.Fatalln(<span class="string">&quot;fatal error: &quot;</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;start&quot;</span>)</span><br><span class="line"></span><br><span class="line">	http.Serve(lis, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>client</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;net/rpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span>&#123;</span><br><span class="line">	A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Ans <span class="keyword">struct</span>&#123;</span><br><span class="line">	Ans <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	conn, _ := rpc.DialHTTP(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;127.0.0.1:8095&quot;</span>)</span><br><span class="line">	args := Args&#123;<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> ans Ans</span><br><span class="line">	conn.Call(<span class="string">&quot;Arith.Calc&quot;</span>,args,&amp;ans)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%d + %d = %d\n&quot;</span>, args.A, args.B, ans.Ans)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/10/rpc%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机各类小技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -397,86 +794,6 @@
 
 
   
-    <article id="post-vim中阶技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/">vim中阶技巧</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/" class="archive-article-date">
-  	<time datetime="2021-06-14T03:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文创建时间：2021-06-14 11:57:50  持续更新中~<br>这个就来计自己vim入门后学的一些奇奇怪怪的技巧吧。（尽学这些没用的了，哭了）</p>
-        
-          <a class="article-more-a" href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-linux各类小技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -605,349 +922,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/06/06/c-%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cmu15445over总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/06/cmu15445over%E6%80%BB%E7%BB%93/">cmu15445over总结</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/06/cmu15445over%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2021-06-06T07:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>历经千辛万苦，终于把cmu15445lab4搞完啦！</p>
-        
-          <a class="article-more-a" href="/2021/06/06/cmu15445over%E6%80%BB%E7%BB%93/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/06/cmu15445over%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cmu15445Lab4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/03/cmu15445Lab4/">cmu15445Lab4</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/03/cmu15445Lab4/" class="archive-article-date">
-  	<time datetime="2021-06-03T06:25:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>终于到最后一个lab了，现在看完实验要求啥也不懂也一点也不慌了，啊哈哈哈哈，反正刚开始都是不懂的下面开始分析。  </p>
-        
-          <a class="article-more-a" href="/2021/06/03/cmu15445Lab4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/03/cmu15445Lab4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-面向应用的并发编程学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">面向应用的并发编程学习</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-06-03T03:50:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文创建时间：2021-03-05 09:30:08  持续更新中~<br>最近在学cmu15445数据库的课程，没想到第一个lab就要用到并发编程的知识（TAT），然而学CSAPP都是一年之前的事情了，当年的并发知识不知道忘到哪里去了，更可恶的是，当年学的时候年少无知，居然一句笔记也没有留下，写的代码连注释都没有一句（论自己都看不懂的自己写的代码是一种什么样的感受）。现如今只好重学（论当年学CSAPP的价值），为避免重蹈覆辙，乃做此记录。<br>注：本文只大概讲讲概念，然后直接讲解c++中如何运用<br>2021.3.25补：这里将补充写并发的时候遇到的注意事项</p>
-<!-- TOC -->
-
-<ul>
-<li><a href="#%E6%A6%82%E5%BF%B5%E5%8E%98%E6%B8%85">概念厘清</a><ul>
-<li><a href="#%E8%BF%9B%E7%A8%8Bio%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B">进程，I/O多路复用，线程</a><ul>
-<li><a href="#%E8%BF%9B%E7%A8%8B">进程</a></li>
-<li><a href="#io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8">I/O多路复用</a></li>
-<li><a href="#%E7%BA%BF%E7%A8%8B">线程</a></li>
-</ul>
-</li>
-<li><a href="#%E9%94%81">锁</a></li>
-<li><a href="#%E6%96%B0%E7%9A%84%E6%A6%82%E5%BF%B5">新的概念</a></li>
-</ul>
-</li>
-<li><a href="#c%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F">C++条件变量</a></li>
-<li><a href="#c%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8">c++锁的使用</a></li>
-<li><a href="#%E8%A1%A5%E5%AE%9E%E6%88%98%E8%B8%A9%E7%9A%84%E5%9D%91">补：实战踩的坑</a></li>
-</ul>
-<!-- /TOC -->
-        
-          <a class="article-more-a" href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/03/%E9%9D%A2%E5%90%91%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c-踩的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/">c++踩的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/" class="archive-article-date">
-  	<time datetime="2021-05-29T12:25:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文创建时间：2021-04-13 10:01:36  持续更新中~</p>
-<p>我爱c++,c++爱我。(c++好，谁用谁知道)<br>啊，原来C也好不到哪里去<br>本文主要记录自己c++犯过的错，特别是那种愚蠢的错误导致调试几个小时的，真的是亏死了。</p>
-<!-- TOC -->
-
-<ul>
-<li><a href="#%E7%B1%BB%E4%B8%AD%E5%8F%98%E9%87%8F%E4%B8%8E%E4%BC%A0%E8%BF%9B%E6%9D%A5%E7%9A%84%E5%8F%82%E6%95%B0">类中变量与传进来的参数</a></li>
-<li><a href="#%E7%94%A8%E4%BA%86ifndef%E4%B9%8B%E5%90%8Ec%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%8D%E7%84%B6%E9%87%8D%E5%A4%8D%E5%AE%9A%E4%B9%89">用了ifndef之后c头文件仍然重复定义</a></li>
-<li><a href="#fstream%E7%A5%9E%E5%A5%87%E5%BC%82%E5%B8%B8%E7%A0%81">fstream神奇异常码</a></li>
-<li><a href="#fstream%E4%B9%8Beof">fstream之eof()</a></li>
-<li><a href="#%E5%85%B3%E4%BA%8Econst%E5%87%BD%E6%95%B0%E9%87%8Citerator%E9%82%A3%E4%BA%9B%E4%BA%8B">关于const函数里iterator那些事</a></li>
-<li><a href="#%E5%85%B3%E4%BA%8Evector%E8%BE%B9%E9%81%8D%E5%8E%86%E8%BE%B9push_back">关于vector边遍历边push_back</a></li>
-</ul>
-<!-- /TOC -->
-        
-          <a class="article-more-a" href="/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小技巧</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/29/c-%E8%B8%A9%E7%9A%84%E5%9D%91/">展开全文 >></a>
         </p>
       
 

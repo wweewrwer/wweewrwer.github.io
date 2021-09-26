@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
-  <title>曾经学的nlp汇总 | wweewrwer的博客</title>
+  <title>Tag: 学习 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现为了应付面试，把这个也写上去了（虽然其实毫无东西，呜呜呜），所以还是来复习一下，但是估计这些不是重点，应该不会怎么问。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="曾经学的nlp汇总">
-<meta property="og:url" content="https://wweewrwer.github.io/2021/04/25/%E6%9B%BE%E7%BB%8F%E5%AD%A6%E7%9A%84nlp%E6%B1%87%E6%80%BB/index.html">
+  <meta name="description" content="aaaa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="wweewrwer的博客">
+<meta property="og:url" content="https://wweewrwer.github.io/tags/%E5%AD%A6%E4%B9%A0/page/2/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="现为了应付面试，把这个也写上去了（虽然其实毫无东西，呜呜呜），所以还是来复习一下，但是估计这些不是重点，应该不会怎么问。">
+<meta property="og:description" content="aaaa">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-25T08:00:57.000Z">
-<meta property="article:modified_time" content="2021-04-25T11:49:46.408Z">
 <meta property="article:author" content="wweewrwer">
-<meta property="article:tag" content="杂记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="wweewrwer的博客" type="application/atom+xml">
@@ -155,40 +152,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-曾经学的nlp汇总" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      曾经学的nlp汇总
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-03-27T01:53:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/">数据库学习杂记</a>
     </h1>
   
 
-        
-        <a href="/2021/04/25/%E6%9B%BE%E7%BB%8F%E5%AD%A6%E7%9A%84nlp%E6%B1%87%E6%80%BB/" class="archive-article-date">
-  	<time datetime="2021-04-25T08:00:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>现为了应付面试，把这个也写上去了（虽然其实毫无东西，呜呜呜），所以还是来复习一下，但是估计这些不是重点，应该不会怎么问。</p>
-<span id="more"></span>
-<h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><p>nlp里常有向量v*矩阵w=向量q的这种形式，它的含义就是向量q每个位置蕴含了某种信息,该种信息由v依位置不同按照w中不同的权重相加而成的意思。</p>
-<h4 id="RNN和LSTM"><a href="#RNN和LSTM" class="headerlink" title="RNN和LSTM"></a>RNN和LSTM</h4><p>具体网上一搜马上就有，大体说一下，RNN就是有一个隐藏层，S(t)是一个向量，整个相当于是1到t的信息都蕴含在这里面了，然后每个S(t)=S(t-1)与输入X(t)做一个运算然后每个位置再与V做一个运算输出，这个会存在梯度爆炸和梯度消失的问题，因为求一个导就知道了，大于1一顿连乘就会很大，而小于1一顿连乘就会很小。而LSTM则是增加了三个这样的隐藏状态f,i,o，f来与s运算表示之前的按f的权进行遗忘（大部分设为1否则就故意阻断了梯度流不学前面的），i控制这个状态哪些东西需要输入，o控制哪些输出。学习的时候f,i,o这些都不涉及对t的求导，这样简化运算。</p>
-<h4 id="seq2seq"><a href="#seq2seq" class="headerlink" title="seq2seq"></a>seq2seq</h4><p>seq2seq则是用于翻译，是为了处理输入和输出不等长的情况，看网上的图，就是左边和右边各一个RNN的样子，但是，注意训练的时候使用teaching force的方法，即每次用的不是生成的拿出去求导，而是拿正确结果去运算来进行求导</p>
-<h4 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h4><p>本质也是一种seq2seq模型，但是为了并行化，这里采用attention的方式（预测的时候输出的那边还是要依据时间的），最核心的就是其QKV的产生和意义，q表示询问，可以理解当前这个元素的信息，而k则是key，可以理解为询问对这个问题产生的关注是多少，将这个元素和某个元素组合，得到attention，v则是值，表示当前元素的值，用于经过这样的attention,最后产生的影响。几个细节：mask掩盖使不在不必要的地方产生attention,然后那个attention是不能产生位置信息的，因而每个输入要加上一个关于位置的偏移</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -196,118 +189,30 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wweewrwer.github.io/2021/04/25/%E6%9B%BE%E7%BB%8F%E5%AD%A6%E7%9A%84nlp%E6%B1%87%E6%80%BB/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2021/05/23/c-%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          c++知识点
-        
-      </div>
-    </a>
   
   
-    <a href="/2021/04/24/cs144%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cs144总结</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/%E5%AD%A6%E4%B9%A0/">&amp;laquo; Prev</a><a class="page-number" href="/tags/%E5%AD%A6%E4%B9%A0/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -331,9 +236,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

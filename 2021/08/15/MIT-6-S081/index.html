@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文创建时间：2021-06-06 14:55:32  持续更新中~开新坑啦！这次决定一改前夕，直接一个文件一门课记到底好了。这是系统课（不过不知道多久后才会来搞了呢，最近临近期末考试，恐怕要搞也是一周以后的事了）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-15T04:18:00.000Z">
-<meta property="article:modified_time" content="2021-08-17T07:35:11.607Z">
+<meta property="article:modified_time" content="2021-08-26T14:38:05.281Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="杂记">
 <meta property="article:tag" content="学习">
@@ -318,6 +318,67 @@
 <p>通常来说，bitmap block，inode blocks和log blocks被统称为metadata block。<br>目录本质上是一个文件加上一些文件系统能够理解的结构，xv6中每个目录包含了很多entry，每条包含文件名和对应的inode编号<br>具体代码分析：创建inode: sys_open-&gt;create-&gt;ialloc，如果多个进程，在之前看的bio文件是有锁的。<br>sleep lock:就是允许中断的锁，与自旋锁相对，持有锁的过程中sleep  </p>
 <h4 id="LEC15"><a href="#LEC15" class="headerlink" title="LEC15"></a>LEC15</h4><p>log:同时具有原子性的系统调用，快速恢复和高性能<br>log的原理：首先全部写到log区后才标注commit，全部写到文件系统后install,然后clean（不太懂这里install为什么和clean分开）<br>具体代码：begin_op表示开始一个事务，end_op表示事务结束，中间的写block操作具有原子性。end_op首先调用commit函数，然后commit中会调用install，install完成后会将log header中n设为0表示清除log,写回到磁盘。<br>难点：log区域的大小要思考，不能被溢出，特别是当并发的时候，这样即使能够容纳单个文件操作，多个也可能将其溢出<br>group commit:为了避免commit顺序的影响  </p>
 <h3 id="LAB9"><a href="#LAB9" class="headerlink" title="LAB9"></a>LAB9</h3><p>实验二：软连接：（网上的解释）相当于新建立一个文件，这个文件专门用来指向别的文件（类似于windows下的快捷方式）。<br>硬连接：就是原来的inode的link count+1。<br>下面是一些问题自己的理解：<br>Q: inode和dinode具体是什么关系？<br>A: 可以认为inode是dinode在内存的映射，我们通过操纵inode来进行。<br>Q:iunlock和iunlockput又是什么关系？<br>A:put就是减少一次引用次数，减到0这个inode就可以回收了，绝大多数地方都需要put回收掉，除非明确建立了文件描述符之类  </p>
+<h4 id="LEC16"><a href="#LEC16" class="headerlink" title="LEC16"></a>LEC16</h4><p>现在开始进入论文环节了。<br>首先是XV6文件系统回顾：commit就是已经全部写到log区了。两个重要的点：一个修改没有commit之前不能忘硬盘写（write ahead rule)，log中的修改没有被更新到文件系统之前该log空间不能复用（freeing rule)<br>问题：太慢了,xv6的系统调用和写磁盘操作是同步的（synchronized）。同时xv6的logging方案中每个block都被写了两次<br>注：write-through(直写模式)：数据更新的时候，同时写入缓存cache和后端存储<br>write-back(回写模式)：在数据更新时只写入缓存Cache，而不是立即写入内存。<br>ext3是write-back的。<br>ext3相比xv6还会额外维护一些transaction信息。包括：  </p>
+<ul>
+<li><p>一个序列号</p>
+</li>
+<li><p>一系列该transaction修改的block编号。这些block编号指向的是在cache中的block</p>
+</li>
+<li><p>一系列的handle，handle对应了系统调用，并且这些系统调用是transaction的一部分，会读写cache中的block</p>
+</li>
+</ul>
+<p>ext3的log：最开始是super block,包含log中第一个有效的transaction的起始位置和序列号。每个transaction在log中包含一个descriptor block,其中包含了log数据对应的实际block编号,之后针对每一个block编号的更新数据，最后当一个transaction完成并commit了，会有一个commit block<br>注：ext3只会有一个内存中正在进行的transaction，但是前面可能有很多个commit了还未写到硬盘的transaction<br>ext3提升性能的三种方式：  </p>
+<ul>
+<li>异步的（asynchronous）系统调用，系统调用只会更新缓存在内存中的block，并不用等待写磁盘操作。</li>
+<li>批量执行（batching）的能力，可以将多个系统调用打包成一个transaction。</li>
+<li>并发（concurrency）。</li>
+</ul>
+<p>异步：为了防止数据丢失，系统调用fsync，确认写入到磁盘后才会返回。<br>批量执行：ext3任一时刻只会有一个open transaction，首先ext3会宣告要开始一个新的transaction，接下来的几秒所有的系统调用都是这个大的transaction的一部分,然后commit这个包含了可能有数百个更新的大transaction。这样的好处：</p>
+<ul>
+<li>在多个系统调用之间分摊了transaction带来的固有的损耗，包括写transaction的descriptor block和commit block。</li>
+<li>write absorption。一堆系统调用可能会反复更新一组相同的磁盘block。通过batching，多次更新同一组block会先快速的在内存的block cache中完成，之后在transaction结束时，一次性的写入磁盘的log中。</li>
+<li>disk scheduling。连续写入1000个block比分1000次写入不同位置的block效率高，当大量的写请求同时发送到驱动时，磁盘可以调度这些写请求，并以特定的高效的顺序执行这些写请求。</li>
+</ul>
+<p>并发：1.在ext3中，大多数时候多个系统调用都可以更改当前正在进行的transaction。2.支持不同状态的transaction并行：一个open transaction，若干个正在commit到log的transaction，若干个正在从cache中向文件系统block写数据的transaction，若干个正在被释放的transaction。</p>
+<p>ext3文件系统每个系统调用在调用了start函数之后，会得到一个handle，它某种程度上唯一识别了当前系统调用。当前系统调用的所有写操作都是通过这个handle来识别跟踪的<br>ext3 transaction commit: 每隔一定时间，文件系统就会commit当前的open transaction：</p>
+<ul>
+<li>首先需要阻止新的系统调用（注：该过程会损害性能，因为在这段时间内系统调用需要等待并且不能执行，为什么要阻止：假设T1在create,T2在unlink,不阻止的话T1可能得到T2unlink的，这时崩溃，T1已经完成了，T2被忽略，因此系统认为T2 unlink的文件还在，这样T1 create的就和T2 unlink的共享了，这是错误的）</li>
+<li>需要等待包含在transaction中的已经开始了的系统调用们结束。</li>
+<li>开始一个新的transaction，并且让在第一步中等待的系统调用继续执行。</li>
+<li>更新descriptor block，其中包含了所有在transaction中被修改了的block编号。</li>
+<li>将被修改了的block，从缓存中写入到磁盘的log中。</li>
+<li>等待前两步中的写log结束。</li>
+<li>写入commit block。</li>
+<li>等待写commit block结束。</li>
+<li>接下来将transaction包含的block写入到文件系统中的实际位置。</li>
+<li>现在可以重用transaction对应的那部分log空间。</li>
+</ul>
+<p>![img](/img/image (667).png)</p>
+<p>恢复：读取super block就可以知道log的起始位置，之后恢复软件会在log中一直扫描并尝试找到log的结束位置。判断最后一个transaction方式就是看下一个block是不是以魔法数字作为起始来判断是否有效。</p>
+<h4 id="LEC17"><a href="#LEC17" class="headerlink" title="LEC17"></a>LEC17</h4><p>应用程序使用虚拟内存：这里指用户层面也能响应page fault</p>
+<p>所需的特性：</p>
+<ul>
+<li>page fault可以传播到用户空间。(通过sigaction调用)</li>
+<li>prot1,用户界面可以降低一个内存的读写权限(通过mprotect)</li>
+<li>protN,管理多个page的，等同于n次prot1,但是效率更高(通过mprotect)</li>
+<li>unprot,可以增加一个内存读写权限(通过mprotect)</li>
+<li>查看内存是否dirty</li>
+<li>map2,将一个特定的内存地址空间映射两次，并且这两次映射拥有不同的accessability</li>
+</ul>
+<p>mmap：接收某个对象，并将其映射到调用者的地址空间<br>mprotect系统调用：将某个对象映射到虚拟内存地址后，允许修改对应虚拟内存的权限<br>munmap:移除某一段地址或内存地址的映射关系<br>sigaction：处理signal,发生特定的signal就调用特定的函数</p>
+<p>Virtual Memory Areas（VMAs）:VMA会记录一些有关连续虚拟内存地址段的信息。在一个地址空间中，可能包含了多个section，每一个section都由一个连续的地址段构成，对于每个section，都有一个VMA对象。连续地址段中的所有Page都有相同的权限，并且都对应同一个对象VMA（例如一个进程的代码是一个section，数据是另一个section，它们对应不同的VMA，VMA还可以表示属于进程的映射关系，例如下面提到的Memory Mapped File）。<br>user level trap实现：1.segfault事件会被传播到用户空间 2.并且通过一个到用户空间的upcall在用户空间运行handler 3.在handler中或许会调用mprotect来修改PTE的权限 4.之后handler返回到内核代码 5.最后，内核再恢复之前被中断的进程。</p>
+<p>copying gc:将内存分为两个空间，一个是from空间，一个是to空间。应用程序会从from空间申请内存。当整个from空间满了的时候，就从根节点开始遍历将对象拷贝到to空间,每个节点被拷贝过去后from空间里该对象就产生一个forwarding指针，指向to中的对象，这样后续的节点更新的时候就可以直接找到to的地址（该过程称为forward)<br>baker算法：一种更复杂的gc，incremental gc(指分批分步骤完成)。基本思想是，GC的过程没有必要停止程序的运行并将所有的对象都从from空间拷贝到to空间，然后再恢复程序的运行。最初只拷贝根节点，之后如果new，就再扫描几个对象拷贝过去，这样就说渐进的过程<br>baker的问题：1.每次获取一个指针指向的对象时（dereference），你需要检查对象是否在在from空间，在from的话要forward到to空间（这里没有看懂为什么，只有自己猜测的原因，例如from里的对象可能指针不对之类），这样每次都增加了额外的开销。2.不容易并行允许gc，存在GC和应用程序race condition的可能。<br>解决问题一：虚拟内存特性的GC，from和to空间再做一次划分，每一个部分包含scanned, unscanned两个区域。最初都是unscanned,unscanned的区域权限为none。首先还是将根节点移到to并标为scanned，之后与根相连的移到to标为unscanned，一旦访问unscanned,触发fault,将其转为scanned，并将其相连的移到to的unscanned。这样就再也不用检查了，软件的检查转为了硬件的实现。  同时这里只有gc可以访问unscanned的page，应用程序不能，这里就提供了自动的并发<br>同时这里有一个细节，为了让gc能访问这个区域的内存page,需要map2,第二次专门为gc映射并赋予权限</p>
+<h4 id="LAB10"><a href="#LAB10" class="headerlink" title="LAB10"></a>LAB10</h4><p>MMAP:    这里是实现将文件映射到文件，整体比较复杂，不过问题被拆解的很好，主要就是照着做。但是有一个问题我没有搞懂，就是exit的时候为什么不用管被修改的写回硬盘呢。还有mmap是lazy的，但是munmap理论上都需要对mmap的释放，这个时候怎么判断有无实际生成呢？（我的实现都不管，反正出问题就是fault，然后读进来再写回去）</p>
+<h4 id="LEC18"><a href="#LEC18" class="headerlink" title="LEC18"></a>LEC18</h4><p>宏内核（monolithic kernel）：优点：1.高度抽象的接口通常是可移植的。2.Linux/Unix提供地址空间的抽象而不是直接访问MMU硬件的权限。这不仅可以提供可移植性，并且也可以向应用程序隐藏复杂性。3. 强大的抽象还可以帮助管理共享资源。4.所有的这些功能都在一个程序里面，意味着它们可以访问彼此，使得依赖多个子系统的工具更容易实现。5.内核的所有代码都以完整的硬件权限在运行。缺点：1.大而复杂 2.大削弱了一些抽象能力 3.可扩展性弱<br>微内核(Mircro kernel)：实现了IPC（Inter-Process Communication）以及线程和任务的tiny kernel，即只提供进程抽象和通过IPC进程间通信的方式。像文件系统之类的都通过一个用户空间进程来实现，完全不会在内核中实现。<br>一个读写文件的例子：文本编辑器（通过IPC发信息）-&gt;文件系统进程（继续通过IPC）-&gt;磁盘驱动程序(通过IPC)-&gt;文件系统(继续IPC)-&gt;文本编辑器<br>现如今，IPC通信在很多操作系统都存在了。<br>微内核的优势：1.优美 2.更加安全 3.在特殊场景下，你需要证明一个操作系统是正确的，没有Bug，并且只做了它应该做的事情。现实中至少有一种经过验证是安全的微内核系统：seL4。 3.更易优化 4.不用为很多用不上的功能付出代价。 4.自带了少得多的设计限制，进而使得应用程序的设计限制也更少。接下来不是微内核必须支持的，但是人们期望可以得到：1.将内核拆分，并在用户空间的不同部分运行，比如说在用户空间运行文件系统服务，可以使得代码更模块化。2.用户空间代码通常会比内核更容易被修改，调整和替换，所以它更容易被定制化。 3.将操作系统放在用户空间，或许可以使得它更加的健壮。如果内核出错了，你需要panic并重启；而在外面或许只需要重启对应的服务。 4.可以在微内核上模拟或者运行多个操作系统。<br>挑战：1.什么才是有用的系统调用的最小集并不十分明确。2.微内核或许会非常简单，但是我们仍然需要开发一些用户空间服务来实现操作系统的其他部分。（例如完全不知道文件的话没办法支持exec）3.IPC需要足够快<br>L4微内核：最早一批可以工作的微内核之一。只有7个系统调用，只有13000行代码，只包含Task，线程，地址空间，IPC是这几个抽象。<br>一个微内核例子：pager。一个进程触发page fault,内核将该fault转为IPC消息给Pager task,由pager task处理。这里pager task可以利用前面的copy-on-write fork或memory mapped file等技巧都可以。而linux若没有这些优化的话则要实现这些技巧就必须修改内核，没办法写一些可移植的用户空间代码。<br>异步传输：例如P1发消息，只是向缓存队列追加一条消息，然后就返回了。<br>同步传输：发消息会等待消息被接收，是unbuffered。直接从用户空间P1拷贝到P2。消息小寄存器传递Zero Copy。长消息L4在IPC消息中携带一个Page映射。结合send和recv为一个调用<br>将Linux运行在L4之上：因为L4缺乏对Linux的支持，而重新开发又是巨大的工作，所以采用修改Linux使其成为一个用户进程。然后当你运行vi调用系统调用的时候，有小的库会将系统调用转成发送到Linux kernel task的IPC消息。缺点：Linux完全控制不了哪些进程可以运行，因为现在是L4而不是Linux在完成调度。失去了Linux的调度能力  </p>
+<h3 id="LEC19"><a href="#LEC19" class="headerlink" title="LEC19"></a>LEC19</h3><p>虚拟机</p>
+<p>Virtual Machine Monitor（VMM）</p>
+<p>![img](/img/image (724).png)</p>
+<p>注：在Guest中linux与VMM之间会相互交互，所以实际上linux可以发现自己是否运行在VMM之上的。<br>构建VMM的方式：1.查看每一条指令并模拟RISC-V的状态，缺点：太慢了 2.Guest kernel运行在宿主机的User mode（在内核的话有逃逸的安全问题），而privileged指令触发trap走到VMM，VMM再做适当处理。（VMM会为每一个Guest维护一套虚拟状态信息，同时VMM会为每个虚拟机维护一个映射表）<br>虚拟机的外部设备：1.模拟一些需要用到的并且使用非常广泛的设备，例如磁盘。2.提供虚拟设备，构造特殊的接口，这样效率更高 3.真实设备的pass-through，例如网卡，可以配置子网卡，每个Guest操作系统拥有其中的一个子网卡。<br>硬件为虚拟机的支持：将VMM为每个Guest保存的虚拟状态信息保存在硬件中。不触发任何trap的前提下执行任何privileged指令。<br>将硬件支持用于其它进程：例如网页浏览器，这样网页浏览器就有用户空间和内核空间，可以安全的运行插件。还可以支持GC  </p>
+<h4 id="LEC20"><a href="#LEC20" class="headerlink" title="LEC20"></a>LEC20</h4><p>编程语言实现系统：略，挺有趣的，用golang就是性能大概会有一定下降，但是可行，下降不大</p>
+<h4 id="LEC21"><a href="#LEC21" class="headerlink" title="LEC21"></a>LEC21</h4><p>以前：当packet到达时，网卡会将packet存在自己的缓存中，之后网卡驱动会负责拷贝网卡内存中的数据到主机内存，效率低</p>
+<p>现在：网卡会直接将packet拷贝到主机的内存中，所以，网卡需要事先知道它应该将packet拷贝到主机内存中的哪个位置。<br>中断livelock：当一个路由器接收packet的速率超过它的临界值时，转发的速率反而会下降（因为每个传来的packet都将触发中断，打断了转发的工作）。解决方法：中断转为轮询模式，不断读取packet并处理packet。  </p>
+<h4 id="LEC22"><a href="#LEC22" class="headerlink" title="LEC22"></a>LEC22</h4><p>就当科普看了，看的不仔细</p>
+<h4 id="LEC23"><a href="#LEC23" class="headerlink" title="LEC23"></a>LEC23</h4><p>读锁的问题：具体实现需要写计数器，降低了性能<br>RCU（Read Copy Update）:目标：读取不需要锁，相应的，写入会复杂一些。<br>以单向链表为例：写入首先复制，然后改变原来的指针指向。那么什么时候可以释放原来的呢？这个要求读取者也遵循之前spinlock所遵循的规则：context switch时不能持有被RCU保护的数据。那么写入者，会在每一个CPU核都执行过至少一次context switch之后再释放链表元素。<br>应用RCU后，读很会快，几乎没有任何额外的负担，但是写的性能更糟</p>
 
       
 
@@ -415,8 +476,8 @@
     </a>
   
   
-    <a href="/2021/06/14/vim%E4%B8%AD%E9%98%B6%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vim中阶技巧</div>
+    <a href="/2021/06/12/linux%E5%90%84%E7%B1%BB%E5%B0%8F%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux各种小技巧</div>
       <i class="icon-circle-right"></i>
     </a>
   

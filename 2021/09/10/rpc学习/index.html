@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://wweewrwer.github.io">
   <title>rpc学习 | wweewrwer的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。   概念上的厘清tcp和http的区别：对应网络模型的不同层，tcp在传输层，http在应用层。http是一个请求-响应协议，规定客户端发送给服务器什么样的消息和得到什么样的响应。http(超文本传输协议)，目的就是传输超文本。（顺便学了下计网教材，了解了一下这些前端的知识）DOM（文档对象模型）是程序访问HTML页面的一种表示">
+  <meta name="description" content="最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rpc学习">
 <meta property="og:url" content="https://wweewrwer.github.io/2021/09/10/rpc%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="wweewrwer的博客">
-<meta property="og:description" content="最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。   概念上的厘清tcp和http的区别：对应网络模型的不同层，tcp在传输层，http在应用层。http是一个请求-响应协议，规定客户端发送给服务器什么样的消息和得到什么样的响应。http(超文本传输协议)，目的就是传输超文本。（顺便学了下计网教材，了解了一下这些前端的知识）DOM（文档对象模型）是程序访问HTML页面的一种表示">
+<meta property="og:description" content="最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-10T08:40:28.000Z">
-<meta property="article:modified_time" content="2021-09-11T08:03:54.880Z">
+<meta property="article:modified_time" content="2021-10-08T08:18:58.530Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -176,6 +176,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>最近闲来无事，外加之前学raft协议需要用到rpc，就好奇来学一下。  </p>
+<span id="more"></span> 
+
 <h3 id="概念上的厘清"><a href="#概念上的厘清" class="headerlink" title="概念上的厘清"></a>概念上的厘清</h3><p>tcp和http的区别：对应网络模型的不同层，tcp在传输层，http在应用层。http是一个请求-响应协议，规定客户端发送给服务器什么样的消息和得到什么样的响应。http(超文本传输协议)，目的就是传输超文本。（顺便学了下计网教材，了解了一下这些前端的知识）DOM（文档对象模型）是程序访问HTML页面的一种表示，提供了改变部分页面内容的简单方法。XML（可扩展标记语言）用于客户端和服务端之间传数据。客户端也可以运行一些脚本，直接就生成界面。服务端通过CGI（公共网关接口）或者内嵌脚本的方式访问数据库应用程序等。<br>http和rpc：这个就很众说纷纭了，个人感觉如果是出于学知识的必要，在现在的基础上，完全没有必要了解这个区别在哪。因为要了解不同和优劣，应该至少是掌握了一个，考虑学不学另一个或者掌握了两个考虑用那个的时候考虑的，现在自己一个也不会，讨论不同完全是空中楼阁。并且我认为，当你真正学了这个东西之后，这些差异根本就是一目了然的。当然面试会不会问另说。具体可以参见网上的答案。  </p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>rpc：远程过程调用，通俗的说，即本地调用远程（其它进程，服务器上的等等）的函数，看下面这个实例就可以明白是什么意思了（没必要细究，有一个直观的了解就可以了）<br>go实例：基于官方的net/rpc库。</p>
 <p>server</p>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-24T10:57:33.000Z">
-<meta property="article:modified_time" content="2021-04-27T10:49:29.181Z">
+<meta property="article:modified_time" content="2022-04-02T13:13:46.627Z">
 <meta property="article:author" content="wweewrwer">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -178,9 +178,13 @@
         <p>这是很久之前做的实验了，奈何如今面试估计会被问（整个简历就这一个项目不问就怪了，呜呜），现在只好来重新总结看一遍（想当年自己也是学过CSAPP和另一门讲函数式语言的课，结果都忘记了都不敢往上写了，呜呜呜；然后新做的数据库才搞了一半，也写不上简历，呜呜呜呜，到时候说不定可以提一下，这个自己可熟了）</p>
 <span id="more"></span> 
 <h3 id="前缀知识部分"><a href="#前缀知识部分" class="headerlink" title="前缀知识部分"></a>前缀知识部分</h3><h4 id="OSI7层模型："><a href="#OSI7层模型：" class="headerlink" title="OSI7层模型："></a>OSI7层模型：</h4><p>计算机网络第5版33页<br>物理层：传0，1<br>数据链路层：消除链路错误<br>网络层：处理拥塞等<br>传输层：分割且确保顺序<br>会话层：各种服务<br>表示层：关注所传递的语法与语义<br>应用层：各种协议<br>之所以TCP在传输层也在控制传输帧的顺序正确，而数据链路层也在，网上的说法有两种：1.传输层是为了统一，因为数据链路层并不一定有，相反，比如一些可以短暂丢包的，像视频，数据链路层一个一个检验反而降低了效率，故数据链路层没有。2.每层都可以有，但谁主张谁举证，哪层需要这个功能哪层就要弄这个。3.就TCP而言，tcp是建立在IP上的，IP是无序的，故tcp要控制</p>
-<h4 id="TCP协议位于传输层"><a href="#TCP协议位于传输层" class="headerlink" title="TCP协议位于传输层"></a>TCP协议位于传输层</h4><h4 id="TCP3次握手"><a href="#TCP3次握手" class="headerlink" title="TCP3次握手"></a>TCP3次握手</h4><p>这是为了避免建立重复的连接，理论上讲，第一次你就可以直接发，但是比如这帧慢了，又传了过去，这就会建立两个连接，白白浪费服务器的资源，所以服务器要发一个回去，如果这个收到答复，说明这个是真的连接，就可以开始了，否则是过期的包</p>
+<h4 id="TCP协议位于传输层"><a href="#TCP协议位于传输层" class="headerlink" title="TCP协议位于传输层"></a>TCP协议位于传输层</h4><h4 id="TCP3次握手"><a href="#TCP3次握手" class="headerlink" title="TCP3次握手"></a>TCP3次握手</h4><p>三次握手流程：首先，服务器A先服务器B发送一个包，标记SYN和seq，指示连接开始，随后服务器B向服务器A回一个SYN和seq和ack，然后A再回一个ack和seq就可以了。</p>
+<p>为什么要三次：因为假如两次，那么当B收到第一次A的报文的时候，就要建立连接，而假如这是一个过时的报文，这就白白浪费了时间。而采用3次握手，则可以在第3次时再建立连接，这样可以节约资源。</p>
+<p>这是为了避免建立重复的连接，理论上讲，第一次你就可以直接发，但是比如这帧慢了，又传了过去，这就会建立两个连接，白白浪费服务器的资源，所以服务器要发一个回去，如果这个收到答复，说明这个是真的连接，就可以开始了，否则是过期的包</p>
 <h4 id="TCP4次挥手"><a href="#TCP4次挥手" class="headerlink" title="TCP4次挥手"></a>TCP4次挥手</h4><p>这个没啥特别的，这个就和下面写代码是一样的，而且这是一种特殊情况。</p>
 <h4 id="具体描述TCP"><a href="#具体描述TCP" class="headerlink" title="具体描述TCP"></a>具体描述TCP</h4><p>着重讲一下三次握手，传输的过程中标序号，捎带ACK，设置windowsSize,超时之后再次发送并计时器加倍</p>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>针对的是点对点，即滑动窗口大小的设置，表示的是接受方所能接受的</p>
+<h4 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><p>针对的是整个网络，拥塞窗口，能发送的报文数量取决于两边的最小者。慢启动：收到一个ack就把窗口增大一倍。 慢启动阈值：最开始任意高，随后出现了问题则将其设为当前拥塞窗口的一半，随后进行加法递增。快重传：当收到对一个报文的三个重复ACK时，就认为下一个报文丢失，要求接收方再收到一个失序的报文段后立即发出重复确认。之后进入快恢复：将拥塞窗口值和慢启动阈值设为当前的一半，继续每轮+1。进入超时要从零开始重新慢启动。</p>
 <h3 id="问题重述与解决与总结"><a href="#问题重述与解决与总结" class="headerlink" title="问题重述与解决与总结"></a>问题重述与解决与总结</h3><h4 id="整个实验的目标"><a href="#整个实验的目标" class="headerlink" title="整个实验的目标"></a>整个实验的目标</h4><p>实现基于不可靠数据报文的可靠字节流通信，传输过来的数据包可能丢失，乱序，被改变和重复。</p>
 <h4 id="lab0"><a href="#lab0" class="headerlink" title="lab0"></a>lab0</h4><h5 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h5><p>首先用命令行发了一个取网页的命令，然后在代码中利用它给的socket去实现它。像下面这样</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TCPSocket sock;</span><br><span class="line">sock.connect(Address(host, <span class="string">&quot;http&quot;</span>));</span><br><span class="line">sock.write(<span class="string">&quot;GET &quot;</span> + path + <span class="string">&quot; HTTP/1.1\r\nHost: &quot;</span> + host + <span class="string">&quot;\r\n\r\n&quot;</span>);</span><br><span class="line">sock.shutdown(SHUT_WR);</span><br><span class="line"><span class="keyword">while</span> (!sock.eof()) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; sock.read();</span><br><span class="line">&#125;</span><br><span class="line">sock.close();</span><br></pre></td></tr></table></figure>
